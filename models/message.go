@@ -1,6 +1,7 @@
 package models
 
 // Message represents a telegram message model.
+// https://core.telegram.org/bots/api#message.
 type Message struct {
 	// Unique message identifier inside this chat.
 	ID int32 `json:"message_id"`
@@ -49,4 +50,33 @@ type Message struct {
 	Animation *Animation `json:"animation,omitempty"`
 	// Optional. Message is an audio file, information about the file.
 	Audio *Audio `json:"audio,omitempty"`
+	// Optional. Message is a general file, information about the file.
+	Document *Document `json:"document,omitempty"`
+	// Optional. Message is a photo, available sizes of the photo.
+	Photo []PhotoSize `json:"photo,omitempty"`
+	// Optional. Message is a sticker, information about the sticker.
+	Sticker *Sticker `json:"sticker,omitempty"`
+	// Optional. Message is a video, information about the video.
+	Video *Video `json:"video,omitempty"`
+	// Optional. Message is a video note (https://telegram.org/blog/video-messages-and-telescope),
+	// information about the video message.
+	VideoNote *VideoNote `json:"video_note,omitempty"`
+	// Optional. Message is a voice message, information about the file.
+	Voice *Voice `json:"voice,omitempty"`
+	// Optional. Caption for the animation, audio, document, photo, video or voice, 0-1024 characters.
+	Caption string `json:"caption,omitempty"`
+	// Optional. For messages with a caption, special entities like
+	// usernames, URLs, bot commands, etc. that appear in the caption.
+	CaptionEntities []MessageEntity `json:"caption_entities,omitempty"`
+	// Optional. Message is a shared contact, information about the contact.
+	Contact *Contact `json:"contact,omitempty"`
+	// Optional. Message is a dice with random value from 1 to 6.
+	Dice *Dice `json:"dice,omitempty"`
+	// Optional. Message is a game, information about the game.
+	Game *Game `json:"game,omitempty"`
+	// Optional. Message is a native poll, information about the poll.
+	Poll *Poll `json:"poll,omitempty"`
+	// Optional. Message is a venue, information about the venue.
+	// For backward compatibility, when this field is set, the location field will also be set.
+	Venue *Venue `json:"venue,omitempty"`
 }
