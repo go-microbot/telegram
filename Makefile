@@ -1,5 +1,8 @@
 all: lint
 
+run:
+	go run main.go
+
 ## golangci-lint run
 lint:
 	golangci-lint cache clean

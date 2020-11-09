@@ -1,8 +1,14 @@
 package main
 
-import "github.com/go-microbot/telegram/models"
+import (
+	"os"
+
+	"github.com/go-microbot/telegram/api"
+	"github.com/go-microbot/telegram/bot"
+)
 
 func main() {
-	u := models.User{}
-	u.ID = 12
+	botAPI := api.New(os.Getenv("TOKEN"))
+	tBot := bot.New(&botAPI)
+	tBot.Test()
 }
