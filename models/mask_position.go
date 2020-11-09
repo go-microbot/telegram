@@ -12,6 +12,7 @@ const (
 type MaskPointType string
 
 // MaskPosition describes the position on faces where a mask should be placed by default.
+// https://core.telegram.org/bots/api#maskposition.
 type MaskPosition struct {
 	// The part of the face relative to which the mask should be placed.
 	// One of "forehead", "eyes", "mouth", or "chin".

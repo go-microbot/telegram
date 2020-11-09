@@ -1,6 +1,7 @@
 package models
 
 // ChatPhoto represents a chat photo model.
+// https://core.telegram.org/bots/api#chatphoto.
 type ChatPhoto struct {
 	// File identifier of small (160x160) chat photo.
 	// This file_id can be used only for photo download

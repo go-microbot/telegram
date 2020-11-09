@@ -12,6 +12,7 @@ const (
 type ChatType string
 
 // Chat represents a chat model.
+// https://core.telegram.org/bots/api#chat.
 type Chat struct {
 	// Unique identifier for this chat.
 	ID int64 `json:"id"`
@@ -60,7 +61,7 @@ type Chat struct {
 	// i.e. the discussion group identifier for a channel and vice versa;
 	// for supergroups and channel chats.
 	// Returned only in getChat (https://core.telegram.org/bots/api#getchat).
-	LinkedChatId *int64 `json:"linked_chat_id,omitempty"`
+	LinkedChatID *int64 `json:"linked_chat_id,omitempty"`
 	// Optional. For supergroups, the location to which the supergroup is connected.
 	// Returned only in getChat (https://core.telegram.org/bots/api#getchat).
 	Location *ChatLocation `json:"location,omitempty"`

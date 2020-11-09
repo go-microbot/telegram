@@ -1,6 +1,7 @@
 package models
 
 // Location represents a point on the map.
+// https://core.telegram.org/bots/api#location.
 type Location struct {
 	// Longitude as defined by sender.
 	Longitude float64 `json:"longitude"`

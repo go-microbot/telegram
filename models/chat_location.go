@@ -1,6 +1,7 @@
 package models
 
 // ChatLocation represents a location to which a chat is connected.
+// https://core.telegram.org/bots/api#chatlocation.
 type ChatLocation struct {
 	// The location to which the supergroup is connected.
 	// Can't be a live location.

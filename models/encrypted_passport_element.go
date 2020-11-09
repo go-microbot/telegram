@@ -17,7 +17,7 @@ const (
 	EPElementTypeEmail                 EncryptedPassportElementType = "email"
 )
 
-// EncryptedPassportElement represents encrypted passport element type.
+// EncryptedPassportElementType represents encrypted passport element type.
 type EncryptedPassportElementType string
 
 // EncryptedPassportElement information about documents

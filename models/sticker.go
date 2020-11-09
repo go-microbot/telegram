@@ -1,6 +1,7 @@
 package models
 
 // Sticker represents a sticker model.
+// https://core.telegram.org/bots/api#sticker.
 type Sticker struct {
 	// Identifier for this file, which can be used to download or reuse the file.
 	FileID string `json:"file_id"`

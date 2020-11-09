@@ -1,6 +1,7 @@
 package models
 
 // Animation represents an animation file (GIF or H.264/MPEG-4 AVC video without sound).
+// https://core.telegram.org/bots/api#animation.
 type Animation struct {
 	// Identifier for this file, which can be used to download or reuse the file.
 	FileID string `json:"file_id"`

@@ -23,6 +23,7 @@ const (
 type MessageEntityType string
 
 // MessageEntity represents one special entity in a text message. For example, hashtags, usernames, URLs, etc.
+// https://core.telegram.org/bots/api#messageentity.
 type MessageEntity struct {
 	// Type of the entity.
 	// Can be "mention" (@username), "hashtag" (#hashtag), "cashtag" ($USD),

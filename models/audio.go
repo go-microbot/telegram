@@ -1,6 +1,7 @@
 package models
 
 // Audio represents an audio file to be treated as music by the Telegram clients.
+// https://core.telegram.org/bots/api#audio.
 type Audio struct {
 	// Identifier for this file, which can be used to download or reuse the file.
 	FileID string `json:"file_id"`

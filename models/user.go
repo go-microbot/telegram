@@ -1,6 +1,7 @@
 package models
 
 // User represents a Telegram user or bot model.
+// https://core.telegram.org/bots/api#user.
 type User struct {
 	// Unique identifier for this user or bot.
 	ID int32 `json:"id"`

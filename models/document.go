@@ -1,6 +1,7 @@
 package models
 
 // Document represents a general file (as opposed to photos, voice messages and audio files).
+// https://core.telegram.org/bots/api#document.
 type Document struct {
 	// Identifier for this file, which can be used to download or reuse the file.
 	FileID string `json:"file_id"`
