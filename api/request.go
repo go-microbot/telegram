@@ -32,13 +32,14 @@ type apiRequest struct {
 	apiMethod  string
 	request    interface{}
 	response   interface{}
+	query      map[string]string
 }
 
 func (api *TelegramAPI) newRequest(ctx context.Context, req apiRequest) error {
 	// prepare URL.
 	url := fmt.Sprintf("%s/bot%s/%s", baseURL, api.token, req.apiMethod)
 
-	// prepare request.
+	// prepare request data.
 	var body io.Reader
 	if req.request != nil {
 		data, err := json.Marshal(req.request)
@@ -53,6 +54,11 @@ func (api *TelegramAPI) newRequest(ctx context.Context, req apiRequest) error {
 		return err
 	}
 	request.Header.Set("Content-Type", "application/json")
+
+	query := request.URL.Query()
+	for k, v := range req.query {
+		query.Add(k, v)
+	}
 
 	// make request.
 	result, err := api.client.Do(request)

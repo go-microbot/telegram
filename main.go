@@ -8,7 +8,7 @@ import (
 )
 
 func main() {
-	botAPI := api.New(os.Getenv("TOKEN"))
-	tBot := bot.New(&botAPI)
+	botAPI := api.NewTelegramAPI(os.Getenv("TOKEN"))
+	tBot := bot.NewTelegramBot(&botAPI)
 	tBot.Test()
 }

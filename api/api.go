@@ -6,8 +6,11 @@ import (
 	"github.com/go-microbot/telegram/models"
 )
 
-// ServiceAPI represents general API interface.
+// Bot represents general Bot API interface.
 // https://core.telegram.org/bots/api#available-methods.
-type ServiceAPI interface {
+type Bot interface {
+	// https://core.telegram.org/bots/api#getme.
 	GetMe(ctx context.Context) (*models.User, error)
+	// https://core.telegram.org/bots/api#getupdates.
+	GetUpdates(ctx context.Context, req GetUpdatesRequest) ([]models.Update, error)
 }
