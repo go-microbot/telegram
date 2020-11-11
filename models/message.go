@@ -12,6 +12,10 @@ type Message struct {
 	// The supergroup itself for messages from anonymous group administrators.
 	// The linked channel for messages automatically forwarded to the discussion group.
 	SenderChat *Chat `json:"sender_chat,omitempty"`
+	// Date the message was sent in Unix time.
+	Date int32 `json:"date"`
+	// Conversation the message belongs to.
+	Chat Chat `json:"chat"`
 	// Optional. For forwarded messages, sender of the original message.
 	ForwardFrom *User `json:"forward_from,omitempty"`
 	// Optional. For messages forwarded from channels or from anonymous administrators,
@@ -34,7 +38,7 @@ type Message struct {
 	// Optional. Bot through which the message was sent.
 	ViaBot *User `json:"via_bot,omitempty"`
 	// Optional. Date the message was last edited in Unix time.
-	EditDate int32 `json:"edit_date,omitempty"`
+	EditDate *int32 `json:"edit_date,omitempty"`
 	// Optional. The unique identifier of a media message group this message belongs to.
 	MediaGroupID string `json:"media_group_id,omitempty"`
 	// Optional. Signature of the post author for messages in channels,

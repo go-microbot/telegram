@@ -7,6 +7,7 @@ import (
 	"fmt"
 	"io"
 	"log"
+	"mime/multipart"
 	"net/http"
 )
 
@@ -28,11 +29,13 @@ type apiGoodResponse struct {
 }
 
 type apiRequest struct {
-	httpMethod string
-	apiMethod  string
-	request    interface{}
-	response   interface{}
-	query      map[string]string
+	httpMethod   string
+	apiMethod    string
+	request      interface{}
+	response     interface{}
+	query        map[string]string
+	formData     map[string]string
+	customClient *http.Client
 }
 
 func (api *TelegramAPI) newRequest(ctx context.Context, req apiRequest) error {
@@ -41,27 +44,54 @@ func (api *TelegramAPI) newRequest(ctx context.Context, req apiRequest) error {
 
 	// prepare request data.
 	var body io.Reader
-	if req.request != nil {
+	headers := make(map[string]string)
+	switch {
+	case req.request != nil:
 		data, err := json.Marshal(req.request)
 		if err != nil {
 			return err
 		}
 		body = bytes.NewBuffer(data)
+		headers["Content-Type"] = "application/json"
+	case len(req.formData) != 0:
+		formData := new(bytes.Buffer)
+		writer := multipart.NewWriter(formData)
+		for k, v := range req.formData {
+			if err := writer.WriteField(k, v); err != nil {
+				return err
+			}
+		}
+		err := writer.Close()
+		if err != nil {
+			return err
+		}
+		body = formData
+		headers["Content-Type"] = writer.FormDataContentType()
 	}
 
 	request, err := http.NewRequestWithContext(ctx, req.httpMethod, url, body)
 	if err != nil {
 		return err
 	}
-	request.Header.Set("Content-Type", "application/json")
+
+	for k, v := range headers {
+		request.Header.Set(k, v)
+	}
 
 	query := request.URL.Query()
 	for k, v := range req.query {
 		query.Add(k, v)
 	}
+	request.URL.RawQuery = query.Encode()
+
+	// prepare http client.
+	client := api.client
+	if req.customClient != nil {
+		client = req.customClient
+	}
 
 	// make request.
-	result, err := api.client.Do(request)
+	result, err := client.Do(request)
 	if err != nil {
 		return err
 	}

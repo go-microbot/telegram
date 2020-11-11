@@ -1,4 +1,4 @@
-package api
+package models
 
 import "github.com/go-microbot/telegram/query"
 

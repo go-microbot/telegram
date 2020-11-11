@@ -1,22 +1,25 @@
 package bot
 
 import (
-	"context"
-	"fmt"
-
 	"github.com/go-microbot/telegram/api"
+	"github.com/go-microbot/telegram/models"
 )
 
 // TelegramBot represents Telegram Bot handler.
 // https://core.telegram.org/bots.
 type TelegramBot struct {
-	api api.Bot
+	api            api.Bot
+	updatesChan    chan models.Update
+	updatesErrChan chan error
+	strategy       UpdatesStrategy
 }
 
 // NewTelegramBot returns new Telegram Bot instance.
 func NewTelegramBot(botAPI api.Bot) TelegramBot {
 	return TelegramBot{
-		api: botAPI,
+		api:            botAPI,
+		updatesChan:    make(chan models.Update, defaultUpdatesLimit),
+		updatesErrChan: make(chan error),
 	}
 }
 
@@ -25,11 +28,32 @@ func (b *TelegramBot) API() api.Bot {
 	return b.api
 }
 
-func (b *TelegramBot) Test() {
-	user, err := b.api.GetMe(context.Background())
-	if err != nil {
-		fmt.Println(err)
-		return
+// WaitForUpdates starts listening of new messages using provided strategy.
+func (b *TelegramBot) WaitForUpdates(strategy UpdatesStrategy) {
+	b.strategy = strategy
+
+	go strategy.Listen()
+
+	for {
+		select {
+		case err, ok := <-strategy.Errors():
+			if ok {
+				b.updatesErrChan <- err
+			}
+		case update, ok := <-strategy.Updates():
+			if ok {
+				b.updatesChan <- update
+			}
+		}
 	}
-	fmt.Println(user.Username)
+}
+
+// Stop stops listening of new messages.
+func (b *TelegramBot) Stop() {
+	b.strategy.Stop()
+}
+
+// Updates returns updates and errors channels.
+func (b *TelegramBot) Updates() (upds chan models.Update, errs chan error) {
+	return b.updatesChan, b.updatesErrChan
 }

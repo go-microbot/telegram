@@ -18,6 +18,11 @@ func Test_AsMap(t *testing.T) {
 		RequiredStringSliceEmptyValue ParamStringSlice `query:"string_slice_required_empty"`
 		StringSliceIgnoreValue        ParamStringSlice `query:"string_slice_ignore,omitempty"`
 		StringSliceValue              ParamStringSlice
+		// string params.
+		RequiredStringValue      ParamString `query:"string_required"`
+		RequiredStringEmptyValue ParamString `query:"string_required_empty"`
+		StringIgnoreValue        ParamString `query:"string_ignore,omitempty"`
+		StringValue              ParamString
 		// unparsed params.
 		Hello string `query:"hello"`
 		World int
@@ -26,6 +31,8 @@ func Test_AsMap(t *testing.T) {
 		IntValue:                 NewParamInt(200),
 		RequiredStringSliceValue: NewParamStringSlice([]string{"1", "2", "3"}),
 		StringSliceValue:         NewParamStringSlice([]string{"hello", "world"}),
+		RequiredStringValue:      NewParamString("hello"),
+		StringValue:              NewParamString("world"),
 	}
 
 	expMap := map[string]string{
@@ -35,6 +42,9 @@ func Test_AsMap(t *testing.T) {
 		"string_slice_required":       "[\"1\",\"2\",\"3\"]",
 		"StringSliceValue":            "[\"hello\",\"world\"]",
 		"string_slice_required_empty": "[]",
+		"string_required":             "hello",
+		"StringValue":                 "world",
+		"string_required_empty":       "",
 	}
 	result := AsMap(testStruct)
 
