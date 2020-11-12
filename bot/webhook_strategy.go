@@ -4,7 +4,6 @@ import (
 	"encoding/json"
 	"net/http"
 
-	"github.com/go-microbot/telegram/api"
 	"github.com/go-microbot/telegram/models"
 )
 
@@ -20,7 +19,6 @@ type UpdatesStrategyWebhook struct {
 // WebhookConfig represents webhook configuration.
 type WebhookConfig struct {
 	ServeURL string
-	BotAPI   api.Bot
 }
 
 type webHookHandler struct {

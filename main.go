@@ -58,7 +58,6 @@ func main() {
 	////////// WEBHOOK
 	go tBot.WaitForUpdates(bot.NewUpdatesStrategyWebhook(bot.WebhookConfig{
 		ServeURL: "localhost:8443",
-		BotAPI:   &botAPI,
 	}))
 
 	updates, errs := tBot.Updates()

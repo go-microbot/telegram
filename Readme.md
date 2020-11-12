@@ -33,8 +33,9 @@ Create your own bot. Follow the [Official guide](https://core.telegram.org/bots/
 The bot is **isn't finished yet**. The main goal is to implement all available methods from [Telegram documentation](https://core.telegram.org/bots/api#available-methods).
 
 
-Done               | Method      | Docs                                     |
------------------  | ----------- | ---------------------------------------- |
-:heavy_check_mark: | getMe       | https://core.telegram.org/bots/api#getme |
-:x:                | close       | https://core.telegram.org/bots/api#close |
+Done               | Method      | Docs                                      |
+-----------------  | ----------- | ----------------------------------------  |
+:heavy_check_mark: | getMe       | https://core.telegram.org/bots/api#getme  |
+:x:                | logout      | https://core.telegram.org/bots/api#logout |
+:x:                | close       | https://core.telegram.org/bots/api#close  |
 
