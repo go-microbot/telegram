@@ -2,7 +2,7 @@
 
 ## This is fully documented and easy to use go-bindings for working with the [Telegram](https://telegram.org/) Bot API.
 
-<p style="display: flex; justify-content: center; align-items: center; justify-content: space-between; max-width: 400px; margin: 36px auto;">
+<p align="center" style="display: flex; justify-content: center; align-items: center; justify-content: space-between; max-width: 400px; margin: 36px auto;">
   <img height="120" src="./.github/assets/gopher.png">
   <img height="80" src="./.github/assets/heart.png">
   <img height="120" src="./.github/assets/telegram.png">
