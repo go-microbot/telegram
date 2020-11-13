@@ -14,8 +14,6 @@ jobs:
     runs-on: ubuntu-latest
     
     env:
-      TELEGRAM_API_ID: ${{ secrets.TELEGRAM_API_ID }}
-      TELEGRAM_API_HASH: ${{ secrets.TELEGRAM_API_HASH }}
       TEST_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
 
     services:
@@ -23,6 +21,12 @@ jobs:
         image: huntechio/telegram-bot-api:master-7cf91e4
         ports:
           - 8081:8081
+        env:
+          TELEGRAM_API_ID: ${{ secrets.TELEGRAM_API_ID }}
+          TELEGRAM_API_HASH: ${{ secrets.TELEGRAM_API_HASH }}
+        options:
+          --api-id=${{ secrets.TELEGRAM_API_ID }}
+          --api-hash=${{ secrets.TELEGRAM_API_HASH }}
 
     steps:
 
