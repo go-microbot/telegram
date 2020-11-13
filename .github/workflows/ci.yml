@@ -8,13 +8,25 @@ on:
 
 jobs:
 
-  prepare:
-    name: Prepare
+  test:
+    name: Prepare and Test
+
     runs-on: ${{matrix.os}}
     strategy:
       matrix:
         os: [ubuntu-latest, windows-latest, macos-latest]
       fail-fast: true
+    
+    env:
+      TELEGRAM_API_ID: ${{ secrets.TELEGRAM_API_ID }}
+      TELEGRAM_API_HASH: ${{ secrets.TELEGRAM_API_HASH }}
+      TEST_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+
+    services:
+      telegram-bot-api:
+        image: huntechio/telegram-bot-api:master-7cf91e4
+        ports:
+          - 8081:8081
 
     steps:
 
@@ -30,23 +42,6 @@ jobs:
       run: |
         go get -v -t -d ./...
 
-  test:
-    needs: prepare
-    name: Test
-    runs-on: ubuntu-latest
-    env:
-      TELEGRAM_API_ID: ${{ secrets.TELEGRAM_API_ID }}
-      TELEGRAM_API_HASH: ${{ secrets.TELEGRAM_API_HASH }}
-      TEST_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
-
-    services:
-      telegram-bot-api:
-        image: huntechio/telegram-bot-api:master-7cf91e4
-        ports:
-          - 8081:8081
-
-    steps:
-
-      - name: Run Tests
-        run: |
-          go test -p 1 -covermode=count -coverprofile=coverage.out -coverpkg=./api/... ./api/...
+    - name: Run Tests
+      run: |
+        make test
