@@ -49,4 +49,4 @@ jobs:
 
       - name: Run Tests
         run: |
-          make test
+          go test -p 1 -covermode=count -coverprofile=coverage.out -coverpkg=./api/... ./api/...
