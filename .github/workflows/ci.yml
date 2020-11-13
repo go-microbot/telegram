@@ -41,7 +41,7 @@ jobs:
 
     services:
       telegram-bot-api:
-        image: huntechio/telegram-bot-api
+        image: huntechio/telegram-bot-api:master-7cf91e4
         ports:
           - 8081:8081
 
