@@ -9,10 +9,13 @@ import (
 	"github.com/go-microbot/telegram/query"
 )
 
+const baseURL = "https://api.telegram.org"
+
 // TelegramAPI represents Telegram Bot API.
 type TelegramAPI struct {
 	client *http.Client
 	token  string
+	url    string
 }
 
 // NewTelegramAPI returns new TelegramAPI instance.
@@ -20,20 +23,8 @@ func NewTelegramAPI(token string) TelegramAPI {
 	return TelegramAPI{
 		token:  token,
 		client: http.DefaultClient,
+		url:    baseURL,
 	}
-}
-
-// GetMe returns basic information about the bot.
-func (api *TelegramAPI) GetMe(ctx context.Context) (*models.User, error) {
-	var me models.User
-	if err := api.newRequest(ctx, apiRequest{
-		apiMethod:  "getMe",
-		httpMethod: http.MethodGet,
-		response:   &me,
-	}); err != nil {
-		return nil, err
-	}
-	return &me, nil
 }
 
 // GetUpdates uses to receive incoming updates using long polling

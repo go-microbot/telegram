@@ -29,3 +29,24 @@ jobs:
     - name: Get dependencies
       run: |
         go get -v -t -d ./...
+
+  test:
+    needs: prepare
+    name: Test
+    runs-on: ubuntu-latest
+    env:
+      TELEGRAM_API_ID: ${{ secrets.TELEGRAM_API_ID }}
+      TELEGRAM_API_HASH: ${{ secrets.TELEGRAM_API_HASH }}
+      TEST_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+
+    services:
+      telegram-bot-api:
+        image: huntechio/telegram-bot-api
+        ports:
+          - 8081:8081
+
+    steps:
+
+      - name: Run Tests
+        run: |
+          make test

@@ -11,8 +11,6 @@ import (
 	"net/http"
 )
 
-const baseURL = "https://api.telegram.org"
-
 type apiResponse struct {
 	OK bool `json:"ok"`
 	apiBadResponse
@@ -40,7 +38,7 @@ type apiRequest struct {
 
 func (api *TelegramAPI) newRequest(ctx context.Context, req apiRequest) error {
 	// prepare URL.
-	url := fmt.Sprintf("%s/bot%s/%s", baseURL, api.token, req.apiMethod)
+	url := fmt.Sprintf("%s/bot%s/%s", api.url, api.token, req.apiMethod)
 
 	// prepare request data.
 	var body io.Reader
