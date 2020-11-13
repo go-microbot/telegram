@@ -25,8 +25,8 @@ jobs:
           TELEGRAM_API_ID: ${{ secrets.TELEGRAM_API_ID }}
           TELEGRAM_API_HASH: ${{ secrets.TELEGRAM_API_HASH }}
         options:
-          --api-id=${{ secrets.TELEGRAM_API_ID }}
-          --api-hash=${{ secrets.TELEGRAM_API_HASH }}
+          --api-id="$TELEGRAM_API_ID"
+          --api-hash="$TELEGRAM_API_HASH"
 
     steps:
 
