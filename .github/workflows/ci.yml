@@ -11,11 +11,7 @@ jobs:
   test:
     name: Prepare and Test
 
-    runs-on: ${{matrix.os}}
-    strategy:
-      matrix:
-        os: [ubuntu-latest, windows-latest, macos-latest]
-      fail-fast: true
+    runs-on: ubuntu-latest
     
     env:
       TELEGRAM_API_ID: ${{ secrets.TELEGRAM_API_ID }}
