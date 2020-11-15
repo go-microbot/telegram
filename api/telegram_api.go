@@ -1,12 +1,7 @@
 package api
 
 import (
-	"context"
 	"net/http"
-
-	apiModels "github.com/go-microbot/telegram/api/models"
-	"github.com/go-microbot/telegram/models"
-	"github.com/go-microbot/telegram/query"
 )
 
 const baseURL = "https://api.telegram.org"
@@ -30,7 +25,7 @@ func NewTelegramAPI(token string) TelegramAPI {
 // GetUpdates uses to receive incoming updates using long polling
 // (https://en.wikipedia.org/wiki/Push_technology#Long_polling).
 // An Array of Update objects is returned.
-func (api *TelegramAPI) GetUpdates(ctx context.Context, req apiModels.GetUpdatesRequest) ([]models.Update, error) {
+/*func (api *TelegramAPI) GetUpdates(ctx context.Context, req apiModels.GetUpdatesRequest) ([]models.Update, error) {
 	var updates []models.Update
 	if err := api.newRequest(ctx, apiRequest{
 		apiMethod:  "getUpdates",
@@ -125,3 +120,4 @@ func (api *TelegramAPI) SendMessage(ctx context.Context, req apiModels.SendMessa
 	}
 	return &message, nil
 }
+*/
