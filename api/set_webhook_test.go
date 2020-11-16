@@ -6,33 +6,33 @@ import (
 	"os"
 	"path"
 	"testing"
+
+	apiModels "github.com/go-microbot/telegram/api/models"
+	"github.com/go-microbot/telegram/models"
+	"github.com/go-microbot/telegram/query"
+	"github.com/stretchr/testify/require"
 )
 
 type setWebhook struct{}
 
-func (h setWebhook) Test(ctx context.Context, t *testing.T) {
+func (h setWebhook) Test(ctx context.Context, t *testing.T) context.Context {
 	// load certificate.
 	wd, err := os.Getwd()
 	if err != nil {
-		panic(err)
+		require.NoError(t, err)
 	}
-	webhookCert, err = ioutil.ReadFile(path.Join(wd, "./test_data/telegram_test.key"))
+	webhookCert, err := ioutil.ReadFile(path.Join(wd, "./test_data/telegram_test.key"))
 	if err != nil {
-		panic(err)
+		require.NoError(t, err)
 	}
-}
 
-/*func TestTelegramAPI_SetWebhook(t *testing.T) {
-	// enable hook.
 	cert := models.InputFile(webhookCert)
-	err := localAPI.SetWebhook(context.Background(), apiModels.SetWebhookRequest{
+	url := "localhost:1012"
+	err = localAPI.SetWebhook(ctx, apiModels.SetWebhookRequest{
 		Certificate: &cert,
-		URL:         query.NewParamString("localhost:1012"),
+		URL:         query.NewParamString(url),
 	})
 	require.NoError(t, err)
 
-	// disable hook.
-	err = localAPI.SetWebhook(context.Background(), apiModels.SetWebhookRequest{})
-	require.NoError(t, err)
+	return context.WithValue(ctx, webhookURLCtxKey, url)
 }
-*/

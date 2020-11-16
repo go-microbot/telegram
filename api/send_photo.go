@@ -13,14 +13,18 @@ import (
 func (api *TelegramAPI) SendPhoto(ctx context.Context, req apiModels.SendPhotoRequest) (*models.Message, error) {
 	request := api.NewRequest("sendPhoto").
 		Method(http.MethodPost).
-		Query(query.AsMap(req)).
-		Body(req)
+		Query(query.AsMap(req))
+	//Body(req)
 
-	if photo, ok := req.Photo.(models.InputFile); ok {
+	/*if photo, ok := req.Photo.(models.InputFile); ok {
 		request.FormData(map[string]string{
 			"photo": string(photo),
 		})
-	}
+	}*/
+
+	request.FormData(map[string]string{
+		"photo": req.Photo.(string),
+	})
 
 	resp, err := request.Do(ctx)
 	if err != nil {

@@ -11,7 +11,7 @@ import (
 
 type getUpdates struct{}
 
-func (h getUpdates) Test(ctx context.Context, t *testing.T) {
+func (h getUpdates) Test(ctx context.Context, t *testing.T) context.Context {
 	// with default HTTP client.
 	updates, err := localAPI.GetUpdates(context.Background(), models.GetUpdatesRequest{})
 	require.NoError(t, err)
@@ -21,4 +21,6 @@ func (h getUpdates) Test(ctx context.Context, t *testing.T) {
 	updates, err = localAPI.GetPollUpdates(context.Background(), models.GetUpdatesRequest{}, http.DefaultClient)
 	require.NoError(t, err)
 	require.NotNil(t, updates)
+
+	return ctx
 }

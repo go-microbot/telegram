@@ -1,20 +1,20 @@
 package api
 
-/*func TestTelegramAPI_GetWebhookInfo(t *testing.T) {
-	// enable hook.
-	cert := models.InputFile(webhookCert)
-	err := localAPI.SetWebhook(context.Background(), apiModels.SetWebhookRequest{
-		Certificate: &cert,
-		URL:         query.NewParamString("localhost:1012"),
-	})
-	require.NoError(t, err)
+import (
+	"context"
+	"testing"
 
-	info, err := localAPI.GetWebhookInfo(context.Background())
+	"github.com/stretchr/testify/require"
+)
+
+type getWebhookInfo struct{}
+
+func (h getWebhookInfo) Test(ctx context.Context, t *testing.T) context.Context {
+	info, err := localAPI.GetWebhookInfo(ctx)
 	require.NoError(t, err)
 	require.NotNil(t, info)
-	require.Equal(t, "localhost:1012", info.URL)
-
-	// disable hook.
-	err = localAPI.SetWebhook(context.Background(), apiModels.SetWebhookRequest{})
-	require.NoError(t, err)
-}*/
+	webhookURL := ctx.Value(webhookURLCtxKey)
+	require.NotEmpty(t, webhookURL)
+	require.Equal(t, webhookURL, info.URL)
+	return ctx
+}
