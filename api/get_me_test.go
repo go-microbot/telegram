@@ -7,7 +7,9 @@ import (
 	"github.com/stretchr/testify/require"
 )
 
-func TestTelegramAPI_GetMe(t *testing.T) {
+type getMe struct{}
+
+func (h getMe) Test(ctx context.Context, t *testing.T) {
 	me, err := localAPI.GetMe(context.Background())
 	require.NoError(t, err)
 	require.NotNil(t, me)

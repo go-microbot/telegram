@@ -24,4 +24,18 @@ type Bot interface {
 	DeleteWebhook(ctx context.Context) error
 	// https://core.telegram.org/bots/api#sendmessage.
 	SendMessage(ctx context.Context, req apiModels.SendMessageRequest) (*models.Message, error)
+	// https://core.telegram.org/bots/api#logout.
+	Logout(ctx context.Context) error
+	// https://core.telegram.org/bots/api#close.
+	Close(ctx context.Context) error
+	// https://core.telegram.org/bots/api#sendphoto.
+	SendPhoto(ctx context.Context, req apiModels.SendPhotoRequest) (*models.Message, error)
+	// https://core.telegram.org/bots/api#setchatphoto.
+	SetChatPhoto(ctx context.Context, req apiModels.SetChatPhotoRequest) error
+	// https://core.telegram.org/bots/api#setchattitle.
+	SetChatTitle(ctx context.Context, req apiModels.SetChatTitleRequest) error
+	// https://core.telegram.org/bots/api#getchat.
+	GetChat(ctx context.Context, req apiModels.ChatID) (*models.Chat, error)
+	// https://core.telegram.org/bots/api#leavechat.
+	LeaveChat(ctx context.Context, req apiModels.ChatID) error
 }
