@@ -2,7 +2,7 @@ package bot
 
 import (
 	"context"
-	"net"
+	"errors"
 	"net/http"
 	"time"
 
@@ -68,7 +68,7 @@ func (poll UpdatesStrategyLongPolling) polling(req *apiModels.GetUpdatesRequest)
 	ctx := context.Background()
 	updates, err := poll.cfg.BotAPI.GetPollUpdates(ctx, *req, poll.client)
 	if err != nil {
-		if err, ok := err.(net.Error); ok && err.Timeout() {
+		if errors.Is(err, api.ErrSendReq) {
 			return
 		}
 

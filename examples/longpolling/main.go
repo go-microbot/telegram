@@ -9,7 +9,7 @@ import (
 	"github.com/go-microbot/telegram/bot"
 )
 
-const telegramBotToken = "1256583982:AAHoS3RanoCsXtKhNJCQSOftJXWSRJnLg2o"
+const telegramBotToken = "1256583982:AAHoS3RanoCsXtKhNJCQSOftJXWSRJnLg2o" // "<PASTE_YOUR_TOKEN_HERE>"
 
 func main() {
 	// init Bot API with token.
@@ -17,6 +17,11 @@ func main() {
 
 	// create Bot instance.
 	myBot := bot.NewTelegramBot(&botAPI)
+
+	// delete webhook (if it was using before).
+	if err := myBot.API().DeleteWebhook(context.Background()); err != nil {
+		fmt.Printf("could not remove webhook: %v", err)
+	}
 
 	// start long polling.
 	go myBot.WaitForUpdates(bot.NewUpdatesStrategyLongPolling(bot.LongPollingConfig{
