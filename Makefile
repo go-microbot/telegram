@@ -15,7 +15,7 @@ gen-mocks:
 
 ## run tests
 test:
-	go test -p 1 -covermode=count -coverprofile=coverage.out -coverpkg=./api/... ./api/...
+	go test -p 1 -covermode=count -coverprofile=coverage.out -coverpkg=./api/.,./bot/...,./query/... ./api/. ./bot/... ./query/...
 
 ## start docker containers
 start_images:

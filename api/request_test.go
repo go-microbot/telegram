@@ -1,9 +1,12 @@
 package api
 
 import (
+	"bytes"
 	"context"
+	"encoding/json"
 	"errors"
 	"fmt"
+	"io/ioutil"
 	"net/http"
 	"net/http/httptest"
 	"testing"
@@ -15,8 +18,16 @@ type invalidMarshal struct {
 	err error
 }
 
+type invalidUnmarshal struct {
+	err error
+}
+
 func (i invalidMarshal) MarshalJSON() ([]byte, error) {
 	return nil, i.err
+}
+
+func (i invalidUnmarshal) UnmarshalJSON([]byte) error {
+	return i.err
 }
 
 func serverMock(pattern string) *httptest.Server {
@@ -112,6 +123,14 @@ func TestRequest_Do(t *testing.T) {
 		require.Error(t, err)
 		require.True(t, errors.Is(err, ErrEncodeBody))
 	})
+	t.Run("prepare request error", func(t *testing.T) {
+		api := NewTelegramAPI("123")
+		req := api.NewRequest("test").Method(fmt.Sprintf("method%c", rune(10)))
+		require.NotNil(t, req)
+		_, err := req.Do(context.Background())
+		require.Error(t, err)
+		require.True(t, errors.Is(err, ErrPrepareReq))
+	})
 	t.Run("send request error", func(t *testing.T) {
 		api := NewTelegramAPI("123")
 		req := api.NewRequest("test").FormData(map[string]string{
@@ -150,9 +169,7 @@ func TestRequest_Do(t *testing.T) {
 		defer srv.Close()
 		api.url = srv.URL
 		req := api.NewRequest("test").
-			FormData(map[string]string{
-				"some": "field",
-			}).
+			Body("some data").
 			Query(map[string]string{
 				"param": "test",
 			})
@@ -160,5 +177,77 @@ func TestRequest_Do(t *testing.T) {
 		resp, err := req.Do(context.Background())
 		require.NoError(t, err)
 		require.NotNil(t, resp)
+	})
+}
+
+func TestResponse_Decode(t *testing.T) {
+	t.Run("decode body error", func(t *testing.T) {
+		resp := Response{
+			resp: &http.Response{
+				Body: http.NoBody,
+			},
+		}
+		var result map[string]string
+		err := resp.Decode(&result)
+		require.Error(t, err)
+		require.True(t, errors.Is(err, ErrDecodeBody))
+	})
+	t.Run("not OK result error", func(t *testing.T) {
+		data, err := json.Marshal(apiResponse{
+			badResponse: badResponse{
+				ErrorCode:   100,
+				Description: "error",
+			},
+		})
+		require.NoError(t, err)
+		resp := Response{
+			resp: &http.Response{
+				Body: ioutil.NopCloser(bytes.NewBuffer(data)),
+			},
+		}
+		var result map[string]string
+		err = resp.Decode(&result)
+		require.Error(t, err)
+		require.True(t, errors.Is(err, ErrResponse))
+	})
+	t.Run("unmarshal good response error", func(t *testing.T) {
+		data, err := json.Marshal(apiResponse{
+			OK: true,
+		})
+		require.NoError(t, err)
+		resp := Response{
+			resp: &http.Response{
+				Body: ioutil.NopCloser(bytes.NewBuffer(data)),
+			},
+		}
+		result := invalidUnmarshal{
+			err: errors.New("error"),
+		}
+		err = resp.Decode(&result)
+		require.Error(t, err)
+		require.True(t, errors.Is(err, ErrDecodeBody))
+	})
+	t.Run("all ok", func(t *testing.T) {
+		body := map[string]interface{}{
+			"key": "value",
+		}
+		data, err := json.Marshal(body)
+		require.NoError(t, err)
+		data, err = json.Marshal(apiResponse{
+			OK: true,
+			goodResponse: goodResponse{
+				Result: data,
+			},
+		})
+		require.NoError(t, err)
+		resp := Response{
+			resp: &http.Response{
+				Body: ioutil.NopCloser(bytes.NewBuffer(data)),
+			},
+		}
+		var result map[string]interface{}
+		err = resp.Decode(&result)
+		require.NoError(t, err)
+		require.Equal(t, body, result)
 	})
 }

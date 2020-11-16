@@ -4,7 +4,7 @@
 
 [![Coverage Status](https://coveralls.io/repos/github/go-microbot/telegram/badge.svg)](https://coveralls.io/github/go-microbot/telegram)
 
-<p align="center" style="display: flex; justify-content: center; align-items: center; justify-content: space-between; max-width: 400px; margin: 36px auto;">
+<p align="center">
   <img height="120" src="./.github/assets/gopher.png">
   <img height="80" src="./.github/assets/heart.png">
   <img height="120" src="./.github/assets/telegram.png">
@@ -17,6 +17,14 @@
 - [Getting started](#getting-started)
   - [Installation](#installation)
   - [Create bot token](#bot-token)
+- [Update Strategies](#update-strategies)
+  - [Long Polling](#long-polling)
+  - [Webhook](#webhook)
+- [Example](#example)
+- [Test](#test)
+  - [Start Docker Containers](#start-docker-containers)
+  - [Local testing](#run-tests-locally)
+  - [Lint](#run-linter)
 - [TODO](#todo)
 
 ## Getting started
@@ -31,13 +39,83 @@ go get -u github.com/go-microbot/telegram
 ### Bot token
 Create your own bot. Follow the [Official guide](https://core.telegram.org/bots/api#authorizing-your-bot).
 
-# TODO
+---
+
+## Update Strategies
+There are two mutually exclusive ways of receiving updates for your bot — the `Long Polling` on one hand and `Webhooks` on the other. Incoming updates are stored on the server until the bot receives them either way, but they will not be kept longer than 24 hours.
+
+### Long Polling
+```go
+package main
+```
+
+### Webhook
+```go
+package main
+```
+
+> Ports currently supported for Webhooks: **443**, **80**, **88**, **8443**.
+
+---
+
+## Example
+See the [examples](./examples) folder to get all available examples.
+
+---
+
+## Test
+
+**NOTE**
+> Download and install [Docker](https://docs.docker.com/) before running tests locally.
+
+### Start Docker Containers
+Create your [Telegram Application](https://core.telegram.org/api/obtaining_api_id).
+
+The mandatory options are `--api-id` and `--api-hash`. You must obtain your own `api_id` and `api_hash` as described in https://core.telegram.org/api/obtaining_api_id and specify them using the `--api-id` and `--api-hash` options or the `TELEGRAM_API_ID` and `TELEGRAM_API_HASH` environment variables.
+
+Use the following command:
+```bash
+docker run --publish 8081:8081 -it --rm -d --name telegram-bot-api huntechio/telegram-bot-api:master-7cf91e4 --api-id=${TEST_API_ID} --api-hash=${TEST_API_HASH}
+```
+
+Or use [Makefile](./Makefile)'s `start_images` command:
+```bash
+make start_images
+```
+
+### Run tests locally
+To run tests locally please specify the `TEST_BOT_TOKEN` env variable. It should contains your bot token.
+
+Use the following command:
+```bash
+go test -p 1
+```
+
+Or use [Makefile](./Makefile)'s `test` command:
+```bash
+make test
+```
+
+### Run linter
+Use the following commands:
+```bash
+golangci-lint cache clean
+golangci-lint run --config .golangci.yml --timeout=5m
+```
+
+Or use [Makefile](./Makefile)'s `lint` command:
+```bash
+make lint
+```
+
+---
+
+## TODO
 The bot is **isn't finished yet**. The main goal is to implement all available methods from [Telegram documentation](https://core.telegram.org/bots/api#available-methods).
 
 
 Implementation     | Test coverage  | Method                          | Docs                                                               |
 -----------------  | -------------  | ------------------------------- | -----------------------------------------------------------------  |
-:heavy_check_mark: | :x:            | getMe                           | https://core.telegram.org/bots/api#getme                           |
 :x:                | :x:            | logout                          | https://core.telegram.org/bots/api#logout                          |
 :x:                | :x:            | close                           | https://core.telegram.org/bots/api#close                           |
 :x:                | :x:            | sendMessage                     | https://core.telegram.org/bots/api#sendMessage                     |
