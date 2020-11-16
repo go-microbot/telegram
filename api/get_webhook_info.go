@@ -17,7 +17,7 @@ func (api *TelegramAPI) GetWebhookInfo(ctx context.Context) (*models.WebhookInfo
 	}
 
 	var status models.WebhookInfo
-	if err = resp.Decode(&status); err != nil {
+	if err := resp.Decode(&status); err != nil {
 		return nil, err
 	}
 

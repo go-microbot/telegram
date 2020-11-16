@@ -9,7 +9,7 @@ import (
 	"github.com/go-microbot/telegram/bot"
 )
 
-const telegramBotToken = "1256583982:AAHoS3RanoCsXtKhNJCQSOftJXWSRJnLg2o" // "<PASTE_YOUR_TOKEN_HERE>"
+const telegramBotToken = "<PASTE_YOUR_TOKEN_HERE>"
 
 func main() {
 	// init Bot API with token.

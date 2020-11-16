@@ -7,6 +7,7 @@ import (
 	"fmt"
 	"io"
 	"mime/multipart"
+	"net"
 	"net/http"
 )
 
@@ -113,6 +114,10 @@ func (req *Request) Do(ctx context.Context) (*Response, error) {
 	// make request.
 	result, err := req.client.Do(request)
 	if err != nil {
+		if nErr, ok := err.(net.Error); ok && nErr.Timeout() {
+			return nil, newErr(ErrReqTimeout, err)
+		}
+
 		return nil, newErr(ErrSendReq, err)
 	}
 

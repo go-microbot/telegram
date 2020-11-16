@@ -68,7 +68,7 @@ func (poll UpdatesStrategyLongPolling) polling(req *apiModels.GetUpdatesRequest)
 	ctx := context.Background()
 	updates, err := poll.cfg.BotAPI.GetPollUpdates(ctx, *req, poll.client)
 	if err != nil {
-		if errors.Is(err, api.ErrSendReq) {
+		if errors.Is(err, api.ErrReqTimeout) {
 			return
 		}
 

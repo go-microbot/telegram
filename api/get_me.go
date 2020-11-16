@@ -14,7 +14,7 @@ func (api *TelegramAPI) GetMe(ctx context.Context) (*models.User, error) {
 	}
 
 	var me models.User
-	if err = resp.Decode(&me); err != nil {
+	if err := resp.Decode(&me); err != nil {
 		return nil, err
 	}
 

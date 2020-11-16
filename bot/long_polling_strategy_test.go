@@ -1,11 +1,11 @@
 package bot
 
 import (
-	"net"
 	"sync"
 	"testing"
 	"time"
 
+	"github.com/go-microbot/telegram/api"
 	apiMocks "github.com/go-microbot/telegram/api/mocks"
 	apiModels "github.com/go-microbot/telegram/api/models"
 	"github.com/go-microbot/telegram/models"
@@ -13,32 +13,6 @@ import (
 	"github.com/stretchr/testify/mock"
 	"github.com/stretchr/testify/require"
 )
-
-type netErrorMock struct {
-	err       error
-	timeout   bool
-	temporary bool
-}
-
-func (err netErrorMock) Timeout() bool {
-	return err.timeout
-}
-
-func (err netErrorMock) Temporary() bool {
-	return err.temporary
-}
-
-func (err netErrorMock) Error() string {
-	return err.err.Error()
-}
-
-func newNetErrorMock(err error, isTemporary, isTimeout bool) netErrorMock {
-	return netErrorMock{
-		err:       err,
-		temporary: isTemporary,
-		timeout:   isTimeout,
-	}
-}
 
 func Test_NewUpdatesStrategyLongPolling(t *testing.T) {
 	poll := NewUpdatesStrategyLongPolling(LongPollingConfig{
@@ -69,23 +43,23 @@ func TestUpdatesStrategyLongPolling_Errors(t *testing.T) {
 
 func TestUpdatesStrategyLongPolling_Listen(t *testing.T) {
 	t.Run("with errors", func(t *testing.T) {
-		api := new(apiMocks.Bot)
-		defer api.AssertExpectations(t)
+		tAPI := new(apiMocks.Bot)
+		defer tAPI.AssertExpectations(t)
 		poll := NewUpdatesStrategyLongPolling(LongPollingConfig{
 			Timeout:        1,
 			Offset:         1,
 			Limit:          2,
 			AllowedUpdates: []string{"all"},
-			BotAPI:         api,
+			BotAPI:         tAPI,
 		})
 		require.NotNil(t, poll)
 
 		// timeout error.
-		api.On("GetPollUpdates", mock.Anything, mock.Anything, mock.Anything).
-			Return(nil, net.Error(newNetErrorMock(errMock, false, true))).Once()
+		tAPI.On("GetPollUpdates", mock.Anything, mock.Anything, mock.Anything).
+			Return(nil, api.ErrReqTimeout).Once()
 
 		// with error.
-		api.On("GetPollUpdates", mock.Anything, mock.Anything, mock.Anything).
+		tAPI.On("GetPollUpdates", mock.Anything, mock.Anything, mock.Anything).
 			Return(nil, errMock)
 
 		var wg sync.WaitGroup
@@ -107,19 +81,19 @@ func TestUpdatesStrategyLongPolling_Listen(t *testing.T) {
 		require.Equal(t, expErrors, errs)
 	})
 	t.Run("all ok", func(t *testing.T) {
-		api := new(apiMocks.Bot)
-		defer api.AssertExpectations(t)
+		tAPI := new(apiMocks.Bot)
+		defer tAPI.AssertExpectations(t)
 		poll := NewUpdatesStrategyLongPolling(LongPollingConfig{
 			Timeout:        1,
 			Offset:         1,
 			Limit:          2,
 			AllowedUpdates: []string{"all"},
-			BotAPI:         api,
+			BotAPI:         tAPI,
 		})
 		require.NotNil(t, poll)
 
 		// with updates.
-		api.On("GetPollUpdates", mock.Anything, apiModels.GetUpdatesRequest{
+		tAPI.On("GetPollUpdates", mock.Anything, apiModels.GetUpdatesRequest{
 			Limit:          query.NewParamInt(2),
 			AllowedUpdates: query.NewParamStringSlice([]string{"all"}),
 			Offset:         query.NewParamInt(1),
@@ -132,7 +106,7 @@ func TestUpdatesStrategyLongPolling_Listen(t *testing.T) {
 				},
 			},
 		}, nil)
-		api.On("GetPollUpdates", mock.Anything, apiModels.GetUpdatesRequest{
+		tAPI.On("GetPollUpdates", mock.Anything, apiModels.GetUpdatesRequest{
 			Limit:          query.NewParamInt(2),
 			AllowedUpdates: query.NewParamStringSlice([]string{"all"}),
 			Offset:         query.NewParamInt(2),
@@ -145,7 +119,7 @@ func TestUpdatesStrategyLongPolling_Listen(t *testing.T) {
 				},
 			},
 		}, nil)
-		api.On("GetPollUpdates", mock.Anything, mock.Anything, mock.Anything).
+		tAPI.On("GetPollUpdates", mock.Anything, mock.Anything, mock.Anything).
 			Return(nil, nil).Maybe()
 
 		messages := make([]string, 0)
@@ -172,14 +146,14 @@ func TestUpdatesStrategyLongPolling_Listen(t *testing.T) {
 }
 
 func TestUpdatesStrategyLongPolling_Stop(t *testing.T) {
-	api := new(apiMocks.Bot)
-	defer api.AssertExpectations(t)
+	tAPI := new(apiMocks.Bot)
+	defer tAPI.AssertExpectations(t)
 	poll := NewUpdatesStrategyLongPolling(LongPollingConfig{
-		BotAPI: api,
+		BotAPI: tAPI,
 	})
 	require.NotNil(t, poll)
 
-	api.On("GetPollUpdates", mock.Anything, mock.Anything, mock.Anything).
+	tAPI.On("GetPollUpdates", mock.Anything, mock.Anything, mock.Anything).
 		Return(nil, nil)
 
 	var wg sync.WaitGroup

@@ -21,7 +21,7 @@ func (api *TelegramAPI) GetUpdates(ctx context.Context, req apiModels.GetUpdates
 	}
 
 	var updates []models.Update
-	if err = resp.Decode(&updates); err != nil {
+	if err := resp.Decode(&updates); err != nil {
 		return nil, err
 	}
 
@@ -42,7 +42,7 @@ func (api *TelegramAPI) GetPollUpdates(ctx context.Context, req apiModels.GetUpd
 	}
 
 	var updates []models.Update
-	if err = resp.Decode(&updates); err != nil {
+	if err := resp.Decode(&updates); err != nil {
 		return nil, err
 	}
 

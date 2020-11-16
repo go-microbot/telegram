@@ -20,7 +20,7 @@ func (api *TelegramAPI) SendMessage(ctx context.Context, req apiModels.SendMessa
 	}
 
 	var message models.Message
-	if err = resp.Decode(&message); err != nil {
+	if err := resp.Decode(&message); err != nil {
 		return nil, err
 	}
 

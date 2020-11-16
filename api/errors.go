@@ -10,6 +10,7 @@ var (
 	ErrEncodeBody = errors.New("could not encode request body")
 	ErrPrepareReq = errors.New("could not create request")
 	ErrSendReq    = errors.New("could not send request")
+	ErrReqTimeout = errors.New("request timeout")
 	ErrResponse   = errors.New("server returned unexpected result")
 	ErrDecodeBody = errors.New("could not parse response body")
 )
