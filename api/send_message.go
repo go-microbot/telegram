@@ -2,7 +2,6 @@ package api
 
 import (
 	"context"
-	"net/http"
 
 	apiModels "github.com/go-microbot/telegram/api/models"
 	"github.com/go-microbot/telegram/models"
@@ -11,7 +10,7 @@ import (
 // SendMessage sends text messages.
 // On success, the sent Message (https://core.telegram.org/bots/api#message) is returned.
 func (api *TelegramAPI) SendMessage(ctx context.Context, req apiModels.SendMessageRequest) (*models.Message, error) {
-	resp, err := api.NewRequest("sendMessage").
+	/*resp, err := api.NewRequest("sendMessage").
 		Method(http.MethodPost).
 		Body(req).
 		Do(ctx)
@@ -24,5 +23,6 @@ func (api *TelegramAPI) SendMessage(ctx context.Context, req apiModels.SendMessa
 		return nil, err
 	}
 
-	return &message, nil
+	return &message, nil*/
+	return nil, nil
 }

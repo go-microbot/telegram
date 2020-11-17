@@ -6,15 +6,41 @@ import (
 	"encoding/json"
 	"fmt"
 	"io"
-	"mime/multipart"
 	"net"
 	"net/http"
+
+	"github.com/go-microbot/telegram/form"
+)
+
+const (
+	contentTypeHeader = "Contet-Type"
 )
 
 // Response represents base API response.
 type Response struct {
 	resp *http.Response
 }
+
+// Request represents API request configuration.
+type Request struct {
+	url        string
+	httpMethod string
+	apiMethod  string
+	body       *RequestBody
+	query      map[string]string
+	headers    map[string]string
+	bodyData   []byte
+	client     *http.Client
+}
+
+// RequestBody represents model for body request.
+type RequestBody struct {
+	m    BodyMarshaler
+	body interface{}
+}
+
+// BodyMarshaler represents body marshaler func.
+type BodyMarshaler func(v interface{}) ([]byte, error)
 
 type apiResponse struct {
 	OK bool `json:"ok"`
@@ -31,16 +57,20 @@ type goodResponse struct {
 	Result json.RawMessage `json:"result,omitempty"`
 }
 
-// Request represents API request configuration.
-type Request struct {
-	url        string
-	httpMethod string
-	apiMethod  string
-	body       interface{}
-	query      map[string]string
-	formData   map[string]string
-	headers    map[string]string
-	client     *http.Client
+// NewJSONBody returns new RequestBody with JSON marshaler.
+func NewJSONBody(body interface{}) *RequestBody {
+	return &RequestBody{
+		m:    json.Marshal,
+		body: body,
+	}
+}
+
+// NewFormDataBody returns new RequestBody with Form Data marshaler.
+func NewFormDataBody(body interface{}) *RequestBody {
+	return &RequestBody{
+		m:    form.Marshal,
+		body: body,
+	}
 }
 
 // NewRequest returns new Request instance.
@@ -53,6 +83,11 @@ func (api *TelegramAPI) NewRequest(apiMethod string) *Request {
 	}
 }
 
+// Marshal marshal request body.
+func (b *RequestBody) Marshal() ([]byte, error) {
+	return b.m(b.body)
+}
+
 // Method sets HTTP method, like GET, POST, etc.
 // GET by default if not provided.
 func (req *Request) Method(method string) *Request {
@@ -61,8 +96,7 @@ func (req *Request) Method(method string) *Request {
 }
 
 // Body sets request body.
-// Will be converted to JSON before send.
-func (req *Request) Body(body interface{}) *Request {
+func (req *Request) Body(body *RequestBody) *Request {
 	req.body = body
 	return req
 }
@@ -70,12 +104,6 @@ func (req *Request) Body(body interface{}) *Request {
 // Query sets query params.
 func (req *Request) Query(q map[string]string) *Request {
 	req.query = q
-	return req
-}
-
-// FormData sets form data.
-func (req *Request) FormData(data map[string]string) *Request {
-	req.formData = data
 	return req
 }
 
@@ -98,6 +126,8 @@ func (req *Request) Do(ctx context.Context) (*Response, error) {
 	if err != nil {
 		return nil, newErr(ErrEncodeBody, err)
 	}
+
+	//panic(body)
 
 	// create request.
 	request, err := http.NewRequestWithContext(ctx, req.httpMethod, req.url, body)
@@ -123,6 +153,11 @@ func (req *Request) Do(ctx context.Context) (*Response, error) {
 
 	// check response status code.
 	if !isValidStatusCode(result.StatusCode) {
+		///
+		var r apiResponse
+		json.NewDecoder(result.Body).Decode(&r)
+		panic(r.Description)
+		///
 		return nil, newErr(ErrResponse,
 			fmt.Errorf("status %d: %s", result.StatusCode, result.Status))
 	}
@@ -152,20 +187,112 @@ func (res *Response) Decode(resp interface{}) error {
 }
 
 func (req *Request) prepareBody() (io.Reader, error) {
-	var body io.Reader
+	if req.body == nil {
+		return nil, nil
+	}
+
+	data, err := req.body.Marshal()
+	if err != nil {
+		return nil, err
+	}
+	req.bodyData = data
+
+	return bytes.NewBuffer(data), nil
+
+	/*var body io.Reader
 
 	if len(req.headers) == 0 {
 		req.headers = make(map[string]string)
 	}
 
-	switch {
-	case req.body != nil:
-		data, err := json.Marshal(req.body)
+	// create metadata.
+	var metaData []byte
+	var err error
+	if req.body != nil {
+		metaData, err = json.Marshal(req.body)
 		if err != nil {
 			return nil, err
 		}
-		body = bytes.NewBuffer(data)
-		req.headers["Content-Type"] = "application/json"
+
+		if len(req.formData) == 0 {
+			body = bytes.NewBuffer(metaData)
+			req.headers["Content-Type"] = "application/json"
+			return body, nil
+		}
+	}
+
+	// create metadata form part.
+	formBody := &bytes.Buffer{}
+	writer := multipart.NewWriter(formBody)
+
+	if len(metaData) != 0 {
+		/*metadataHeader := textproto.MIMEHeader{}
+		metadataHeader.Set("Content-Type", "application/json")
+		metadataHeader.Set("Content-ID", "body")
+		part, err := writer.CreatePart(metadataHeader)
+		if err != nil {
+			return nil, err
+		}
+		_, err = part.Write([]byte(metaData))
+		if err != nil {
+			return nil, err
+		}
+
+		err = writer.WriteField("", string(metaData))
+		if err != nil {
+			return nil, err
+		}
+	}
+
+	///
+	/*mediaData, err := ioutil.ReadFile("./test_data/test_photo.png")
+	if err != nil {
+		return nil, err
+	}
+	mediaHeader := textproto.MIMEHeader{}
+	mediaHeader.Set("Content-Disposition", fmt.Sprintf("attachment; name=\"photo\"; filename=\"%v\".", "./test_data/test_photo.png"))
+	mediaHeader.Set("Content-ID", "photo")
+	mediaHeader.Set("Content-Filename", "photo.png")
+
+	mediaPart, err := writer.CreatePart(mediaHeader)
+	if err != nil {
+		return nil, err
+	}
+	_, err = io.Copy(mediaPart, bytes.NewReader(mediaData))
+	if err != nil {
+		return nil, err
+	}
+
+	file, err := os.Open("./test_data/test_photo.png")
+	if err != nil {
+		return nil, err
+	}
+	fileContents, err := ioutil.ReadAll(file)
+	if err != nil {
+		return nil, err
+	}
+	fi, err := file.Stat()
+	if err != nil {
+		return nil, err
+	}
+	file.Close()
+
+	part, err := writer.CreateFormFile("photo", fi.Name())
+	if err != nil {
+		return nil, err
+	}
+	if _, err := part.Write(fileContents); err != nil {
+		return nil, err
+	}
+
+	if err := writer.Close(); err != nil {
+		return nil, err
+	}
+
+	body = formBody
+	req.headers["Content-Type"] = writer.FormDataContentType() // fmt.Sprintf("multipart/form-data; boundary=%s", writer.Boundary())
+
+	/*switch {
 	case len(req.formData) != 0:
 		formData := new(bytes.Buffer)
 		writer := multipart.NewWriter(formData)
@@ -180,12 +307,19 @@ func (req *Request) prepareBody() (io.Reader, error) {
 		}
 		body = formData
 		req.headers["Content-Type"] = writer.FormDataContentType()
-	}
-
-	return body, nil
+	}*/
 }
 
 func (req *Request) setHeaders(request *http.Request) {
+	if len(req.headers) == 0 {
+		req.headers = make(map[string]string)
+	}
+
+	// detect content-type.
+	if _, ok := req.headers[contentTypeHeader]; !ok && len(req.bodyData) != 0 {
+		req.headers[contentTypeHeader] = form.CT //http.DetectContentType(req.bodyData)
+	}
+
 	for k, v := range req.headers {
 		request.Header.Set(k, v)
 	}

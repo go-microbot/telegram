@@ -2,12 +2,10 @@ package api
 
 import (
 	"context"
-	"io/ioutil"
-	"os"
-	"path"
 	"testing"
 
 	apiModels "github.com/go-microbot/telegram/api/models"
+	"github.com/go-microbot/telegram/form"
 	"github.com/go-microbot/telegram/query"
 	"github.com/stretchr/testify/require"
 )
@@ -46,13 +44,10 @@ func (h sendPhoto) Test(ctx context.Context, t *testing.T) context.Context {
 	require.NotNil(t, msg.Photo)*/
 
 	// send new photo.
-	wd, err := os.Getwd()
-	require.NoError(t, err)
-	data, err := ioutil.ReadFile(path.Join(wd, "./test_data/test_photo.png"))
-	require.NoError(t, err)
 	msg, err := localAPI.SendPhoto(ctx, apiModels.SendPhotoRequest{
 		ChatID: query.NewParamAny(chatID),
-		Photo:  string(data), //models.InputFile(data),
+		Photo:  form.NewPartFile("./test_data/test_photo.png"),
+		//Caption: form.NewPartText("text caption"),
 	})
 	require.NoError(t, err)
 	require.NotNil(t, msg)

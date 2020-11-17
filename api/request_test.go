@@ -1,20 +1,6 @@
 package api
 
-import (
-	"bytes"
-	"context"
-	"encoding/json"
-	"errors"
-	"fmt"
-	"io/ioutil"
-	"net/http"
-	"net/http/httptest"
-	"testing"
-
-	"github.com/stretchr/testify/require"
-)
-
-type invalidMarshal struct {
+/*type invalidMarshal struct {
 	err error
 }
 
@@ -251,3 +237,4 @@ func TestResponse_Decode(t *testing.T) {
 		require.Equal(t, body, result)
 	})
 }
+*/
