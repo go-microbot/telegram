@@ -32,6 +32,20 @@ func (_m *Bot) Close(ctx context.Context) error {
 	return r0
 }
 
+// DeleteChatPhoto provides a mock function with given fields: ctx, req
+func (_m *Bot) DeleteChatPhoto(ctx context.Context, req models.ChatID) error {
+	ret := _m.Called(ctx, req)
+
+	var r0 error
+	if rf, ok := ret.Get(0).(func(context.Context, models.ChatID) error); ok {
+		r0 = rf(ctx, req)
+	} else {
+		r0 = ret.Error(0)
+	}
+
+	return r0
+}
+
 // DeleteWebhook provides a mock function with given fields: ctx
 func (_m *Bot) DeleteWebhook(ctx context.Context) error {
 	ret := _m.Called(ctx)
@@ -44,6 +58,29 @@ func (_m *Bot) DeleteWebhook(ctx context.Context) error {
 	}
 
 	return r0
+}
+
+// ForwardMessage provides a mock function with given fields: ctx, req
+func (_m *Bot) ForwardMessage(ctx context.Context, req models.ForwardMessageRequest) (*telegrammodels.Message, error) {
+	ret := _m.Called(ctx, req)
+
+	var r0 *telegrammodels.Message
+	if rf, ok := ret.Get(0).(func(context.Context, models.ForwardMessageRequest) *telegrammodels.Message); ok {
+		r0 = rf(ctx, req)
+	} else {
+		if ret.Get(0) != nil {
+			r0 = ret.Get(0).(*telegrammodels.Message)
+		}
+	}
+
+	var r1 error
+	if rf, ok := ret.Get(1).(func(context.Context, models.ForwardMessageRequest) error); ok {
+		r1 = rf(ctx, req)
+	} else {
+		r1 = ret.Error(1)
+	}
+
+	return r0, r1
 }
 
 // GetChat provides a mock function with given fields: ctx, req
@@ -79,6 +116,29 @@ func (_m *Bot) GetMe(ctx context.Context) (*telegrammodels.User, error) {
 	} else {
 		if ret.Get(0) != nil {
 			r0 = ret.Get(0).(*telegrammodels.User)
+		}
+	}
+
+	var r1 error
+	if rf, ok := ret.Get(1).(func(context.Context) error); ok {
+		r1 = rf(ctx)
+	} else {
+		r1 = ret.Error(1)
+	}
+
+	return r0, r1
+}
+
+// GetMyCommands provides a mock function with given fields: ctx
+func (_m *Bot) GetMyCommands(ctx context.Context) ([]telegrammodels.BotCommand, error) {
+	ret := _m.Called(ctx)
+
+	var r0 []telegrammodels.BotCommand
+	if rf, ok := ret.Get(0).(func(context.Context) []telegrammodels.BotCommand); ok {
+		r0 = rf(ctx)
+	} else {
+		if ret.Get(0) != nil {
+			r0 = ret.Get(0).([]telegrammodels.BotCommand)
 		}
 	}
 
@@ -235,6 +295,20 @@ func (_m *Bot) SendPhoto(ctx context.Context, req models.SendPhotoRequest) (*tel
 	return r0, r1
 }
 
+// SetChatDescription provides a mock function with given fields: ctx, req
+func (_m *Bot) SetChatDescription(ctx context.Context, req models.SetChatDescriptionRequest) error {
+	ret := _m.Called(ctx, req)
+
+	var r0 error
+	if rf, ok := ret.Get(0).(func(context.Context, models.SetChatDescriptionRequest) error); ok {
+		r0 = rf(ctx, req)
+	} else {
+		r0 = ret.Error(0)
+	}
+
+	return r0
+}
+
 // SetChatPermissions provides a mock function with given fields: ctx, req
 func (_m *Bot) SetChatPermissions(ctx context.Context, req models.SetChatPermissionsRequest) error {
 	ret := _m.Called(ctx, req)
@@ -269,6 +343,20 @@ func (_m *Bot) SetChatTitle(ctx context.Context, req models.SetChatTitleRequest)
 
 	var r0 error
 	if rf, ok := ret.Get(0).(func(context.Context, models.SetChatTitleRequest) error); ok {
+		r0 = rf(ctx, req)
+	} else {
+		r0 = ret.Error(0)
+	}
+
+	return r0
+}
+
+// SetMyCommands provides a mock function with given fields: ctx, req
+func (_m *Bot) SetMyCommands(ctx context.Context, req models.SetMyCommandsRequest) error {
+	ret := _m.Called(ctx, req)
+
+	var r0 error
+	if rf, ok := ret.Get(0).(func(context.Context, models.SetMyCommandsRequest) error); ok {
 		r0 = rf(ctx, req)
 	} else {
 		r0 = ret.Error(0)

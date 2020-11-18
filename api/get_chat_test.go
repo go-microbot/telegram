@@ -16,6 +16,8 @@ func (h getChat) Test(ctx context.Context, t *testing.T) context.Context {
 	require.NotNil(t, groupChatID)
 	groupChatTitle := ctx.Value(newGroupChatTitleCtxKey)
 	require.NotNil(t, groupChatTitle)
+	groupChatDescription := ctx.Value(newGroupChatDescriptionCtxKey)
+	require.NotNil(t, groupChatDescription)
 
 	chat, err := localAPI.GetChat(ctx, apiModels.ChatID{
 		ChatID: query.NewParamAny(groupChatID.(int64)),
@@ -25,6 +27,7 @@ func (h getChat) Test(ctx context.Context, t *testing.T) context.Context {
 
 	require.Equal(t, groupChatID, chat.ID)
 	require.Equal(t, groupChatTitle, chat.Title)
+	require.Equal(t, groupChatDescription, chat.Description)
 
 	return ctx
 }
