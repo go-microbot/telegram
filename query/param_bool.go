@@ -8,7 +8,7 @@ type ParamBool struct {
 }
 
 // Set sets the query bool param value.
-func (qpb ParamBool) Set(v bool) {
+func (qpb *ParamBool) Set(v bool) {
 	qpb.v = &v
 }
 

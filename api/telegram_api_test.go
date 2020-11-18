@@ -36,7 +36,7 @@ type Testable interface {
 type TestDataKey interface{}
 
 func TestMain(m *testing.M) {
-	localAPI = NewTelegramAPI( /*os.Getenv("TEST_BOT_TOKEN")*/ "1256583982:AAHoS3RanoCsXtKhNJCQSOftJXWSRJnLg2o")
+	localAPI = NewTelegramAPI(os.Getenv("TEST_BOT_TOKEN"))
 	localAPI.url = localAPIURL
 
 	os.Exit(m.Run())
@@ -113,7 +113,7 @@ func TestTelegramAPI_Integration(t *testing.T) {
 		},
 		{
 			name:        "getChat",
-			testHandler: setChatTitle{},
+			testHandler: getChat{},
 		},
 	}
 	for i := range testCases {

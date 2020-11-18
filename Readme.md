@@ -248,12 +248,10 @@ The bot is **isn't finished yet**. The main goal is to implement all available m
 
 Implementation     | Test coverage  | Method                          | Docs                                                               |
 -----------------  | -------------  | ------------------------------- | -----------------------------------------------------------------  |
-:x:                | :x:            | logout                          | https://core.telegram.org/bots/api#logout                          |
-:x:                | :x:            | close                           | https://core.telegram.org/bots/api#close                           |
-:x:                | :x:            | sendMessage                     | https://core.telegram.org/bots/api#sendMessage                     |
+:heavy_check_mark: | :x:            | logout                          | https://core.telegram.org/bots/api#logout                          |
+:heavy_check_mark: | :x:            | close                           | https://core.telegram.org/bots/api#close                           |
 :x:                | :x:            | forwardMessage                  | https://core.telegram.org/bots/api#forwardMessage                  |
 :x:                | :x:            | copyMessage                     | https://core.telegram.org/bots/api#copyMessage                     |
-:x:                | :x:            | sendPhoto                       | https://core.telegram.org/bots/api#sendPhoto                       |
 :x:                | :x:            | sendAudio                       | https://core.telegram.org/bots/api#sendAudio                       |
 :x:                | :x:            | sendDocument                    | https://core.telegram.org/bots/api#sendDocument                    |
 :x:                | :x:            | sendVideo                       | https://core.telegram.org/bots/api#sendVideo                       |
@@ -276,17 +274,13 @@ Implementation     | Test coverage  | Method                          | Docs    
 :x:                | :x:            | restrictChatMember              | https://core.telegram.org/bots/api#restrictChatMember              |
 :x:                | :x:            | promoteChatMember               | https://core.telegram.org/bots/api#promoteChatMember               |
 :x:                | :x:            | setChatAdministratorCustomTitle | https://core.telegram.org/bots/api#setChatAdministratorCustomTitle |
-:x:                | :x:            | setChatPermissions              | https://core.telegram.org/bots/api#setChatPermissions              |
 :x:                | :x:            | exportChatInviteLink            | https://core.telegram.org/bots/api#exportChatInviteLink            |
-:x:                | :x:            | setChatPhoto                    | https://core.telegram.org/bots/api#setChatPhoto                    |
 :x:                | :x:            | deleteChatPhoto                 | https://core.telegram.org/bots/api#deleteChatPhoto                 |
-:x:                | :x:            | setChatTitle                    | https://core.telegram.org/bots/api#setChatTitle                    |
 :x:                | :x:            | setChatDescription              | https://core.telegram.org/bots/api#setChatDescription              |
 :x:                | :x:            | pinChatMessage                  | https://core.telegram.org/bots/api#pinChatMessage                  |
 :x:                | :x:            | unpinChatMessage                | https://core.telegram.org/bots/api#unpinChatMessage                |
 :x:                | :x:            | unpinAllChatMessages            | https://core.telegram.org/bots/api#unpinAllChatMessages            |
-:x:                | :x:            | leaveChat                       | https://core.telegram.org/bots/api#leaveChat                       |
-:x:                | :x:            | getChat                         | https://core.telegram.org/bots/api#getChat                         |
+:heavy_check_mark: | :x:            | leaveChat                       | https://core.telegram.org/bots/api#leaveChat                       |
 :x:                | :x:            | getChatAdministrators           | https://core.telegram.org/bots/api#getChatAdministrators           |
 :x:                | :x:            | getChatMembersCount             | https://core.telegram.org/bots/api#getChatMembersCount             |
 :x:                | :x:            | getChatMember                   | https://core.telegram.org/bots/api#getChatMember                   |

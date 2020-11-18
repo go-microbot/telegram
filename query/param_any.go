@@ -10,7 +10,7 @@ type ParamAny struct {
 }
 
 // Set sets the query any type param value.
-func (qpa ParamAny) Set(v interface{}) {
+func (qpa *ParamAny) Set(v interface{}) {
 	qpa.v = &v
 }
 

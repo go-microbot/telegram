@@ -35,7 +35,7 @@ func (p PartFile) Marshal(w *multipart.Writer, partName string, omitempty bool) 
 	if err != nil {
 		return err
 	}
-	if err = file.Close(); err != nil {
+	if err := file.Close(); err != nil {
 		return err
 	}
 

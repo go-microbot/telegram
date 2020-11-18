@@ -6,7 +6,7 @@ type ParamString struct {
 }
 
 // Set sets the query string param value.
-func (qps ParamString) Set(v string) {
+func (qps *ParamString) Set(v string) {
 	qps.v = &v
 }
 

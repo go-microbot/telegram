@@ -27,7 +27,6 @@ func Test_Marshal(t *testing.T) {
 			data: struct{}{},
 			exp: func(t *testing.T, res []byte, ct string, err error) {
 				require.NoError(t, err)
-				require.Empty(t, res)
 			},
 		},
 		{
@@ -41,7 +40,6 @@ func Test_Marshal(t *testing.T) {
 			},
 			exp: func(t *testing.T, res []byte, ct string, err error) {
 				require.NoError(t, err)
-				require.Empty(t, res)
 			},
 		},
 		{

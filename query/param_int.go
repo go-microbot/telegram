@@ -8,7 +8,7 @@ type ParamInt struct {
 }
 
 // Set sets the query int param value.
-func (qpi ParamInt) Set(v int) {
+func (qpi *ParamInt) Set(v int) {
 	qpi.v = &v
 }
 

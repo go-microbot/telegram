@@ -1,6 +1,21 @@
 package api
 
-/*type invalidMarshal struct {
+import (
+	"bytes"
+	"context"
+	"encoding/json"
+	"errors"
+	"fmt"
+	"io/ioutil"
+	"net/http"
+	"net/http/httptest"
+	"strings"
+	"testing"
+
+	"github.com/stretchr/testify/require"
+)
+
+type invalidMarshal struct {
 	err error
 }
 
@@ -8,12 +23,20 @@ type invalidUnmarshal struct {
 	err error
 }
 
+func (i invalidUnmarshal) UnmarshalJSON([]byte) error {
+	return i.err
+}
+
 func (i invalidMarshal) MarshalJSON() ([]byte, error) {
 	return nil, i.err
 }
 
-func (i invalidUnmarshal) UnmarshalJSON([]byte) error {
-	return i.err
+func testMarsaler(v interface{}, ct *string) ([]byte, error) {
+	if ct != nil {
+		*ct = "test content type"
+	}
+
+	return []byte(strings.ToUpper(v.(string))), nil
 }
 
 func serverMock(pattern string) *httptest.Server {
@@ -30,6 +53,22 @@ func serverMock(pattern string) *httptest.Server {
 	return httptest.NewServer(handler)
 }
 
+func Test_NewJSONBody(t *testing.T) {
+	b := NewJSONBody("test")
+	require.NotNil(t, b)
+	require.NotNil(t, b.body)
+	require.NotNil(t, b.m)
+	require.Equal(t, "test", b.body)
+}
+
+func Test_NewFormDataBody(t *testing.T) {
+	b := NewFormDataBody("test")
+	require.NotNil(t, b)
+	require.NotNil(t, b.body)
+	require.NotNil(t, b.m)
+	require.Equal(t, "test", b.body)
+}
+
 func TestTelegramAPI_NewRequest(t *testing.T) {
 	api := NewTelegramAPI("123")
 	req := api.NewRequest("test")
@@ -38,6 +77,19 @@ func TestTelegramAPI_NewRequest(t *testing.T) {
 	require.Equal(t, "test", req.apiMethod)
 	require.NotNil(t, req.client)
 	require.Equal(t, http.MethodGet, req.httpMethod)
+}
+
+func TestRequestBody_Marshal(t *testing.T) {
+	rb := RequestBody{
+		body: "test data",
+		m:    testMarsaler,
+	}
+	var ct string
+	data, err := rb.Marshal(&ct)
+	require.NoError(t, err)
+	require.NotEmpty(t, data)
+	require.Equal(t, "test content type", ct)
+	require.Equal(t, strings.ToUpper(rb.body.(string)), string(data))
 }
 
 func TestRequest_Method(t *testing.T) {
@@ -52,8 +104,8 @@ func TestRequest_Body(t *testing.T) {
 	api := NewTelegramAPI("123")
 	req := api.NewRequest("test")
 	require.NotNil(t, req)
-	req.Body("data")
-	require.Equal(t, "data", req.body)
+	req.Body(&RequestBody{})
+	require.NotNil(t, req.body)
 }
 
 func TestRequest_Query(t *testing.T) {
@@ -65,17 +117,6 @@ func TestRequest_Query(t *testing.T) {
 	}
 	req.Query(q)
 	require.Equal(t, q, req.query)
-}
-
-func TestRequest_FormData(t *testing.T) {
-	api := NewTelegramAPI("123")
-	req := api.NewRequest("test")
-	require.NotNil(t, req)
-	fd := map[string]string{
-		"hello": "world",
-	}
-	req.FormData(fd)
-	require.Equal(t, fd, req.formData)
 }
 
 func TestRequest_Headers(t *testing.T) {
@@ -101,9 +142,9 @@ func TestRequest_CustomClient(t *testing.T) {
 func TestRequest_Do(t *testing.T) {
 	t.Run("encode body error (JSON)", func(t *testing.T) {
 		api := NewTelegramAPI("123")
-		req := api.NewRequest("test").Body(invalidMarshal{
+		req := api.NewRequest("test").Body(NewJSONBody(invalidMarshal{
 			err: errors.New("error"),
-		})
+		}))
 		require.NotNil(t, req)
 		_, err := req.Do(context.Background())
 		require.Error(t, err)
@@ -119,9 +160,7 @@ func TestRequest_Do(t *testing.T) {
 	})
 	t.Run("send request error", func(t *testing.T) {
 		api := NewTelegramAPI("123")
-		req := api.NewRequest("test").FormData(map[string]string{
-			"some": "field",
-		})
+		req := api.NewRequest("test")
 		require.NotNil(t, req)
 		ctx, cancel := context.WithCancel(context.Background())
 		cancel()
@@ -135,9 +174,6 @@ func TestRequest_Do(t *testing.T) {
 		defer srv.Close()
 		api.url = srv.URL
 		req := api.NewRequest("test").
-			FormData(map[string]string{
-				"some": "field",
-			}).
 			Headers(map[string]string{
 				"x-test": "status 500",
 			}).
@@ -155,7 +191,12 @@ func TestRequest_Do(t *testing.T) {
 		defer srv.Close()
 		api.url = srv.URL
 		req := api.NewRequest("test").
-			Body("some data").
+			Body(&RequestBody{
+				body: "test",
+				m: func(v interface{}, ct *string) ([]byte, error) {
+					return nil, nil
+				},
+			}).
 			Query(map[string]string{
 				"param": "test",
 			})
@@ -237,4 +278,3 @@ func TestResponse_Decode(t *testing.T) {
 		require.Equal(t, body, result)
 	})
 }
-*/

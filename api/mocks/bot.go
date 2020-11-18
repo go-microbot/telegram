@@ -235,6 +235,20 @@ func (_m *Bot) SendPhoto(ctx context.Context, req models.SendPhotoRequest) (*tel
 	return r0, r1
 }
 
+// SetChatPermissions provides a mock function with given fields: ctx, req
+func (_m *Bot) SetChatPermissions(ctx context.Context, req models.SetChatPermissionsRequest) error {
+	ret := _m.Called(ctx, req)
+
+	var r0 error
+	if rf, ok := ret.Get(0).(func(context.Context, models.SetChatPermissionsRequest) error); ok {
+		r0 = rf(ctx, req)
+	} else {
+		r0 = ret.Error(0)
+	}
+
+	return r0
+}
+
 // SetChatPhoto provides a mock function with given fields: ctx, req
 func (_m *Bot) SetChatPhoto(ctx context.Context, req models.SetChatPhotoRequest) error {
 	ret := _m.Called(ctx, req)

@@ -11,7 +11,7 @@ type ParamStringSlice struct {
 }
 
 // Set sets the query string slice param value.
-func (qpss ParamStringSlice) Set(v []string) {
+func (qpss *ParamStringSlice) Set(v []string) {
 	qpss.v = v
 }
 

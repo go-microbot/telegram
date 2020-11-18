@@ -29,7 +29,6 @@ type Request struct {
 	body       *RequestBody
 	query      map[string]string
 	headers    map[string]string
-	bodyData   []byte
 	client     *http.Client
 }
 
@@ -151,11 +150,6 @@ func (req *Request) Do(ctx context.Context) (*Response, error) {
 
 	// check response status code.
 	if !isValidStatusCode(result.StatusCode) {
-		///
-		var r apiResponse
-		json.NewDecoder(result.Body).Decode(&r)
-		panic(r.Description)
-		///
 		return nil, newErr(ErrResponse,
 			fmt.Errorf("status %d: %s", result.StatusCode, result.Status))
 	}
@@ -209,40 +203,6 @@ func (req *Request) prepareBody() (io.Reader, error) {
 	}
 
 	return bytes.NewBuffer(data), nil
-	// create metadata form part.
-	/*formBody := &bytes.Buffer{}
-	writer := multipart.NewWriter(formBody)
-
-	file, err := os.Open("./test_data/test_photo.png")
-	if err != nil {
-		return nil, err
-	}
-	fileContents, err := ioutil.ReadAll(file)
-	if err != nil {
-		return nil, err
-	}
-	fi, err := file.Stat()
-	if err != nil {
-		return nil, err
-	}
-	file.Close()
-
-	part, err := writer.CreateFormFile("photo", fi.Name())
-	if err != nil {
-		return nil, err
-	}
-	if _, err := part.Write(fileContents); err != nil {
-		return nil, err
-	}
-
-	if err := writer.Close(); err != nil {
-		return nil, err
-	}*/
-
-	//req.headers = make(map[string]string)
-	//req.headers["Content-Type"] = writer.FormDataContentType() // fmt.Sprintf("multipart/form-data; boundary=%s", writer.Boundary())
-
-	//return formBody, nil
 }
 
 func (req *Request) setHeaders(request *http.Request) {
