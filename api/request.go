@@ -13,7 +13,7 @@ import (
 )
 
 const (
-	contentTypeHeader = "Contet-Type"
+	contentTypeHeader = "Content-Type"
 )
 
 // Response represents base API response.
@@ -40,7 +40,7 @@ type RequestBody struct {
 }
 
 // BodyMarshaler represents body marshaler func.
-type BodyMarshaler func(v interface{}) ([]byte, error)
+type BodyMarshaler func(v interface{}, ct *string) ([]byte, error)
 
 type apiResponse struct {
 	OK bool `json:"ok"`
@@ -60,7 +60,7 @@ type goodResponse struct {
 // NewJSONBody returns new RequestBody with JSON marshaler.
 func NewJSONBody(body interface{}) *RequestBody {
 	return &RequestBody{
-		m:    json.Marshal,
+		m:    jsonMarsaler,
 		body: body,
 	}
 }
@@ -84,8 +84,8 @@ func (api *TelegramAPI) NewRequest(apiMethod string) *Request {
 }
 
 // Marshal marshal request body.
-func (b *RequestBody) Marshal() ([]byte, error) {
-	return b.m(b.body)
+func (b *RequestBody) Marshal(contentType *string) ([]byte, error) {
+	return b.m(b.body, contentType)
 }
 
 // Method sets HTTP method, like GET, POST, etc.
@@ -126,8 +126,6 @@ func (req *Request) Do(ctx context.Context) (*Response, error) {
 	if err != nil {
 		return nil, newErr(ErrEncodeBody, err)
 	}
-
-	//panic(body)
 
 	// create request.
 	request, err := http.NewRequestWithContext(ctx, req.httpMethod, req.url, body)
@@ -191,77 +189,29 @@ func (req *Request) prepareBody() (io.Reader, error) {
 		return nil, nil
 	}
 
-	data, err := req.body.Marshal()
+	var cType string
+	data, err := req.body.Marshal(&cType)
 	if err != nil {
 		return nil, err
 	}
-	req.bodyData = data
 
-	return bytes.NewBuffer(data), nil
-
-	/*var body io.Reader
+	// detect content-type.
+	if cType == "" {
+		cType = http.DetectContentType(data)
+	}
 
 	if len(req.headers) == 0 {
 		req.headers = make(map[string]string)
 	}
 
-	// create metadata.
-	var metaData []byte
-	var err error
-	if req.body != nil {
-		metaData, err = json.Marshal(req.body)
-		if err != nil {
-			return nil, err
-		}
-
-		if len(req.formData) == 0 {
-			body = bytes.NewBuffer(metaData)
-			req.headers["Content-Type"] = "application/json"
-			return body, nil
-		}
+	if _, ok := req.headers[contentTypeHeader]; !ok {
+		req.headers[contentTypeHeader] = cType
 	}
 
+	return bytes.NewBuffer(data), nil
 	// create metadata form part.
-	formBody := &bytes.Buffer{}
+	/*formBody := &bytes.Buffer{}
 	writer := multipart.NewWriter(formBody)
-
-	if len(metaData) != 0 {
-		/*metadataHeader := textproto.MIMEHeader{}
-		metadataHeader.Set("Content-Type", "application/json")
-		metadataHeader.Set("Content-ID", "body")
-		part, err := writer.CreatePart(metadataHeader)
-		if err != nil {
-			return nil, err
-		}
-		_, err = part.Write([]byte(metaData))
-		if err != nil {
-			return nil, err
-		}
-
-		err = writer.WriteField("", string(metaData))
-		if err != nil {
-			return nil, err
-		}
-	}
-
-	///
-	/*mediaData, err := ioutil.ReadFile("./test_data/test_photo.png")
-	if err != nil {
-		return nil, err
-	}
-	mediaHeader := textproto.MIMEHeader{}
-	mediaHeader.Set("Content-Disposition", fmt.Sprintf("attachment; name=\"photo\"; filename=\"%v\".", "./test_data/test_photo.png"))
-	mediaHeader.Set("Content-ID", "photo")
-	mediaHeader.Set("Content-Filename", "photo.png")
-
-	mediaPart, err := writer.CreatePart(mediaHeader)
-	if err != nil {
-		return nil, err
-	}
-	_, err = io.Copy(mediaPart, bytes.NewReader(mediaData))
-	if err != nil {
-		return nil, err
-	}
 
 	file, err := os.Open("./test_data/test_photo.png")
 	if err != nil {
@@ -287,39 +237,15 @@ func (req *Request) prepareBody() (io.Reader, error) {
 
 	if err := writer.Close(); err != nil {
 		return nil, err
-	}
-
-	body = formBody
-	req.headers["Content-Type"] = writer.FormDataContentType() // fmt.Sprintf("multipart/form-data; boundary=%s", writer.Boundary())
-
-	/*switch {
-	case len(req.formData) != 0:
-		formData := new(bytes.Buffer)
-		writer := multipart.NewWriter(formData)
-		for k, v := range req.formData {
-			if err := writer.WriteField(k, v); err != nil {
-				return nil, err
-			}
-		}
-		err := writer.Close()
-		if err != nil {
-			return nil, err
-		}
-		body = formData
-		req.headers["Content-Type"] = writer.FormDataContentType()
 	}*/
+
+	//req.headers = make(map[string]string)
+	//req.headers["Content-Type"] = writer.FormDataContentType() // fmt.Sprintf("multipart/form-data; boundary=%s", writer.Boundary())
+
+	//return formBody, nil
 }
 
 func (req *Request) setHeaders(request *http.Request) {
-	if len(req.headers) == 0 {
-		req.headers = make(map[string]string)
-	}
-
-	// detect content-type.
-	if _, ok := req.headers[contentTypeHeader]; !ok && len(req.bodyData) != 0 {
-		req.headers[contentTypeHeader] = form.CT //http.DetectContentType(req.bodyData)
-	}
-
 	for k, v := range req.headers {
 		request.Header.Set(k, v)
 	}
@@ -336,4 +262,12 @@ func (req *Request) encodeQuery(request *http.Request) string {
 
 func isValidStatusCode(statusCode int) bool {
 	return statusCode >= http.StatusOK && statusCode < http.StatusMultipleChoices
+}
+
+func jsonMarsaler(v interface{}, ct *string) ([]byte, error) {
+	if ct != nil {
+		*ct = "application/json"
+	}
+
+	return json.Marshal(v)
 }

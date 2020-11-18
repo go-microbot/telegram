@@ -1,11 +1,14 @@
 package models
 
-import "github.com/go-microbot/telegram/models"
+import (
+	"github.com/go-microbot/telegram/models"
+	"github.com/go-microbot/telegram/query"
+)
 
 // SendMessageRequest represents `sendMessage` body.
 type SendMessageRequest struct {
 	// Unique identifier for the target chat.
-	ChatID int64 `json:"chat_id"`
+	ChatID query.ParamAny `query:"chat_id" json:"-"`
 	// Text of the message to be sent, 1-4096 characters after entities parsing.
 	Text string `json:"text"`
 	// Optional. Mode for parsing entities in the message text. See formatting options

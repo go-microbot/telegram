@@ -2,8 +2,10 @@ package api
 
 import (
 	"context"
+	"net/http"
 
 	apiModels "github.com/go-microbot/telegram/api/models"
+	"github.com/go-microbot/telegram/query"
 )
 
 // SetWebhook sets a webhook.
@@ -17,17 +19,11 @@ import (
 // we recommend using a secret path in the URL, e.g. https://www.example.com/<token>.
 // Since nobody else knows your bot's token, you can be pretty sure it's us.
 func (api *TelegramAPI) SetWebhook(ctx context.Context, req apiModels.SetWebhookRequest) error {
-	/*request := api.NewRequest("setWebhook").
+	request := api.NewRequest("setWebhook").
 		Method(http.MethodPost).
-		Query(query.AsMap(req))
-	if req.Certificate != nil {
-		request.FormData(map[string]string{
-			"certificate": string(*req.Certificate),
-		})
-	}
+		Query(query.AsMap(req)).
+		Body(NewFormDataBody(req))
 
 	_, err := request.Do(ctx)
-	return err*/
-
-	return nil
+	return err
 }

@@ -15,13 +15,13 @@ import (
 const localAPIURL = "http://localhost:8081"
 
 const (
-	webhookURLCtxKey       = "webhook_url"
-	chatIDCtxKey           = "chat_id"
-	existingPhotoIDCtxKey  = "existing_photo_id"
-	existingPhotoUIDCtxKey = "existing_photo_unique_id"
-	photoToUploadURLCtxKey = "photo_to_upload_url"
-	uploadedPhotoID        = "uploaded_photo_id"
-	uploadedPhotoUID       = "uploaded_photo_unique_id"
+	webhookURLCtxKey        = "webhook_url"
+	chatIDCtxKey            = "chat_id"
+	existingPhotoIDCtxKey   = "existing_photo_id"
+	existingPhotoUIDCtxKey  = "existing_photo_unique_id"
+	photoToUploadURLCtxKey  = "photo_to_upload_url"
+	groupChatIDCtxKey       = "group_chat_id"
+	newGroupChatTitleCtxKey = "new_group_chat_title"
 )
 
 var (
@@ -31,6 +31,9 @@ var (
 type Testable interface {
 	Test(ctx context.Context, t *testing.T) context.Context
 }
+
+// TestDataKey
+type TestDataKey interface{}
 
 func TestMain(m *testing.M) {
 	localAPI = NewTelegramAPI( /*os.Getenv("TEST_BOT_TOKEN")*/ "1256583982:AAHoS3RanoCsXtKhNJCQSOftJXWSRJnLg2o")
@@ -58,7 +61,7 @@ func TestTelegramAPI_Integration(t *testing.T) {
 		if val, ok := v.(float64); ok {
 			v = int64(val)
 		}
-		ctx = context.WithValue(ctx, k, v)
+		ctx = context.WithValue(ctx, TestDataKey(k), v)
 	}
 
 	testCases := []struct {
@@ -66,7 +69,7 @@ func TestTelegramAPI_Integration(t *testing.T) {
 		testHandler Testable
 		sleep       int
 	}{
-		/*{
+		{
 			name:        "getMe",
 			testHandler: getMe{},
 		},
@@ -81,7 +84,7 @@ func TestTelegramAPI_Integration(t *testing.T) {
 		{
 			name:        "deleteWebhook",
 			testHandler: deleteWebhook{},
-			sleep:       2,
+			sleep:       1,
 		},
 		// should be always after webhook delete case.
 		{
@@ -91,22 +94,27 @@ func TestTelegramAPI_Integration(t *testing.T) {
 		{
 			name:        "sendMessage",
 			testHandler: sendMessage{},
-		},*/
+		},
 		{
 			name:        "sendPhoto",
 			testHandler: sendPhoto{},
 		},
-		// TODO: add test cases
-		/*
-			{
-				name:        "logout",
-				testHandler: logout{},
-			},
-			{
-				name:        "close",
-				testHandler: close{},
-			},
-		*/
+		{
+			name:        "setChatPermissions",
+			testHandler: setChatPermissions{},
+		},
+		{
+			name:        "setChatPhoto",
+			testHandler: setChatPhoto{},
+		},
+		{
+			name:        "setChatTitle",
+			testHandler: setChatTitle{},
+		},
+		{
+			name:        "getChat",
+			testHandler: setChatTitle{},
+		},
 	}
 	for i := range testCases {
 		tc := &testCases[i]

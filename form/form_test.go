@@ -20,12 +20,12 @@ func Test_Marshal(t *testing.T) {
 	testCases := []struct {
 		name string
 		data interface{}
-		exp  func(t *testing.T, res []byte, err error)
+		exp  func(t *testing.T, res []byte, ct string, err error)
 	}{
 		{
 			name: "nothing to marshal",
 			data: struct{}{},
-			exp: func(t *testing.T, res []byte, err error) {
+			exp: func(t *testing.T, res []byte, ct string, err error) {
 				require.NoError(t, err)
 				require.Empty(t, res)
 			},
@@ -39,7 +39,7 @@ func Test_Marshal(t *testing.T) {
 				Field1: 11,
 				Field2: NewPartText("test"),
 			},
-			exp: func(t *testing.T, res []byte, err error) {
+			exp: func(t *testing.T, res []byte, ct string, err error) {
 				require.NoError(t, err)
 				require.Empty(t, res)
 			},
@@ -53,7 +53,7 @@ func Test_Marshal(t *testing.T) {
 					err: errors.New("error"),
 				},
 			},
-			exp: func(t *testing.T, res []byte, err error) {
+			exp: func(t *testing.T, res []byte, ct string, err error) {
 				require.EqualError(t, err, "could not marshal Field value: error")
 			},
 		},
@@ -69,9 +69,10 @@ func Test_Marshal(t *testing.T) {
 				Field2: NewPartText("test value 2"),
 				Field4: NewPartText("test value 4"),
 			},
-			exp: func(t *testing.T, res []byte, err error) {
+			exp: func(t *testing.T, res []byte, ct string, err error) {
 				require.NoError(t, err)
 				require.NotEmpty(t, res)
+				require.NotEmpty(t, ct)
 				resStr := string(res)
 				require.Contains(t, resStr, "name=\"test\"")
 				require.Contains(t, resStr, "test value 2")
@@ -85,8 +86,9 @@ func Test_Marshal(t *testing.T) {
 	for i := range testCases {
 		tc := &testCases[i]
 		t.Run(tc.name, func(t *testing.T) {
-			res, err := Marshal(tc.data)
-			tc.exp(t, res, err)
+			var ct string
+			res, err := Marshal(tc.data, &ct)
+			tc.exp(t, res, ct, err)
 		})
 	}
 }

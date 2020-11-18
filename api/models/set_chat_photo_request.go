@@ -1,7 +1,7 @@
 package models
 
 import (
-	"github.com/go-microbot/telegram/models"
+	"github.com/go-microbot/telegram/form"
 	"github.com/go-microbot/telegram/query"
 )
 
@@ -11,5 +11,5 @@ type SetChatPhotoRequest struct {
 	// (in the format @channelusername).
 	ChatID query.ParamAny `query:"chat_id"`
 	// New chat photo, uploaded using multipart/form-data.
-	Photo models.InputFile
+	Photo form.PartFile `form:"photo"`
 }

@@ -30,6 +30,8 @@ type Bot interface {
 	Close(ctx context.Context) error
 	// https://core.telegram.org/bots/api#sendphoto.
 	SendPhoto(ctx context.Context, req apiModels.SendPhotoRequest) (*models.Message, error)
+	// https://core.telegram.org/bots/api#setchatpermissions
+	SetChatPermissions(ctx context.Context, req apiModels.SetChatPermissionsRequest) error
 	// https://core.telegram.org/bots/api#setchatphoto.
 	SetChatPhoto(ctx context.Context, req apiModels.SetChatPhotoRequest) error
 	// https://core.telegram.org/bots/api#setchattitle.

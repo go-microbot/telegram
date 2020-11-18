@@ -13,12 +13,12 @@ type getUpdates struct{}
 
 func (h getUpdates) Test(ctx context.Context, t *testing.T) context.Context {
 	// with default HTTP client.
-	updates, err := localAPI.GetUpdates(context.Background(), models.GetUpdatesRequest{})
+	updates, err := localAPI.GetUpdates(ctx, models.GetUpdatesRequest{})
 	require.NoError(t, err)
 	require.NotNil(t, updates)
 
 	// with custom HTTP client.
-	updates, err = localAPI.GetPollUpdates(context.Background(), models.GetUpdatesRequest{}, http.DefaultClient)
+	updates, err = localAPI.GetPollUpdates(ctx, models.GetUpdatesRequest{}, http.DefaultClient)
 	require.NoError(t, err)
 	require.NotNil(t, updates)
 

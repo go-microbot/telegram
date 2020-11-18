@@ -8,7 +8,7 @@ import (
 	"testing"
 
 	apiModels "github.com/go-microbot/telegram/api/models"
-	"github.com/go-microbot/telegram/models"
+	"github.com/go-microbot/telegram/form"
 	"github.com/go-microbot/telegram/query"
 	"github.com/stretchr/testify/require"
 )
@@ -26,13 +26,13 @@ func (h setWebhook) Test(ctx context.Context, t *testing.T) context.Context {
 		require.NoError(t, err)
 	}
 
-	cert := models.InputFile(webhookCert)
+	// set webhook.
 	url := "localhost:1012"
 	err = localAPI.SetWebhook(ctx, apiModels.SetWebhookRequest{
-		Certificate: &cert,
+		Certificate: form.NewPartText(string(webhookCert)),
 		URL:         query.NewParamString(url),
 	})
 	require.NoError(t, err)
 
-	return context.WithValue(ctx, webhookURLCtxKey, url)
+	return context.WithValue(ctx, TestDataKey(webhookURLCtxKey), url)
 }

@@ -14,7 +14,7 @@ type Part interface {
 }
 
 // Marshal encodes form's data value into a bytes slice.
-func Marshal(val interface{}) ([]byte, error) {
+func Marshal(val interface{}, ct *string) ([]byte, error) {
 	typeOf := reflect.TypeOf(val)
 	valueOf := reflect.ValueOf(val)
 	fPType := reflect.TypeOf((*Part)(nil)).Elem()
@@ -58,14 +58,9 @@ func Marshal(val interface{}) ([]byte, error) {
 		return nil, err
 	}
 
-	///
-	CT = writer.FormDataContentType()
-	///
+	if ct != nil {
+		*ct = writer.FormDataContentType()
+	}
 
 	return formBody.Bytes(), nil
 }
-
-///
-var CT string
-
-///

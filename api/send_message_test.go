@@ -5,6 +5,7 @@ import (
 	"testing"
 
 	apiModels "github.com/go-microbot/telegram/api/models"
+	"github.com/go-microbot/telegram/query"
 	"github.com/stretchr/testify/require"
 )
 
@@ -15,7 +16,7 @@ func (h sendMessage) Test(ctx context.Context, t *testing.T) context.Context {
 	require.NotNil(t, chatID)
 
 	req := apiModels.SendMessageRequest{
-		ChatID: chatID.(int64),
+		ChatID: query.NewParamAny(chatID.(int64)),
 		Text:   "This is a test message!",
 	}
 	msg, err := localAPI.SendMessage(ctx, req)
