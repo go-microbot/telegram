@@ -12,7 +12,7 @@ func Test_NewPartText(t *testing.T) {
 	p := NewPartText("hello")
 	require.NotNil(t, p)
 	require.NotNil(t, p.text)
-	require.Equal(t, "hello", p.text)
+	require.Equal(t, "hello", *p.text)
 }
 
 func TestPartText_Marshal(t *testing.T) {

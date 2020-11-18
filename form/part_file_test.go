@@ -15,7 +15,7 @@ func Test_NewPartFile(t *testing.T) {
 	p := NewPartFile("hello")
 	require.NotNil(t, p)
 	require.NotNil(t, p.filePath)
-	require.Equal(t, "hello", p.filePath)
+	require.Equal(t, "hello", *p.filePath)
 }
 
 func TestPartFile_Marshal(t *testing.T) {
