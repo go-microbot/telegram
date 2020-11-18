@@ -39,8 +39,6 @@ go get -u github.com/go-microbot/telegram
 ### Bot token
 Create your own bot. Follow the [Official guide](https://core.telegram.org/bots/api#authorizing-your-bot).
 
----
-
 ## Update Strategies
 There are two mutually exclusive ways of receiving updates for your bot — the `Long Polling` on one hand and `Webhooks` on the other. Incoming updates are stored on the server until the bot receives them either way, but they will not be kept longer than 24 hours.
 
@@ -188,12 +186,8 @@ func main() {
 
 > Ports currently supported for Webhooks: **443**, **80**, **88**, **8443**.
 
----
-
 ## Example
 See the [examples](./examples) folder to get all available examples.
-
----
 
 ## Test
 
@@ -240,8 +234,6 @@ Or use [Makefile](./Makefile)'s `lint` command:
 make lint
 ```
 
----
-
 ## TODO
 The bot is **isn't finished yet**. The main goal is to implement all available methods from [Telegram documentation](https://core.telegram.org/bots/api#available-methods).
 
@@ -250,7 +242,6 @@ Implementation     | Test coverage  | Method                          | Docs    
 -----------------  | -------------  | ------------------------------- | -----------------------------------------------------------------  |
 :heavy_check_mark: | :x:            | logout                          | https://core.telegram.org/bots/api#logout                          |
 :heavy_check_mark: | :x:            | close                           | https://core.telegram.org/bots/api#close                           |
-:x:                | :x:            | forwardMessage                  | https://core.telegram.org/bots/api#forwardMessage                  |
 :x:                | :x:            | copyMessage                     | https://core.telegram.org/bots/api#copyMessage                     |
 :x:                | :x:            | sendAudio                       | https://core.telegram.org/bots/api#sendAudio                       |
 :x:                | :x:            | sendDocument                    | https://core.telegram.org/bots/api#sendDocument                    |
@@ -275,8 +266,6 @@ Implementation     | Test coverage  | Method                          | Docs    
 :x:                | :x:            | promoteChatMember               | https://core.telegram.org/bots/api#promoteChatMember               |
 :x:                | :x:            | setChatAdministratorCustomTitle | https://core.telegram.org/bots/api#setChatAdministratorCustomTitle |
 :x:                | :x:            | exportChatInviteLink            | https://core.telegram.org/bots/api#exportChatInviteLink            |
-:x:                | :x:            | deleteChatPhoto                 | https://core.telegram.org/bots/api#deleteChatPhoto                 |
-:x:                | :x:            | setChatDescription              | https://core.telegram.org/bots/api#setChatDescription              |
 :x:                | :x:            | pinChatMessage                  | https://core.telegram.org/bots/api#pinChatMessage                  |
 :x:                | :x:            | unpinChatMessage                | https://core.telegram.org/bots/api#unpinChatMessage                |
 :x:                | :x:            | unpinAllChatMessages            | https://core.telegram.org/bots/api#unpinAllChatMessages            |
@@ -287,8 +276,6 @@ Implementation     | Test coverage  | Method                          | Docs    
 :x:                | :x:            | setChatStickerSet               | https://core.telegram.org/bots/api#setChatStickerSet               |
 :x:                | :x:            | deleteChatStickerSet            | https://core.telegram.org/bots/api#deleteChatStickerSet            |
 :x:                | :x:            | answerCallbackQuery             | https://core.telegram.org/bots/api#answerCallbackQuery             |
-:x:                | :x:            | setMyCommands                   | https://core.telegram.org/bots/api#setMyCommands                   |
-:x:                | :x:            | getMyCommands                   | https://core.telegram.org/bots/api#getMyCommands                   |
 :x:                | :x:            | editMessageText                 | https://core.telegram.org/bots/api#editMessageText                 |
 :x:                | :x:            | editMessageCaption              | https://core.telegram.org/bots/api#editMessageCaption              |
 :x:                | :x:            | editMessageMedia                | https://core.telegram.org/bots/api#editMessageMedia                |

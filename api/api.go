@@ -50,4 +50,14 @@ type Bot interface {
 	SetChatDescription(ctx context.Context, req apiModels.SetChatDescriptionRequest) error
 	// https://core.telegram.org/bots/api#deletechatphoto.
 	DeleteChatPhoto(ctx context.Context, req apiModels.ChatID) error
+	// https://core.telegram.org/bots/api#sendlocation.
+	SendLocation(ctx context.Context, req apiModels.SendLocationRequest) (*models.Message, error)
+	// https://core.telegram.org/bots/api#getfile.
+	GetFile(ctx context.Context, req apiModels.FileID) (*models.File, error)
+	// https://core.telegram.org/bots/api#pinchatmessage.
+	PinChatMessage(ctx context.Context, req apiModels.PinChatMessageRequest) error
+	// https://core.telegram.org/bots/api#unpinchatmessage.
+	UnpinChatMessage(ctx context.Context, req apiModels.UnpinChatMessageRequest) error
+	// https://core.telegram.org/bots/api#unpinallchatmessages.
+	UnpinAllChatMessages(ctx context.Context, req apiModels.ChatID) error
 }
