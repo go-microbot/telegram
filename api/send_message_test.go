@@ -25,5 +25,5 @@ func (h sendMessage) Test(ctx context.Context, t *testing.T) context.Context {
 	require.Equal(t, msg.Text, req.Text)
 	require.Equal(t, chatID, msg.Chat.ID)
 
-	return ctx
+	return context.WithValue(ctx, TestDataKey(sentMessageIDCtxKey), msg.ID)
 }

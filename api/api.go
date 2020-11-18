@@ -40,4 +40,14 @@ type Bot interface {
 	GetChat(ctx context.Context, req apiModels.ChatID) (*models.Chat, error)
 	// https://core.telegram.org/bots/api#leavechat.
 	LeaveChat(ctx context.Context, req apiModels.ChatID) error
+	// https://core.telegram.org/bots/api#forwardmessage.
+	ForwardMessage(ctx context.Context, req apiModels.ForwardMessageRequest) (*models.Message, error)
+	// https://core.telegram.org/bots/api#setmycommands.
+	SetMyCommands(ctx context.Context, req apiModels.SetMyCommandsRequest) error
+	// https://core.telegram.org/bots/api#getmycommands.
+	GetMyCommands(ctx context.Context) ([]models.BotCommand, error)
+	// https://core.telegram.org/bots/api#setchatdescription.
+	SetChatDescription(ctx context.Context, req apiModels.SetChatDescriptionRequest) error
+	// https://core.telegram.org/bots/api#deletechatphoto.
+	DeleteChatPhoto(ctx context.Context, req apiModels.ChatID) error
 }

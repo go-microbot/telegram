@@ -15,13 +15,16 @@ import (
 const localAPIURL = "http://localhost:8081"
 
 const (
-	webhookURLCtxKey        = "webhook_url"
-	chatIDCtxKey            = "chat_id"
-	existingPhotoIDCtxKey   = "existing_photo_id"
-	existingPhotoUIDCtxKey  = "existing_photo_unique_id"
-	photoToUploadURLCtxKey  = "photo_to_upload_url"
-	groupChatIDCtxKey       = "group_chat_id"
-	newGroupChatTitleCtxKey = "new_group_chat_title"
+	webhookURLCtxKey              = "webhook_url"
+	chatIDCtxKey                  = "chat_id"
+	existingPhotoIDCtxKey         = "existing_photo_id"
+	existingPhotoUIDCtxKey        = "existing_photo_unique_id"
+	photoToUploadURLCtxKey        = "photo_to_upload_url"
+	groupChatIDCtxKey             = "group_chat_id"
+	newGroupChatTitleCtxKey       = "new_group_chat_title"
+	newGroupChatDescriptionCtxKey = "new_group_chat_description"
+	sentMessageIDCtxKey           = "sent_message_id"
+	botCommandsCtxKey             = "bot_commands"
 )
 
 var (
@@ -112,8 +115,28 @@ func TestTelegramAPI_Integration(t *testing.T) {
 			testHandler: setChatTitle{},
 		},
 		{
+			name:        "setChatDescription",
+			testHandler: setChatDescription{},
+		},
+		{
 			name:        "getChat",
 			testHandler: getChat{},
+		},
+		{
+			name:        "forwardMessage",
+			testHandler: forwardMessage{},
+		},
+		{
+			name:        "setMyCommands",
+			testHandler: setMyCommands{},
+		},
+		{
+			name:        "getMyCommands",
+			testHandler: getMyCommands{},
+		},
+		{
+			name:        "deleteChatPhoto",
+			testHandler: deleteChatPhoto{},
 		},
 	}
 	for i := range testCases {

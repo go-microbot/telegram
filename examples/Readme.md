@@ -1,1 +1,1 @@
-# [GO-MICROBOT] Telegram Examples
+# [GO-MICROBOT] Telegram Bot Examples
