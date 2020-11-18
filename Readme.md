@@ -55,6 +55,7 @@ import (
 	"github.com/go-microbot/telegram/api"
 	apiModels "github.com/go-microbot/telegram/api/models"
 	"github.com/go-microbot/telegram/bot"
+	"github.com/go-microbot/telegram/query"
 )
 
 const telegramBotToken = "<PASTE_YOUR_TOKEN_HERE>"
@@ -89,7 +90,7 @@ func main() {
 
 			// reply "hello" message.
 			_, err := myBot.API().SendMessage(context.Background(), apiModels.SendMessageRequest{
-				ChatID:           update.Message.Chat.ID,
+				ChatID:           query.NewParamAny(update.Message.Chat.ID),
 				Text:             fmt.Sprintf("Hello, %s!", update.Message.From.Username),
 				ReplyToMessageID: &update.Message.ID,
 			})
@@ -121,7 +122,7 @@ import (
 	"github.com/go-microbot/telegram/api"
 	apiModels "github.com/go-microbot/telegram/api/models"
 	"github.com/go-microbot/telegram/bot"
-	"github.com/go-microbot/telegram/models"
+	"github.com/go-microbot/telegram/form"
 	"github.com/go-microbot/telegram/query"
 )
 
@@ -141,10 +142,9 @@ func main() {
 	}
 
 	// set webhook.
-	certificate := models.InputFile(data)
 	req := apiModels.SetWebhookRequest{
-		Certificate: &certificate,
-		URL:         query.NewParamString("https://17e87b76ccd4.ngrok.io"), // ngrok, you need to use your server URL.
+		Certificate: form.NewPartText(string(data)),
+		URL:         query.NewParamString("https://53ec7fc0c840.ngrok.io"), // ngrok, you need to use your server URL.
 	}
 	err = myBot.API().SetWebhook(context.Background(), req)
 	if err != nil {
@@ -168,7 +168,7 @@ func main() {
 
 			// reply "hello" message.
 			_, err := myBot.API().SendMessage(context.Background(), apiModels.SendMessageRequest{
-				ChatID:           update.Message.Chat.ID,
+				ChatID:           query.NewParamAny(update.Message.Chat.ID),
 				Text:             fmt.Sprintf("Hello, %s!", update.Message.From.Username),
 				ReplyToMessageID: &update.Message.ID,
 			})

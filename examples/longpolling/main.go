@@ -7,9 +7,10 @@ import (
 	"github.com/go-microbot/telegram/api"
 	apiModels "github.com/go-microbot/telegram/api/models"
 	"github.com/go-microbot/telegram/bot"
+	"github.com/go-microbot/telegram/query"
 )
 
-const telegramBotToken = z"<PASTE_YOUR_TOKEN_HERE>"
+const telegramBotToken = "<PASTE_YOUR_TOKEN_HERE>"
 
 func main() {
 	// init Bot API with token.
@@ -41,7 +42,7 @@ func main() {
 
 			// reply "hello" message.
 			_, err := myBot.API().SendMessage(context.Background(), apiModels.SendMessageRequest{
-				ChatID:           update.Message.Chat.ID,
+				ChatID:           query.NewParamAny(update.Message.Chat.ID),
 				Text:             fmt.Sprintf("Hello, %s!", update.Message.From.Username),
 				ReplyToMessageID: &update.Message.ID,
 			})
