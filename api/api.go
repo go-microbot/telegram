@@ -60,4 +60,6 @@ type Bot interface {
 	UnpinChatMessage(ctx context.Context, req apiModels.UnpinChatMessageRequest) error
 	// https://core.telegram.org/bots/api#unpinallchatmessages.
 	UnpinAllChatMessages(ctx context.Context, req apiModels.ChatID) error
+	// https://core.telegram.org/bots/api#getchatmember.
+	GetChatMember(ctx context.Context, req apiModels.GetChatMemberRequest) (*models.ChatMember, error)
 }
