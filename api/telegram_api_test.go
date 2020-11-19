@@ -4,6 +4,7 @@ import (
 	"context"
 	"encoding/json"
 	"io/ioutil"
+	"math/rand"
 	"os"
 	"path"
 	"testing"
@@ -41,6 +42,7 @@ type TestDataKey interface{}
 func TestMain(m *testing.M) {
 	localAPI = NewTelegramAPI(os.Getenv("TEST_BOT_TOKEN"))
 	localAPI.url = localAPIURL
+	rand.Seed(time.Now().Unix())
 
 	os.Exit(m.Run())
 }
@@ -137,6 +139,26 @@ func TestTelegramAPI_Integration(t *testing.T) {
 		{
 			name:        "deleteChatPhoto",
 			testHandler: deleteChatPhoto{},
+		},
+		{
+			name:        "sendLocation",
+			testHandler: sendLocation{},
+		},
+		{
+			name:        "getFile",
+			testHandler: getFile{},
+		},
+		{
+			name:        "pinChatMessage",
+			testHandler: pinChatMessage{},
+		},
+		{
+			name:        "unpinChatMessage",
+			testHandler: unpinChatMessage{},
+		},
+		{
+			name:        "unpinAllChatMessages",
+			testHandler: unpinAllChatMessages{},
 		},
 	}
 	for i := range testCases {

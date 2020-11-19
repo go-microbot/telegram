@@ -250,7 +250,6 @@ Implementation     | Test coverage  | Method                          | Docs    
 :x:                | :x:            | sendVoice                       | https://core.telegram.org/bots/api#sendVoice                       |
 :x:                | :x:            | sendVideoNote                   | https://core.telegram.org/bots/api#sendVideoNote                   |
 :x:                | :x:            | sendMediaGroup                  | https://core.telegram.org/bots/api#sendMediaGroup                  |
-:x:                | :x:            | sendLocation                    | https://core.telegram.org/bots/api#sendLocation                    |
 :x:                | :x:            | editMessageLiveLocation         | https://core.telegram.org/bots/api#editMessageLiveLocation         |
 :x:                | :x:            | stopMessageLiveLocation         | https://core.telegram.org/bots/api#stopMessageLiveLocation         |
 :x:                | :x:            | sendVenue                       | https://core.telegram.org/bots/api#sendVenue                       |
@@ -259,16 +258,12 @@ Implementation     | Test coverage  | Method                          | Docs    
 :x:                | :x:            | sendDice                        | https://core.telegram.org/bots/api#sendDice                        |
 :x:                | :x:            | sendChatAction                  | https://core.telegram.org/bots/api#sendChatAction                  |
 :x:                | :x:            | getUserProfilePhotos            | https://core.telegram.org/bots/api#getUserProfilePhotos            |
-:x:                | :x:            | getFile                         | https://core.telegram.org/bots/api#getFile                         |
 :x:                | :x:            | kickChatMember                  | https://core.telegram.org/bots/api#kickChatMember                  |
 :x:                | :x:            | unbanChatMember                 | https://core.telegram.org/bots/api#unbanChatMember                 |
 :x:                | :x:            | restrictChatMember              | https://core.telegram.org/bots/api#restrictChatMember              |
 :x:                | :x:            | promoteChatMember               | https://core.telegram.org/bots/api#promoteChatMember               |
 :x:                | :x:            | setChatAdministratorCustomTitle | https://core.telegram.org/bots/api#setChatAdministratorCustomTitle |
 :x:                | :x:            | exportChatInviteLink            | https://core.telegram.org/bots/api#exportChatInviteLink            |
-:x:                | :x:            | pinChatMessage                  | https://core.telegram.org/bots/api#pinChatMessage                  |
-:x:                | :x:            | unpinChatMessage                | https://core.telegram.org/bots/api#unpinChatMessage                |
-:x:                | :x:            | unpinAllChatMessages            | https://core.telegram.org/bots/api#unpinAllChatMessages            |
 :heavy_check_mark: | :x:            | leaveChat                       | https://core.telegram.org/bots/api#leaveChat                       |
 :x:                | :x:            | getChatAdministrators           | https://core.telegram.org/bots/api#getChatAdministrators           |
 :x:                | :x:            | getChatMembersCount             | https://core.telegram.org/bots/api#getChatMembersCount             |
