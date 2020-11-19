@@ -15,5 +15,5 @@ func (h getMe) Test(ctx context.Context, t *testing.T) context.Context {
 	require.NotNil(t, me)
 	require.True(t, me.IsBot)
 	require.NotNil(t, me.Username)
-	return ctx
+	return context.WithValue(ctx, TestDataKey(botUserIDCtxKey), me.ID)
 }

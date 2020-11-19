@@ -26,6 +26,7 @@ const (
 	newGroupChatDescriptionCtxKey = "new_group_chat_description"
 	sentMessageIDCtxKey           = "sent_message_id"
 	botCommandsCtxKey             = "bot_commands"
+	botUserIDCtxKey               = "bot_user_id"
 )
 
 var (
@@ -40,7 +41,7 @@ type Testable interface {
 type TestDataKey interface{}
 
 func TestMain(m *testing.M) {
-	localAPI = NewTelegramAPI(os.Getenv("TEST_BOT_TOKEN"))
+	localAPI = NewTelegramAPI("1256583982:AAHoS3RanoCsXtKhNJCQSOftJXWSRJnLg2o" /*os.Getenv("TEST_BOT_TOKEN")*/)
 	localAPI.url = localAPIURL
 	rand.Seed(time.Now().Unix())
 
@@ -159,6 +160,10 @@ func TestTelegramAPI_Integration(t *testing.T) {
 		{
 			name:        "unpinAllChatMessages",
 			testHandler: unpinAllChatMessages{},
+		},
+		{
+			name:        "getChatMember",
+			testHandler: getChatMember{},
 		},
 	}
 	for i := range testCases {
