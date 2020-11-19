@@ -106,6 +106,29 @@ func (_m *Bot) GetChat(ctx context.Context, req models.ChatID) (*telegrammodels.
 	return r0, r1
 }
 
+// GetFile provides a mock function with given fields: ctx, req
+func (_m *Bot) GetFile(ctx context.Context, req models.FileID) (*telegrammodels.File, error) {
+	ret := _m.Called(ctx, req)
+
+	var r0 *telegrammodels.File
+	if rf, ok := ret.Get(0).(func(context.Context, models.FileID) *telegrammodels.File); ok {
+		r0 = rf(ctx, req)
+	} else {
+		if ret.Get(0) != nil {
+			r0 = ret.Get(0).(*telegrammodels.File)
+		}
+	}
+
+	var r1 error
+	if rf, ok := ret.Get(1).(func(context.Context, models.FileID) error); ok {
+		r1 = rf(ctx, req)
+	} else {
+		r1 = ret.Error(1)
+	}
+
+	return r0, r1
+}
+
 // GetMe provides a mock function with given fields: ctx
 func (_m *Bot) GetMe(ctx context.Context) (*telegrammodels.User, error) {
 	ret := _m.Called(ctx)
@@ -249,6 +272,43 @@ func (_m *Bot) Logout(ctx context.Context) error {
 	return r0
 }
 
+// PinChatMessage provides a mock function with given fields: ctx, req
+func (_m *Bot) PinChatMessage(ctx context.Context, req models.PinChatMessageRequest) error {
+	ret := _m.Called(ctx, req)
+
+	var r0 error
+	if rf, ok := ret.Get(0).(func(context.Context, models.PinChatMessageRequest) error); ok {
+		r0 = rf(ctx, req)
+	} else {
+		r0 = ret.Error(0)
+	}
+
+	return r0
+}
+
+// SendLocation provides a mock function with given fields: ctx, req
+func (_m *Bot) SendLocation(ctx context.Context, req models.SendLocationRequest) (*telegrammodels.Message, error) {
+	ret := _m.Called(ctx, req)
+
+	var r0 *telegrammodels.Message
+	if rf, ok := ret.Get(0).(func(context.Context, models.SendLocationRequest) *telegrammodels.Message); ok {
+		r0 = rf(ctx, req)
+	} else {
+		if ret.Get(0) != nil {
+			r0 = ret.Get(0).(*telegrammodels.Message)
+		}
+	}
+
+	var r1 error
+	if rf, ok := ret.Get(1).(func(context.Context, models.SendLocationRequest) error); ok {
+		r1 = rf(ctx, req)
+	} else {
+		r1 = ret.Error(1)
+	}
+
+	return r0, r1
+}
+
 // SendMessage provides a mock function with given fields: ctx, req
 func (_m *Bot) SendMessage(ctx context.Context, req models.SendMessageRequest) (*telegrammodels.Message, error) {
 	ret := _m.Called(ctx, req)
@@ -371,6 +431,34 @@ func (_m *Bot) SetWebhook(ctx context.Context, req models.SetWebhookRequest) err
 
 	var r0 error
 	if rf, ok := ret.Get(0).(func(context.Context, models.SetWebhookRequest) error); ok {
+		r0 = rf(ctx, req)
+	} else {
+		r0 = ret.Error(0)
+	}
+
+	return r0
+}
+
+// UnpinAllChatMessages provides a mock function with given fields: ctx, req
+func (_m *Bot) UnpinAllChatMessages(ctx context.Context, req models.ChatID) error {
+	ret := _m.Called(ctx, req)
+
+	var r0 error
+	if rf, ok := ret.Get(0).(func(context.Context, models.ChatID) error); ok {
+		r0 = rf(ctx, req)
+	} else {
+		r0 = ret.Error(0)
+	}
+
+	return r0
+}
+
+// UnpinChatMessage provides a mock function with given fields: ctx, req
+func (_m *Bot) UnpinChatMessage(ctx context.Context, req models.UnpinChatMessageRequest) error {
+	ret := _m.Called(ctx, req)
+
+	var r0 error
+	if rf, ok := ret.Get(0).(func(context.Context, models.UnpinChatMessageRequest) error); ok {
 		r0 = rf(ctx, req)
 	} else {
 		r0 = ret.Error(0)
