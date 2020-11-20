@@ -62,6 +62,7 @@ func Test_Marshal(t *testing.T) {
 				Field2 PartText `form:"test"`
 				Field3 PartText `form:"test2,omitempty"`
 				Field4 PartText
+				Field5 Part `form:"test_test,omitempty"`
 			}{
 				Field1: NewPartText("test value 1"),
 				Field2: NewPartText("test value 2"),

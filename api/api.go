@@ -70,4 +70,14 @@ type Bot interface {
 	GetChatAdministrators(ctx context.Context, req apiModels.ChatID) ([]models.ChatMember, error)
 	// https://core.telegram.org/bots/api#getchatmemberscount.
 	GetChatMembersCount(ctx context.Context, req apiModels.ChatID) (int32, error)
+	// https://core.telegram.org/bots/api#sendaudio.
+	SendAudio(ctx context.Context, req apiModels.SendAudioRequest) (*models.Message, error)
+	// https://core.telegram.org/bots/api#senddocument.
+	SendDocument(ctx context.Context, req apiModels.SendDocumentRequest) (*models.Message, error)
+	// https://core.telegram.org/bots/api#sendvideo.
+	SendVideo(ctx context.Context, req apiModels.SendVideoRequest) (*models.Message, error)
+	// https://core.telegram.org/bots/api#sendanimation.
+	SendAnimation(ctx context.Context, req apiModels.SendAnimationRequest) (*models.Message, error)
+	// https://core.telegram.org/bots/api#sendvoice.
+	SendVoice(ctx context.Context, req apiModels.SendVoiceRequest) (*models.Message, error)
 }

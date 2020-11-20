@@ -181,6 +181,26 @@ func TestTelegramAPI_Integration(t *testing.T) {
 			name:        "getChatMembersCount",
 			testHandler: getChatMembersCount{},
 		},
+		{
+			name:        "sendAudio",
+			testHandler: sendAudio{},
+		},
+		{
+			name:        "sendDocument",
+			testHandler: sendDocument{},
+		},
+		{
+			name:        "sendVideo",
+			testHandler: sendVideo{},
+		},
+		{
+			name:        "sendAnimation",
+			testHandler: sendAnimation{},
+		},
+		{
+			name:        "sendVoice",
+			testHandler: sendVoice{},
+		},
 	}
 	for i := range testCases {
 		tc := &testCases[i]
