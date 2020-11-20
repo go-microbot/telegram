@@ -26,6 +26,7 @@ const (
 	newGroupChatDescriptionCtxKey = "new_group_chat_description"
 	sentMessageIDCtxKey           = "sent_message_id"
 	botCommandsCtxKey             = "bot_commands"
+	botUserIDCtxKey               = "bot_user_id"
 )
 
 var (
@@ -159,6 +160,26 @@ func TestTelegramAPI_Integration(t *testing.T) {
 		{
 			name:        "unpinAllChatMessages",
 			testHandler: unpinAllChatMessages{},
+		},
+		{
+			name:        "getChatMember",
+			testHandler: getChatMember{},
+		},
+		{
+			name:        "exportChatInviteLink",
+			testHandler: exportChatInviteLink{},
+		},
+		{
+			name:        "getChatAdministrators",
+			testHandler: getChatAdministrators{},
+		},
+		{
+			name:        "setChatAdministratorCustomTitle",
+			testHandler: setChatAdministratorCustomTitle{},
+		},
+		{
+			name:        "getChatMembersCount",
+			testHandler: getChatMembersCount{},
 		},
 	}
 	for i := range testCases {

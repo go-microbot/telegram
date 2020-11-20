@@ -2,6 +2,7 @@ package api
 
 import (
 	"context"
+	"net/http"
 
 	apiModels "github.com/go-microbot/telegram/api/models"
 	"github.com/go-microbot/telegram/query"
@@ -12,6 +13,7 @@ import (
 // for this to work and must have the appropriate admin rights. Returns True on success.
 func (api *TelegramAPI) SetChatDescription(ctx context.Context, req apiModels.SetChatDescriptionRequest) error {
 	_, err := api.NewRequest("setChatDescription").
+		Method(http.MethodPost).
 		Query(query.AsMap(req)).
 		Body(NewJSONBody(req)).
 		Do(ctx)

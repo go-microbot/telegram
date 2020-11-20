@@ -2,6 +2,7 @@ package api
 
 import (
 	"context"
+	"net/http"
 
 	apiModels "github.com/go-microbot/telegram/api/models"
 	"github.com/go-microbot/telegram/query"
@@ -14,6 +15,7 @@ import (
 func (api *TelegramAPI) PinChatMessage(ctx context.Context, req apiModels.PinChatMessageRequest) error {
 	_, err := api.NewRequest("pinChatMessage").
 		Query(query.AsMap(req)).
+		Method(http.MethodPost).
 		Body(NewJSONBody(req)).
 		Do(ctx)
 

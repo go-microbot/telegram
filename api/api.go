@@ -60,4 +60,14 @@ type Bot interface {
 	UnpinChatMessage(ctx context.Context, req apiModels.UnpinChatMessageRequest) error
 	// https://core.telegram.org/bots/api#unpinallchatmessages.
 	UnpinAllChatMessages(ctx context.Context, req apiModels.ChatID) error
+	// https://core.telegram.org/bots/api#getchatmember.
+	GetChatMember(ctx context.Context, req apiModels.GetChatMemberRequest) (*models.ChatMember, error)
+	// https://core.telegram.org/bots/api#exportchatinvitelink.
+	ExportChatInviteLink(ctx context.Context, req apiModels.ChatID) (string, error)
+	// https://core.telegram.org/bots/api#setchatadministratorcustomtitle.
+	SetChatAdministratorCustomTitle(ctx context.Context, req apiModels.SetChatAdminCustomTitleRequest) error
+	// https://core.telegram.org/bots/api#getchatadministrators.
+	GetChatAdministrators(ctx context.Context, req apiModels.ChatID) ([]models.ChatMember, error)
+	// https://core.telegram.org/bots/api#getchatmemberscount.
+	GetChatMembersCount(ctx context.Context, req apiModels.ChatID) (int32, error)
 }

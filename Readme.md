@@ -262,12 +262,7 @@ Implementation     | Test coverage  | Method                          | Docs    
 :x:                | :x:            | unbanChatMember                 | https://core.telegram.org/bots/api#unbanChatMember                 |
 :x:                | :x:            | restrictChatMember              | https://core.telegram.org/bots/api#restrictChatMember              |
 :x:                | :x:            | promoteChatMember               | https://core.telegram.org/bots/api#promoteChatMember               |
-:x:                | :x:            | setChatAdministratorCustomTitle | https://core.telegram.org/bots/api#setChatAdministratorCustomTitle |
-:x:                | :x:            | exportChatInviteLink            | https://core.telegram.org/bots/api#exportChatInviteLink            |
 :heavy_check_mark: | :x:            | leaveChat                       | https://core.telegram.org/bots/api#leaveChat                       |
-:x:                | :x:            | getChatAdministrators           | https://core.telegram.org/bots/api#getChatAdministrators           |
-:x:                | :x:            | getChatMembersCount             | https://core.telegram.org/bots/api#getChatMembersCount             |
-:x:                | :x:            | getChatMember                   | https://core.telegram.org/bots/api#getChatMember                   |
 :x:                | :x:            | setChatStickerSet               | https://core.telegram.org/bots/api#setChatStickerSet               |
 :x:                | :x:            | deleteChatStickerSet            | https://core.telegram.org/bots/api#deleteChatStickerSet            |
 :x:                | :x:            | answerCallbackQuery             | https://core.telegram.org/bots/api#answerCallbackQuery             |
