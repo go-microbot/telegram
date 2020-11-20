@@ -41,7 +41,7 @@ type Testable interface {
 type TestDataKey interface{}
 
 func TestMain(m *testing.M) {
-	localAPI = NewTelegramAPI("1256583982:AAHoS3RanoCsXtKhNJCQSOftJXWSRJnLg2o" /*os.Getenv("TEST_BOT_TOKEN")*/)
+	localAPI = NewTelegramAPI(os.Getenv("TEST_BOT_TOKEN"))
 	localAPI.url = localAPIURL
 	rand.Seed(time.Now().Unix())
 
@@ -164,6 +164,22 @@ func TestTelegramAPI_Integration(t *testing.T) {
 		{
 			name:        "getChatMember",
 			testHandler: getChatMember{},
+		},
+		{
+			name:        "exportChatInviteLink",
+			testHandler: exportChatInviteLink{},
+		},
+		{
+			name:        "getChatAdministrators",
+			testHandler: getChatAdministrators{},
+		},
+		{
+			name:        "setChatAdministratorCustomTitle",
+			testHandler: setChatAdministratorCustomTitle{},
+		},
+		{
+			name:        "getChatMembersCount",
+			testHandler: getChatMembersCount{},
 		},
 	}
 	for i := range testCases {

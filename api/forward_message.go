@@ -2,6 +2,7 @@ package api
 
 import (
 	"context"
+	"net/http"
 
 	apiModels "github.com/go-microbot/telegram/api/models"
 	"github.com/go-microbot/telegram/models"
@@ -13,6 +14,7 @@ import (
 func (api *TelegramAPI) ForwardMessage(ctx context.Context, req apiModels.ForwardMessageRequest) (*models.Message, error) {
 	resp, err := api.NewRequest("forwardMessage").
 		Query(query.AsMap(req)).
+		Method(http.MethodPost).
 		Body(NewJSONBody(req)).
 		Do(ctx)
 	if err != nil {

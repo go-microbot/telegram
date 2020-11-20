@@ -2,6 +2,7 @@ package api
 
 import (
 	"context"
+	"net/http"
 
 	apiModels "github.com/go-microbot/telegram/api/models"
 	"github.com/go-microbot/telegram/query"
@@ -12,6 +13,7 @@ import (
 // and must have the can_restrict_members admin rights. Returns True on success.
 func (api *TelegramAPI) SetChatPermissions(ctx context.Context, req apiModels.SetChatPermissionsRequest) error {
 	_, err := api.NewRequest("setChatPermissions").
+		Method(http.MethodPost).
 		Query(query.AsMap(req)).
 		Body(NewJSONBody(req)).
 		Do(ctx)

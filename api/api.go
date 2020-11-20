@@ -65,7 +65,7 @@ type Bot interface {
 	// https://core.telegram.org/bots/api#exportchatinvitelink.
 	ExportChatInviteLink(ctx context.Context, req apiModels.ChatID) (string, error)
 	// https://core.telegram.org/bots/api#setchatadministratorcustomtitle.
-	SetChatAdministratorCustomTitle(ctx context.Context, req apiModels.SetChatAdminCustomTitle) error
+	SetChatAdministratorCustomTitle(ctx context.Context, req apiModels.SetChatAdminCustomTitleRequest) error
 	// https://core.telegram.org/bots/api#getchatadministrators.
 	GetChatAdministrators(ctx context.Context, req apiModels.ChatID) ([]models.ChatMember, error)
 	// https://core.telegram.org/bots/api#getchatmemberscount.

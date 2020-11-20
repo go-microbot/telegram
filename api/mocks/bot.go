@@ -444,11 +444,11 @@ func (_m *Bot) SendPhoto(ctx context.Context, req models.SendPhotoRequest) (*tel
 }
 
 // SetChatAdministratorCustomTitle provides a mock function with given fields: ctx, req
-func (_m *Bot) SetChatAdministratorCustomTitle(ctx context.Context, req models.SetChatAdminCustomTitle) error {
+func (_m *Bot) SetChatAdministratorCustomTitle(ctx context.Context, req models.SetChatAdminCustomTitleRequest) error {
 	ret := _m.Called(ctx, req)
 
 	var r0 error
-	if rf, ok := ret.Get(0).(func(context.Context, models.SetChatAdminCustomTitle) error); ok {
+	if rf, ok := ret.Get(0).(func(context.Context, models.SetChatAdminCustomTitleRequest) error); ok {
 		r0 = rf(ctx, req)
 	} else {
 		r0 = ret.Error(0)

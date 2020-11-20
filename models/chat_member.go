@@ -62,7 +62,7 @@ type ChatMember struct {
 	// Optional. Restricted only.
 	// True, if the user is allowed to send text messages, contacts, locations and venues.
 	CanSendMessages bool `json:"can_send_messages,omitempty"`
-	//Optional. Restricted only.
+	// Optional. Restricted only.
 	// True, if the user is allowed to send audios, documents, photos, videos,
 	// video notes and voice notes.
 	CanSendMediaMessages bool `json:"can_send_media_messages,omitempty"`
