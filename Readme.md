@@ -243,11 +243,6 @@ Implementation     | Test coverage  | Method                          | Docs    
 :heavy_check_mark: | :x:            | logout                          | https://core.telegram.org/bots/api#logout                          |
 :heavy_check_mark: | :x:            | close                           | https://core.telegram.org/bots/api#close                           |
 :x:                | :x:            | copyMessage                     | https://core.telegram.org/bots/api#copyMessage                     |
-:x:                | :x:            | sendAudio                       | https://core.telegram.org/bots/api#sendAudio                       |
-:x:                | :x:            | sendDocument                    | https://core.telegram.org/bots/api#sendDocument                    |
-:x:                | :x:            | sendVideo                       | https://core.telegram.org/bots/api#sendVideo                       |
-:x:                | :x:            | sendAnimation                   | https://core.telegram.org/bots/api#sendAnimation                   |
-:x:                | :x:            | sendVoice                       | https://core.telegram.org/bots/api#sendVoice                       |
 :x:                | :x:            | sendVideoNote                   | https://core.telegram.org/bots/api#sendVideoNote                   |
 :x:                | :x:            | sendMediaGroup                  | https://core.telegram.org/bots/api#sendMediaGroup                  |
 :x:                | :x:            | editMessageLiveLocation         | https://core.telegram.org/bots/api#editMessageLiveLocation         |

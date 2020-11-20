@@ -43,7 +43,14 @@ func Marshal(val interface{}, ct *string) ([]byte, error) {
 		}
 
 		// call `Marshal` method.
-		values := valueOf.FieldByName(field.Name).MethodByName("Marshal").Call([]reflect.Value{
+		fieldValueOf := valueOf.FieldByName(field.Name)
+		if fieldValueOf.CanInterface() {
+			v := fieldValueOf.Interface()
+			if v == nil {
+				continue
+			}
+		}
+		values := fieldValueOf.MethodByName("Marshal").Call([]reflect.Value{
 			reflect.ValueOf(writer),
 			reflect.ValueOf(partName),
 			reflect.ValueOf(omitempty),
