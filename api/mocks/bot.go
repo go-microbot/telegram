@@ -83,6 +83,20 @@ func (_m *Bot) DeleteChatPhoto(ctx context.Context, req models.ChatID) error {
 	return r0
 }
 
+// DeleteChatStickerSet provides a mock function with given fields: ctx, req
+func (_m *Bot) DeleteChatStickerSet(ctx context.Context, req models.ChatID) error {
+	ret := _m.Called(ctx, req)
+
+	var r0 error
+	if rf, ok := ret.Get(0).(func(context.Context, models.ChatID) error); ok {
+		r0 = rf(ctx, req)
+	} else {
+		r0 = ret.Error(0)
+	}
+
+	return r0
+}
+
 // DeleteMessage provides a mock function with given fields: ctx, req
 func (_m *Bot) DeleteMessage(ctx context.Context, req models.DeleteMessageRequest) error {
 	ret := _m.Called(ctx, req)
@@ -508,6 +522,29 @@ func (_m *Bot) SendChatAction(ctx context.Context, req models.SendChatActionRequ
 	return r0
 }
 
+// SendDice provides a mock function with given fields: ctx, req
+func (_m *Bot) SendDice(ctx context.Context, req models.SendDiceRequest) (*telegrammodels.Message, error) {
+	ret := _m.Called(ctx, req)
+
+	var r0 *telegrammodels.Message
+	if rf, ok := ret.Get(0).(func(context.Context, models.SendDiceRequest) *telegrammodels.Message); ok {
+		r0 = rf(ctx, req)
+	} else {
+		if ret.Get(0) != nil {
+			r0 = ret.Get(0).(*telegrammodels.Message)
+		}
+	}
+
+	var r1 error
+	if rf, ok := ret.Get(1).(func(context.Context, models.SendDiceRequest) error); ok {
+		r1 = rf(ctx, req)
+	} else {
+		r1 = ret.Error(1)
+	}
+
+	return r0, r1
+}
+
 // SendDocument provides a mock function with given fields: ctx, req
 func (_m *Bot) SendDocument(ctx context.Context, req models.SendDocumentRequest) (*telegrammodels.Message, error) {
 	ret := _m.Called(ctx, req)
@@ -546,6 +583,29 @@ func (_m *Bot) SendLocation(ctx context.Context, req models.SendLocationRequest)
 
 	var r1 error
 	if rf, ok := ret.Get(1).(func(context.Context, models.SendLocationRequest) error); ok {
+		r1 = rf(ctx, req)
+	} else {
+		r1 = ret.Error(1)
+	}
+
+	return r0, r1
+}
+
+// SendMediaGroup provides a mock function with given fields: ctx, req
+func (_m *Bot) SendMediaGroup(ctx context.Context, req models.SendMediaGroupRequest) ([]telegrammodels.Message, error) {
+	ret := _m.Called(ctx, req)
+
+	var r0 []telegrammodels.Message
+	if rf, ok := ret.Get(0).(func(context.Context, models.SendMediaGroupRequest) []telegrammodels.Message); ok {
+		r0 = rf(ctx, req)
+	} else {
+		if ret.Get(0) != nil {
+			r0 = ret.Get(0).([]telegrammodels.Message)
+		}
+	}
+
+	var r1 error
+	if rf, ok := ret.Get(1).(func(context.Context, models.SendMediaGroupRequest) error); ok {
 		r1 = rf(ctx, req)
 	} else {
 		r1 = ret.Error(1)
@@ -600,6 +660,29 @@ func (_m *Bot) SendPhoto(ctx context.Context, req models.SendPhotoRequest) (*tel
 	return r0, r1
 }
 
+// SendVenue provides a mock function with given fields: ctx, req
+func (_m *Bot) SendVenue(ctx context.Context, req models.SendVenueRequest) (*telegrammodels.Message, error) {
+	ret := _m.Called(ctx, req)
+
+	var r0 *telegrammodels.Message
+	if rf, ok := ret.Get(0).(func(context.Context, models.SendVenueRequest) *telegrammodels.Message); ok {
+		r0 = rf(ctx, req)
+	} else {
+		if ret.Get(0) != nil {
+			r0 = ret.Get(0).(*telegrammodels.Message)
+		}
+	}
+
+	var r1 error
+	if rf, ok := ret.Get(1).(func(context.Context, models.SendVenueRequest) error); ok {
+		r1 = rf(ctx, req)
+	} else {
+		r1 = ret.Error(1)
+	}
+
+	return r0, r1
+}
+
 // SendVideo provides a mock function with given fields: ctx, req
 func (_m *Bot) SendVideo(ctx context.Context, req models.SendVideoRequest) (*telegrammodels.Message, error) {
 	ret := _m.Called(ctx, req)
@@ -615,6 +698,29 @@ func (_m *Bot) SendVideo(ctx context.Context, req models.SendVideoRequest) (*tel
 
 	var r1 error
 	if rf, ok := ret.Get(1).(func(context.Context, models.SendVideoRequest) error); ok {
+		r1 = rf(ctx, req)
+	} else {
+		r1 = ret.Error(1)
+	}
+
+	return r0, r1
+}
+
+// SendVideoNote provides a mock function with given fields: ctx, req
+func (_m *Bot) SendVideoNote(ctx context.Context, req models.SendVideoNoteRequest) (*telegrammodels.Message, error) {
+	ret := _m.Called(ctx, req)
+
+	var r0 *telegrammodels.Message
+	if rf, ok := ret.Get(0).(func(context.Context, models.SendVideoNoteRequest) *telegrammodels.Message); ok {
+		r0 = rf(ctx, req)
+	} else {
+		if ret.Get(0) != nil {
+			r0 = ret.Get(0).(*telegrammodels.Message)
+		}
+	}
+
+	var r1 error
+	if rf, ok := ret.Get(1).(func(context.Context, models.SendVideoNoteRequest) error); ok {
 		r1 = rf(ctx, req)
 	} else {
 		r1 = ret.Error(1)

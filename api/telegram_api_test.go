@@ -21,6 +21,9 @@ const (
 	existingPhotoIDCtxKey         = "existing_photo_id"
 	existingPhotoUIDCtxKey        = "existing_photo_unique_id"
 	photoToUploadURLCtxKey        = "photo_to_upload_url"
+	videoToUploadURLCtxKey        = "video_to_upload_url"
+	documentToUploadURLCtxKey     = "document_to_upload_url"
+	audioToUploadURLCtxKey        = "audio_to_upload_url"
 	groupChatIDCtxKey             = "group_chat_id"
 	newGroupChatTitleCtxKey       = "new_group_chat_title"
 	newGroupChatDescriptionCtxKey = "new_group_chat_description"
@@ -227,6 +230,26 @@ func TestTelegramAPI_Integration(t *testing.T) {
 		{
 			name:        "setChatStickerSet",
 			testHandler: setChatStickerSet{},
+		},
+		{
+			name:        "sendVideoNote",
+			testHandler: sendVideoNote{},
+		},
+		{
+			name:        "deleteChatStickerSet",
+			testHandler: deleteChatStickerSet{},
+		},
+		{
+			name:        "sendMediaGroup",
+			testHandler: sendMediaGroup{},
+		},
+		{
+			name:        "sendDice",
+			testHandler: sendDice{},
+		},
+		{
+			name:        "sendVenue",
+			testHandler: sendVenue{},
 		},
 	}
 	for i := range testCases {
