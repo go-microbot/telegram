@@ -1,12 +1,10 @@
 package api
 
 import (
-	"bytes"
 	"context"
 	"encoding/json"
 	"errors"
 	"fmt"
-	"io/ioutil"
 	"net/http"
 	"net/http/httptest"
 	"strings"
@@ -208,44 +206,13 @@ func TestRequest_Do(t *testing.T) {
 }
 
 func TestResponse_Decode(t *testing.T) {
-	t.Run("decode body error", func(t *testing.T) {
-		resp := Response{
-			resp: &http.Response{
-				Body: http.NoBody,
-			},
-		}
-		var result map[string]string
-		err := resp.Decode(&result)
-		require.Error(t, err)
-		require.True(t, errors.Is(err, ErrDecodeBody))
-	})
-	t.Run("not OK result error", func(t *testing.T) {
-		data, err := json.Marshal(apiResponse{
-			badResponse: badResponse{
-				ErrorCode:   100,
-				Description: "error",
-			},
-		})
-		require.NoError(t, err)
-		resp := Response{
-			resp: &http.Response{
-				Body: ioutil.NopCloser(bytes.NewBuffer(data)),
-			},
-		}
-		var result map[string]string
-		err = resp.Decode(&result)
-		require.Error(t, err)
-		require.True(t, errors.Is(err, ErrResponse))
-	})
 	t.Run("unmarshal good response error", func(t *testing.T) {
 		data, err := json.Marshal(apiResponse{
 			OK: true,
 		})
 		require.NoError(t, err)
 		resp := Response{
-			resp: &http.Response{
-				Body: ioutil.NopCloser(bytes.NewBuffer(data)),
-			},
+			resp: json.RawMessage(data),
 		}
 		result := invalidUnmarshal{
 			err: errors.New("error"),
@@ -260,17 +227,8 @@ func TestResponse_Decode(t *testing.T) {
 		}
 		data, err := json.Marshal(body)
 		require.NoError(t, err)
-		data, err = json.Marshal(apiResponse{
-			OK: true,
-			goodResponse: goodResponse{
-				Result: data,
-			},
-		})
-		require.NoError(t, err)
 		resp := Response{
-			resp: &http.Response{
-				Body: ioutil.NopCloser(bytes.NewBuffer(data)),
-			},
+			resp: json.RawMessage(data),
 		}
 		var result map[string]interface{}
 		err = resp.Decode(&result)

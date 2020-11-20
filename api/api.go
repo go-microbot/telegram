@@ -92,4 +92,14 @@ type Bot interface {
 	SetChatStickerSet(ctx context.Context, req apiModels.SetChatStickerSetRequest) error
 	// https://core.telegram.org/bots/api#createnewstickerset.
 	CreateNewStickerSet(ctx context.Context, req apiModels.CreateNewStickerSetRequest) error
+	// https://core.telegram.org/bots/api#sendvideonote.
+	SendVideoNote(ctx context.Context, req apiModels.SendVideoNoteRequest) (*models.Message, error)
+	// https://core.telegram.org/bots/api#deletechatstickerset.
+	DeleteChatStickerSet(ctx context.Context, req apiModels.ChatID) error
+	// https://core.telegram.org/bots/api#sendmediagroup.
+	SendMediaGroup(ctx context.Context, req apiModels.SendMediaGroupRequest) ([]models.Message, error)
+	// https://core.telegram.org/bots/api#senddice.
+	SendDice(ctx context.Context, req apiModels.SendDiceRequest) (*models.Message, error)
+	// https://core.telegram.org/bots/api#sendvenue.
+	SendVenue(ctx context.Context, req apiModels.SendVenueRequest) (*models.Message, error)
 }

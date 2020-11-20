@@ -18,7 +18,7 @@ const (
 
 // Response represents base API response.
 type Response struct {
-	resp *http.Response
+	resp json.RawMessage
 }
 
 // Request represents API request configuration.
@@ -148,6 +148,13 @@ func (req *Request) Do(ctx context.Context) (*Response, error) {
 		return nil, newErr(ErrSendReq, err)
 	}
 
+	// try to parse API body.
+	respBody, err := parseResponseBody(result.Body)
+	if err == nil {
+		result.Status = respBody.Description
+		result.StatusCode = respBody.ErrorCode
+	}
+
 	// check response status code.
 	if !isValidStatusCode(result.StatusCode) {
 		return nil, newErr(ErrResponse,
@@ -155,23 +162,13 @@ func (req *Request) Do(ctx context.Context) (*Response, error) {
 	}
 
 	return &Response{
-		resp: result,
+		resp: respBody.Result,
 	}, nil
 }
 
 // Decode unmarshal response body.
 func (res *Response) Decode(resp interface{}) error {
-	var apiResp apiResponse
-	if err := json.NewDecoder(res.resp.Body).Decode(&apiResp); err != nil {
-		return newErr(ErrDecodeBody, err)
-	}
-
-	if !apiResp.OK {
-		return newErr(ErrResponse,
-			fmt.Errorf("status %d: %s", apiResp.ErrorCode, apiResp.Description))
-	}
-
-	if err := json.Unmarshal(apiResp.Result, resp); err != nil {
+	if err := json.Unmarshal(res.resp, resp); err != nil {
 		return newErr(ErrDecodeBody, err)
 	}
 
@@ -221,7 +218,7 @@ func (req *Request) encodeQuery(request *http.Request) string {
 }
 
 func isValidStatusCode(statusCode int) bool {
-	return statusCode >= http.StatusOK && statusCode < http.StatusMultipleChoices
+	return statusCode == 0 || statusCode >= http.StatusOK && statusCode < http.StatusMultipleChoices
 }
 
 func jsonMarsaler(v interface{}, ct *string) ([]byte, error) {
@@ -230,4 +227,17 @@ func jsonMarsaler(v interface{}, ct *string) ([]byte, error) {
 	}
 
 	return json.Marshal(v)
+}
+
+func parseResponseBody(body io.ReadCloser) (apiResponse, error) {
+	var resp apiResponse
+	if err := json.NewDecoder(body).Decode(&resp); err != nil {
+		return apiResponse{}, err
+	}
+
+	if err := body.Close(); err != nil {
+		return apiResponse{}, err
+	}
+
+	return resp, nil
 }
