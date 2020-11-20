@@ -27,6 +27,9 @@ const (
 	sentMessageIDCtxKey           = "sent_message_id"
 	botCommandsCtxKey             = "bot_commands"
 	botUserIDCtxKey               = "bot_user_id"
+	botUsernameCtxKey             = "bot_user_name"
+	adminUserIDCtxKey             = "admin_user_id"
+	stickerSetNameCtxKey          = "sticker_set_name"
 )
 
 var (
@@ -200,6 +203,30 @@ func TestTelegramAPI_Integration(t *testing.T) {
 		{
 			name:        "sendVoice",
 			testHandler: sendVoice{},
+		},
+		{
+			name:        "copyMessage",
+			testHandler: copyMessage{},
+		},
+		{
+			name:        "deleteMessage",
+			testHandler: deleteMessage{},
+		},
+		{
+			name:        "sendChatAction",
+			testHandler: sendChatAction{},
+		},
+		{
+			name:        "getUserProfilePhotos",
+			testHandler: getUserProfilePhotos{},
+		},
+		{
+			name:        "createNewStickerSet",
+			testHandler: createNewStickerSet{},
+		},
+		{
+			name:        "setChatStickerSet",
+			testHandler: setChatStickerSet{},
 		},
 	}
 	for i := range testCases {

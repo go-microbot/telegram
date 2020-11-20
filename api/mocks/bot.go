@@ -32,12 +32,63 @@ func (_m *Bot) Close(ctx context.Context) error {
 	return r0
 }
 
+// CopyMessage provides a mock function with given fields: ctx, req
+func (_m *Bot) CopyMessage(ctx context.Context, req models.CopyMessageRequest) (*telegrammodels.MessageID, error) {
+	ret := _m.Called(ctx, req)
+
+	var r0 *telegrammodels.MessageID
+	if rf, ok := ret.Get(0).(func(context.Context, models.CopyMessageRequest) *telegrammodels.MessageID); ok {
+		r0 = rf(ctx, req)
+	} else {
+		if ret.Get(0) != nil {
+			r0 = ret.Get(0).(*telegrammodels.MessageID)
+		}
+	}
+
+	var r1 error
+	if rf, ok := ret.Get(1).(func(context.Context, models.CopyMessageRequest) error); ok {
+		r1 = rf(ctx, req)
+	} else {
+		r1 = ret.Error(1)
+	}
+
+	return r0, r1
+}
+
+// CreateNewStickerSet provides a mock function with given fields: ctx, req
+func (_m *Bot) CreateNewStickerSet(ctx context.Context, req models.CreateNewStickerSetRequest) error {
+	ret := _m.Called(ctx, req)
+
+	var r0 error
+	if rf, ok := ret.Get(0).(func(context.Context, models.CreateNewStickerSetRequest) error); ok {
+		r0 = rf(ctx, req)
+	} else {
+		r0 = ret.Error(0)
+	}
+
+	return r0
+}
+
 // DeleteChatPhoto provides a mock function with given fields: ctx, req
 func (_m *Bot) DeleteChatPhoto(ctx context.Context, req models.ChatID) error {
 	ret := _m.Called(ctx, req)
 
 	var r0 error
 	if rf, ok := ret.Get(0).(func(context.Context, models.ChatID) error); ok {
+		r0 = rf(ctx, req)
+	} else {
+		r0 = ret.Error(0)
+	}
+
+	return r0
+}
+
+// DeleteMessage provides a mock function with given fields: ctx, req
+func (_m *Bot) DeleteMessage(ctx context.Context, req models.DeleteMessageRequest) error {
+	ret := _m.Called(ctx, req)
+
+	var r0 error
+	if rf, ok := ret.Get(0).(func(context.Context, models.DeleteMessageRequest) error); ok {
 		r0 = rf(ctx, req)
 	} else {
 		r0 = ret.Error(0)
@@ -309,6 +360,29 @@ func (_m *Bot) GetUpdates(ctx context.Context, req models.GetUpdatesRequest) ([]
 	return r0, r1
 }
 
+// GetUserProfilePhotos provides a mock function with given fields: ctx, req
+func (_m *Bot) GetUserProfilePhotos(ctx context.Context, req models.GetUserProfilePhotosRequest) (*telegrammodels.UserProfilePhotos, error) {
+	ret := _m.Called(ctx, req)
+
+	var r0 *telegrammodels.UserProfilePhotos
+	if rf, ok := ret.Get(0).(func(context.Context, models.GetUserProfilePhotosRequest) *telegrammodels.UserProfilePhotos); ok {
+		r0 = rf(ctx, req)
+	} else {
+		if ret.Get(0) != nil {
+			r0 = ret.Get(0).(*telegrammodels.UserProfilePhotos)
+		}
+	}
+
+	var r1 error
+	if rf, ok := ret.Get(1).(func(context.Context, models.GetUserProfilePhotosRequest) error); ok {
+		r1 = rf(ctx, req)
+	} else {
+		r1 = ret.Error(1)
+	}
+
+	return r0, r1
+}
+
 // GetWebhookInfo provides a mock function with given fields: ctx
 func (_m *Bot) GetWebhookInfo(ctx context.Context) (*telegrammodels.WebhookInfo, error) {
 	ret := _m.Called(ctx)
@@ -418,6 +492,20 @@ func (_m *Bot) SendAudio(ctx context.Context, req models.SendAudioRequest) (*tel
 	}
 
 	return r0, r1
+}
+
+// SendChatAction provides a mock function with given fields: ctx, req
+func (_m *Bot) SendChatAction(ctx context.Context, req models.SendChatActionRequest) error {
+	ret := _m.Called(ctx, req)
+
+	var r0 error
+	if rf, ok := ret.Get(0).(func(context.Context, models.SendChatActionRequest) error); ok {
+		r0 = rf(ctx, req)
+	} else {
+		r0 = ret.Error(0)
+	}
+
+	return r0
 }
 
 // SendDocument provides a mock function with given fields: ctx, req
@@ -606,6 +694,20 @@ func (_m *Bot) SetChatPhoto(ctx context.Context, req models.SetChatPhotoRequest)
 
 	var r0 error
 	if rf, ok := ret.Get(0).(func(context.Context, models.SetChatPhotoRequest) error); ok {
+		r0 = rf(ctx, req)
+	} else {
+		r0 = ret.Error(0)
+	}
+
+	return r0
+}
+
+// SetChatStickerSet provides a mock function with given fields: ctx, req
+func (_m *Bot) SetChatStickerSet(ctx context.Context, req models.SetChatStickerSetRequest) error {
+	ret := _m.Called(ctx, req)
+
+	var r0 error
+	if rf, ok := ret.Get(0).(func(context.Context, models.SetChatStickerSetRequest) error); ok {
 		r0 = rf(ctx, req)
 	} else {
 		r0 = ret.Error(0)

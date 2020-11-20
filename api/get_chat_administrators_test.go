@@ -24,12 +24,15 @@ func (h getChatAdministrators) Test(ctx context.Context, t *testing.T) context.C
 	require.NotEmpty(t, admins)
 
 	var found bool
+	var adminID int32
 	for i := range admins {
 		if admins[i].User.ID == botUserID {
 			found = true
+			continue
 		}
+		adminID = admins[i].User.ID
 	}
 	require.True(t, found)
 
-	return ctx
+	return context.WithValue(ctx, TestDataKey(adminUserIDCtxKey), adminID)
 }

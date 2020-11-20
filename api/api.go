@@ -80,4 +80,16 @@ type Bot interface {
 	SendAnimation(ctx context.Context, req apiModels.SendAnimationRequest) (*models.Message, error)
 	// https://core.telegram.org/bots/api#sendvoice.
 	SendVoice(ctx context.Context, req apiModels.SendVoiceRequest) (*models.Message, error)
+	// https://core.telegram.org/bots/api#deletemessage.
+	DeleteMessage(ctx context.Context, req apiModels.DeleteMessageRequest) error
+	// https://core.telegram.org/bots/api#copymessage.
+	CopyMessage(ctx context.Context, req apiModels.CopyMessageRequest) (*models.MessageID, error)
+	// https://core.telegram.org/bots/api#sendchataction.
+	SendChatAction(ctx context.Context, req apiModels.SendChatActionRequest) error
+	// https://core.telegram.org/bots/api#getuserprofilephotos.
+	GetUserProfilePhotos(ctx context.Context, req apiModels.GetUserProfilePhotosRequest) (*models.UserProfilePhotos, error)
+	// https://core.telegram.org/bots/api#setchatstickerset.
+	SetChatStickerSet(ctx context.Context, req apiModels.SetChatStickerSetRequest) error
+	// https://core.telegram.org/bots/api#createnewstickerset.
+	CreateNewStickerSet(ctx context.Context, req apiModels.CreateNewStickerSetRequest) error
 }
