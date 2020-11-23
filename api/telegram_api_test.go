@@ -85,7 +85,6 @@ func TestTelegramAPI_Integration(t *testing.T) {
 	testCases := []struct {
 		name        string
 		testHandler Testable
-		sleep       int
 	}{
 		{
 			name:        "close",
@@ -114,7 +113,6 @@ func TestTelegramAPI_Integration(t *testing.T) {
 		{
 			name:        "deleteWebhook",
 			testHandler: deleteWebhook{},
-			sleep:       1,
 		},
 		// should be always after webhook delete case.
 		{
@@ -334,7 +332,12 @@ func TestTelegramAPI_Integration(t *testing.T) {
 		tc := &testCases[i]
 		t.Run(tc.name, func(t *testing.T) {
 			ctx = tc.testHandler.Test(ctx, t)
-			time.Sleep(time.Second * time.Duration(tc.sleep))
+			// When sending messages inside a particular chat,
+			// avoid sending more than one message per second.
+			// We may allow short bursts that go over this limit,
+			// but eventually you'll begin receiving 429 errors.
+			// https://core.telegram.org/bots/faq#my-bot-is-hitting-limits-how-do-i-avoid-this.
+			time.Sleep(time.Second)
 		})
 	}
 }
