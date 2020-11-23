@@ -420,6 +420,20 @@ func (_m *Bot) GetWebhookInfo(ctx context.Context) (*telegrammodels.WebhookInfo,
 	return r0, r1
 }
 
+// KickChatMember provides a mock function with given fields: ctx, req
+func (_m *Bot) KickChatMember(ctx context.Context, req models.KickChatMemberRequest) error {
+	ret := _m.Called(ctx, req)
+
+	var r0 error
+	if rf, ok := ret.Get(0).(func(context.Context, models.KickChatMemberRequest) error); ok {
+		r0 = rf(ctx, req)
+	} else {
+		r0 = ret.Error(0)
+	}
+
+	return r0
+}
+
 // LeaveChat provides a mock function with given fields: ctx, req
 func (_m *Bot) LeaveChat(ctx context.Context, req models.ChatID) error {
 	ret := _m.Called(ctx, req)
@@ -520,6 +534,29 @@ func (_m *Bot) SendChatAction(ctx context.Context, req models.SendChatActionRequ
 	}
 
 	return r0
+}
+
+// SendContact provides a mock function with given fields: ctx, req
+func (_m *Bot) SendContact(ctx context.Context, req models.SendContactRequest) (*telegrammodels.Message, error) {
+	ret := _m.Called(ctx, req)
+
+	var r0 *telegrammodels.Message
+	if rf, ok := ret.Get(0).(func(context.Context, models.SendContactRequest) *telegrammodels.Message); ok {
+		r0 = rf(ctx, req)
+	} else {
+		if ret.Get(0) != nil {
+			r0 = ret.Get(0).(*telegrammodels.Message)
+		}
+	}
+
+	var r1 error
+	if rf, ok := ret.Get(1).(func(context.Context, models.SendContactRequest) error); ok {
+		r1 = rf(ctx, req)
+	} else {
+		r1 = ret.Error(1)
+	}
+
+	return r0, r1
 }
 
 // SendDice provides a mock function with given fields: ctx, req
@@ -652,6 +689,29 @@ func (_m *Bot) SendPhoto(ctx context.Context, req models.SendPhotoRequest) (*tel
 
 	var r1 error
 	if rf, ok := ret.Get(1).(func(context.Context, models.SendPhotoRequest) error); ok {
+		r1 = rf(ctx, req)
+	} else {
+		r1 = ret.Error(1)
+	}
+
+	return r0, r1
+}
+
+// SendPoll provides a mock function with given fields: ctx, req
+func (_m *Bot) SendPoll(ctx context.Context, req models.SendPollRequest) (*telegrammodels.Message, error) {
+	ret := _m.Called(ctx, req)
+
+	var r0 *telegrammodels.Message
+	if rf, ok := ret.Get(0).(func(context.Context, models.SendPollRequest) *telegrammodels.Message); ok {
+		r0 = rf(ctx, req)
+	} else {
+		if ret.Get(0) != nil {
+			r0 = ret.Get(0).(*telegrammodels.Message)
+		}
+	}
+
+	var r1 error
+	if rf, ok := ret.Get(1).(func(context.Context, models.SendPollRequest) error); ok {
 		r1 = rf(ctx, req)
 	} else {
 		r1 = ret.Error(1)
@@ -856,6 +916,43 @@ func (_m *Bot) SetWebhook(ctx context.Context, req models.SetWebhookRequest) err
 
 	var r0 error
 	if rf, ok := ret.Get(0).(func(context.Context, models.SetWebhookRequest) error); ok {
+		r0 = rf(ctx, req)
+	} else {
+		r0 = ret.Error(0)
+	}
+
+	return r0
+}
+
+// StopPoll provides a mock function with given fields: ctx, req
+func (_m *Bot) StopPoll(ctx context.Context, req models.StopPollRequest) (*telegrammodels.Poll, error) {
+	ret := _m.Called(ctx, req)
+
+	var r0 *telegrammodels.Poll
+	if rf, ok := ret.Get(0).(func(context.Context, models.StopPollRequest) *telegrammodels.Poll); ok {
+		r0 = rf(ctx, req)
+	} else {
+		if ret.Get(0) != nil {
+			r0 = ret.Get(0).(*telegrammodels.Poll)
+		}
+	}
+
+	var r1 error
+	if rf, ok := ret.Get(1).(func(context.Context, models.StopPollRequest) error); ok {
+		r1 = rf(ctx, req)
+	} else {
+		r1 = ret.Error(1)
+	}
+
+	return r0, r1
+}
+
+// UnbanChatMember provides a mock function with given fields: ctx, req
+func (_m *Bot) UnbanChatMember(ctx context.Context, req models.UnbanChatMemberRequest) error {
+	ret := _m.Called(ctx, req)
+
+	var r0 error
+	if rf, ok := ret.Get(0).(func(context.Context, models.UnbanChatMemberRequest) error); ok {
 		r0 = rf(ctx, req)
 	} else {
 		r0 = ret.Error(0)

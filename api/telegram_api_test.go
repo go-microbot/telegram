@@ -33,6 +33,8 @@ const (
 	botUsernameCtxKey             = "bot_user_name"
 	adminUserIDCtxKey             = "admin_user_id"
 	stickerSetNameCtxKey          = "sticker_set_name"
+	pollQuestionCtxKey            = "poll_question"
+	pollMessageIDCtxKey           = "poll_message_id"
 )
 
 var (
@@ -250,6 +252,26 @@ func TestTelegramAPI_Integration(t *testing.T) {
 		{
 			name:        "sendVenue",
 			testHandler: sendVenue{},
+		},
+		{
+			name:        "sendContact",
+			testHandler: sendContact{},
+		},
+		{
+			name:        "sendPoll",
+			testHandler: sendPoll{},
+		},
+		{
+			name:        "stopPoll",
+			testHandler: stopPoll{},
+		},
+		{
+			name:        "kickChatMember",
+			testHandler: kickChatMember{},
+		},
+		{
+			name:        "unbanChatMember",
+			testHandler: unbanChatMember{},
 		},
 	}
 	for i := range testCases {
