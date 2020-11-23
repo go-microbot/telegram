@@ -102,4 +102,14 @@ type Bot interface {
 	SendDice(ctx context.Context, req apiModels.SendDiceRequest) (*models.Message, error)
 	// https://core.telegram.org/bots/api#sendvenue.
 	SendVenue(ctx context.Context, req apiModels.SendVenueRequest) (*models.Message, error)
+	// https://core.telegram.org/bots/api#sendcontact.
+	SendContact(ctx context.Context, req apiModels.SendContactRequest) (*models.Message, error)
+	// https://core.telegram.org/bots/api#sendpoll.
+	SendPoll(ctx context.Context, req apiModels.SendPollRequest) (*models.Message, error)
+	// https://core.telegram.org/bots/api#stoppoll.
+	StopPoll(ctx context.Context, req apiModels.StopPollRequest) (*models.Poll, error)
+	// https://core.telegram.org/bots/api#kickchatmember.
+	KickChatMember(ctx context.Context, req apiModels.KickChatMemberRequest) error
+	// https://core.telegram.org/bots/api#unbanchatmember.
+	UnbanChatMember(ctx context.Context, req apiModels.UnbanChatMemberRequest) error
 }

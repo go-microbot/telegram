@@ -244,10 +244,6 @@ Implementation     | Test coverage  | Method                          | Docs    
 :heavy_check_mark: | :x:            | close                           | https://core.telegram.org/bots/api#close                           |
 :x:                | :x:            | editMessageLiveLocation         | https://core.telegram.org/bots/api#editMessageLiveLocation         |
 :x:                | :x:            | stopMessageLiveLocation         | https://core.telegram.org/bots/api#stopMessageLiveLocation         |
-:x:                | :x:            | sendContact                     | https://core.telegram.org/bots/api#sendContact                     |
-:x:                | :x:            | sendPoll                        | https://core.telegram.org/bots/api#sendPoll                        |
-:x:                | :x:            | kickChatMember                  | https://core.telegram.org/bots/api#kickChatMember                  |
-:x:                | :x:            | unbanChatMember                 | https://core.telegram.org/bots/api#unbanChatMember                 |
 :x:                | :x:            | restrictChatMember              | https://core.telegram.org/bots/api#restrictChatMember              |
 :x:                | :x:            | promoteChatMember               | https://core.telegram.org/bots/api#promoteChatMember               |
 :heavy_check_mark: | :x:            | leaveChat                       | https://core.telegram.org/bots/api#leaveChat                       |
@@ -256,7 +252,6 @@ Implementation     | Test coverage  | Method                          | Docs    
 :x:                | :x:            | editMessageCaption              | https://core.telegram.org/bots/api#editMessageCaption              |
 :x:                | :x:            | editMessageMedia                | https://core.telegram.org/bots/api#editMessageMedia                |
 :x:                | :x:            | editMessageReplyMarkup          | https://core.telegram.org/bots/api#editMessageReplyMarkup          |
-:x:                | :x:            | stopPoll                        | https://core.telegram.org/bots/api#stopPoll                        |
 :x:                | :x:            | sendSticker                     | https://core.telegram.org/bots/api#sendSticker                     |
 :x:                | :x:            | getStickerSet                   | https://core.telegram.org/bots/api#getStickerSet                   |
 :x:                | :x:            | uploadStickerFile               | https://core.telegram.org/bots/api#uploadStickerFile               |
