@@ -10,8 +10,13 @@ import (
 type close struct{}
 
 func (h close) Test(ctx context.Context, t *testing.T) context.Context {
+	prevToken := localAPI.token
+	defer func() {
+		localAPI.token = prevToken
+	}()
+	localAPI.token = "invalid"
 	err := localAPI.Close(ctx)
-	require.NoError(t, err)
+	require.Error(t, err)
 
 	return ctx
 }

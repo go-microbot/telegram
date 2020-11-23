@@ -112,4 +112,14 @@ type Bot interface {
 	KickChatMember(ctx context.Context, req apiModels.KickChatMemberRequest) error
 	// https://core.telegram.org/bots/api#unbanchatmember.
 	UnbanChatMember(ctx context.Context, req apiModels.UnbanChatMemberRequest) error
+	// https://core.telegram.org/bots/api#restrictchatmember.
+	RestrictChatMember(ctx context.Context, req apiModels.RestrictChatMemberRequest) error
+	// https://core.telegram.org/bots/api#promotechatmember.
+	PromoteChatMember(ctx context.Context, req apiModels.PromoteChatMemberRequest) error
+	// https://core.telegram.org/bots/api#editmessagelivelocation.
+	EditMessageLiveLocation(ctx context.Context, req apiModels.EditMessageLiveLocationRequest) error
+	// https://core.telegram.org/bots/api#stopmessagelivelocation.
+	StopMessageLiveLocation(ctx context.Context, req apiModels.StopMessageLiveLocationRequest) error
+	// https://core.telegram.org/bots/api#getstickerset.
+	GetStickerSet(ctx context.Context, req apiModels.GetStickerSetRequest) (*models.StickerSet, error)
 }

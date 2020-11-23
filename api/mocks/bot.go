@@ -125,6 +125,20 @@ func (_m *Bot) DeleteWebhook(ctx context.Context) error {
 	return r0
 }
 
+// EditMessageLiveLocation provides a mock function with given fields: ctx, req
+func (_m *Bot) EditMessageLiveLocation(ctx context.Context, req models.EditMessageLiveLocationRequest) error {
+	ret := _m.Called(ctx, req)
+
+	var r0 error
+	if rf, ok := ret.Get(0).(func(context.Context, models.EditMessageLiveLocationRequest) error); ok {
+		r0 = rf(ctx, req)
+	} else {
+		r0 = ret.Error(0)
+	}
+
+	return r0
+}
+
 // ExportChatInviteLink provides a mock function with given fields: ctx, req
 func (_m *Bot) ExportChatInviteLink(ctx context.Context, req models.ChatID) (string, error) {
 	ret := _m.Called(ctx, req)
@@ -351,6 +365,29 @@ func (_m *Bot) GetPollUpdates(ctx context.Context, req models.GetUpdatesRequest,
 	return r0, r1
 }
 
+// GetStickerSet provides a mock function with given fields: ctx, req
+func (_m *Bot) GetStickerSet(ctx context.Context, req models.GetStickerSetRequest) (*telegrammodels.StickerSet, error) {
+	ret := _m.Called(ctx, req)
+
+	var r0 *telegrammodels.StickerSet
+	if rf, ok := ret.Get(0).(func(context.Context, models.GetStickerSetRequest) *telegrammodels.StickerSet); ok {
+		r0 = rf(ctx, req)
+	} else {
+		if ret.Get(0) != nil {
+			r0 = ret.Get(0).(*telegrammodels.StickerSet)
+		}
+	}
+
+	var r1 error
+	if rf, ok := ret.Get(1).(func(context.Context, models.GetStickerSetRequest) error); ok {
+		r1 = rf(ctx, req)
+	} else {
+		r1 = ret.Error(1)
+	}
+
+	return r0, r1
+}
+
 // GetUpdates provides a mock function with given fields: ctx, req
 func (_m *Bot) GetUpdates(ctx context.Context, req models.GetUpdatesRequest) ([]telegrammodels.Update, error) {
 	ret := _m.Called(ctx, req)
@@ -468,6 +505,34 @@ func (_m *Bot) PinChatMessage(ctx context.Context, req models.PinChatMessageRequ
 
 	var r0 error
 	if rf, ok := ret.Get(0).(func(context.Context, models.PinChatMessageRequest) error); ok {
+		r0 = rf(ctx, req)
+	} else {
+		r0 = ret.Error(0)
+	}
+
+	return r0
+}
+
+// PromoteChatMember provides a mock function with given fields: ctx, req
+func (_m *Bot) PromoteChatMember(ctx context.Context, req models.PromoteChatMemberRequest) error {
+	ret := _m.Called(ctx, req)
+
+	var r0 error
+	if rf, ok := ret.Get(0).(func(context.Context, models.PromoteChatMemberRequest) error); ok {
+		r0 = rf(ctx, req)
+	} else {
+		r0 = ret.Error(0)
+	}
+
+	return r0
+}
+
+// RestrictChatMember provides a mock function with given fields: ctx, req
+func (_m *Bot) RestrictChatMember(ctx context.Context, req models.RestrictChatMemberRequest) error {
+	ret := _m.Called(ctx, req)
+
+	var r0 error
+	if rf, ok := ret.Get(0).(func(context.Context, models.RestrictChatMemberRequest) error); ok {
 		r0 = rf(ctx, req)
 	} else {
 		r0 = ret.Error(0)
@@ -916,6 +981,20 @@ func (_m *Bot) SetWebhook(ctx context.Context, req models.SetWebhookRequest) err
 
 	var r0 error
 	if rf, ok := ret.Get(0).(func(context.Context, models.SetWebhookRequest) error); ok {
+		r0 = rf(ctx, req)
+	} else {
+		r0 = ret.Error(0)
+	}
+
+	return r0
+}
+
+// StopMessageLiveLocation provides a mock function with given fields: ctx, req
+func (_m *Bot) StopMessageLiveLocation(ctx context.Context, req models.StopMessageLiveLocationRequest) error {
+	ret := _m.Called(ctx, req)
+
+	var r0 error
+	if rf, ok := ret.Get(0).(func(context.Context, models.StopMessageLiveLocationRequest) error); ok {
 		r0 = rf(ctx, req)
 	} else {
 		r0 = ret.Error(0)

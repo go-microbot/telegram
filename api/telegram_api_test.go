@@ -84,6 +84,18 @@ func TestTelegramAPI_Integration(t *testing.T) {
 		sleep       int
 	}{
 		{
+			name:        "close",
+			testHandler: close{},
+		},
+		{
+			name:        "logOut",
+			testHandler: logOut{},
+		},
+		{
+			name:        "leaveChat",
+			testHandler: leaveChat{},
+		},
+		{
 			name:        "getMe",
 			testHandler: getMe{},
 		},
@@ -108,6 +120,14 @@ func TestTelegramAPI_Integration(t *testing.T) {
 		{
 			name:        "sendMessage",
 			testHandler: sendMessage{},
+		},
+		{
+			name:        "editMessageLiveLocation",
+			testHandler: editMessageLiveLocation{},
+		},
+		{
+			name:        "stopMessageLiveLocation",
+			testHandler: stopMessageLiveLocation{},
 		},
 		{
 			name:        "sendPhoto",
@@ -234,6 +254,10 @@ func TestTelegramAPI_Integration(t *testing.T) {
 			testHandler: setChatStickerSet{},
 		},
 		{
+			name:        "getStickerSet",
+			testHandler: getStickerSet{},
+		},
+		{
 			name:        "sendVideoNote",
 			testHandler: sendVideoNote{},
 		},
@@ -272,6 +296,14 @@ func TestTelegramAPI_Integration(t *testing.T) {
 		{
 			name:        "unbanChatMember",
 			testHandler: unbanChatMember{},
+		},
+		{
+			name:        "restrictChatMember",
+			testHandler: restrictChatMember{},
+		},
+		{
+			name:        "promoteChatMember",
+			testHandler: promoteChatMember{},
 		},
 	}
 	for i := range testCases {
