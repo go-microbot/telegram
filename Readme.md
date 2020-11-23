@@ -240,20 +240,12 @@ The bot is **isn't finished yet**. The main goal is to implement all available m
 
 Implementation     | Test coverage  | Method                          | Docs                                                               |
 -----------------  | -------------  | ------------------------------- | -----------------------------------------------------------------  |
-:heavy_check_mark: | :x:            | logout                          | https://core.telegram.org/bots/api#logout                          |
-:heavy_check_mark: | :x:            | close                           | https://core.telegram.org/bots/api#close                           |
-:x:                | :x:            | editMessageLiveLocation         | https://core.telegram.org/bots/api#editMessageLiveLocation         |
-:x:                | :x:            | stopMessageLiveLocation         | https://core.telegram.org/bots/api#stopMessageLiveLocation         |
-:x:                | :x:            | restrictChatMember              | https://core.telegram.org/bots/api#restrictChatMember              |
-:x:                | :x:            | promoteChatMember               | https://core.telegram.org/bots/api#promoteChatMember               |
-:heavy_check_mark: | :x:            | leaveChat                       | https://core.telegram.org/bots/api#leaveChat                       |
 :x:                | :x:            | answerCallbackQuery             | https://core.telegram.org/bots/api#answerCallbackQuery             |
 :x:                | :x:            | editMessageText                 | https://core.telegram.org/bots/api#editMessageText                 |
 :x:                | :x:            | editMessageCaption              | https://core.telegram.org/bots/api#editMessageCaption              |
 :x:                | :x:            | editMessageMedia                | https://core.telegram.org/bots/api#editMessageMedia                |
 :x:                | :x:            | editMessageReplyMarkup          | https://core.telegram.org/bots/api#editMessageReplyMarkup          |
 :x:                | :x:            | sendSticker                     | https://core.telegram.org/bots/api#sendSticker                     |
-:x:                | :x:            | getStickerSet                   | https://core.telegram.org/bots/api#getStickerSet                   |
 :x:                | :x:            | uploadStickerFile               | https://core.telegram.org/bots/api#uploadStickerFile               |
 :x:                | :x:            | addStickerToSet                 | https://core.telegram.org/bots/api#addStickerToSet                 |
 :x:                | :x:            | setStickerPositionInSet         | https://core.telegram.org/bots/api#setStickerPositionInSet         |

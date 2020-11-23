@@ -12,13 +12,10 @@ import (
 type leaveChat struct{}
 
 func (h leaveChat) Test(ctx context.Context, t *testing.T) context.Context {
-	groupChatID := ctx.Value(groupChatIDCtxKey)
-	require.NotNil(t, groupChatID)
-
 	err := localAPI.LeaveChat(ctx, apiModels.ChatID{
-		ChatID: query.NewParamAny(groupChatID.(int64)),
+		ChatID: query.NewParamAny(7),
 	})
-	require.NoError(t, err)
+	require.Error(t, err)
 
 	return ctx
 }
