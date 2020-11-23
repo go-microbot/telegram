@@ -246,8 +246,6 @@ Implementation     | Test coverage  | Method                          | Docs    
 :x:                | :x:            | editMessageMedia                | https://core.telegram.org/bots/api#editMessageMedia                |
 :x:                | :x:            | editMessageReplyMarkup          | https://core.telegram.org/bots/api#editMessageReplyMarkup          |
 :x:                | :x:            | sendSticker                     | https://core.telegram.org/bots/api#sendSticker                     |
-:x:                | :x:            | uploadStickerFile               | https://core.telegram.org/bots/api#uploadStickerFile               |
-:x:                | :x:            | addStickerToSet                 | https://core.telegram.org/bots/api#addStickerToSet                 |
 :x:                | :x:            | setStickerPositionInSet         | https://core.telegram.org/bots/api#setStickerPositionInSet         |
 :x:                | :x:            | deleteStickerFromSet            | https://core.telegram.org/bots/api#deleteStickerFromSet            |
 :x:                | :x:            | setStickerSetThumb              | https://core.telegram.org/bots/api#setStickerSetThumb              |
@@ -256,7 +254,3 @@ Implementation     | Test coverage  | Method                          | Docs    
 :x:                | :x:            | answerShippingQuery             | https://core.telegram.org/bots/api#answerShippingQuery             |
 :x:                | :x:            | answerPreCheckoutQuery          | https://core.telegram.org/bots/api#answerPreCheckoutQuery          |
 :x:                | :x:            | setPassportDataErrors           | https://core.telegram.org/bots/api#setPassportDataErrors           |
-:x:                | :x:            | sendGame                        | https://core.telegram.org/bots/api#sendGame                        |
-:x:                | :x:            | setGameScore                    | https://core.telegram.org/bots/api#setGameScore                    |
-:x:                | :x:            | getGameHighScores               | https://core.telegram.org/bots/api#getGameHighScores               |
-:x:                | :x:            | getGameHighScores               | https://core.telegram.org/bots/api#getGameHighScores               |

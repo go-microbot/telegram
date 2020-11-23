@@ -35,6 +35,10 @@ const (
 	stickerSetNameCtxKey          = "sticker_set_name"
 	pollQuestionCtxKey            = "poll_question"
 	pollMessageIDCtxKey           = "poll_message_id"
+	gameShortNameCtxKey           = "game_short_name"
+	gameScoreCtxKey               = "game_score"
+	gameMessageIDCtxKey           = "game_message_id"
+	uploadedStickerFileIDCtxKey   = "uploaded_sticker_file_id"
 )
 
 var (
@@ -304,6 +308,26 @@ func TestTelegramAPI_Integration(t *testing.T) {
 		{
 			name:        "promoteChatMember",
 			testHandler: promoteChatMember{},
+		},
+		{
+			name:        "sendGame",
+			testHandler: sendGame{},
+		},
+		{
+			name:        "setGameScore",
+			testHandler: setGameScore{},
+		},
+		{
+			name:        "getGameHighScores",
+			testHandler: getGameHighScores{},
+		},
+		{
+			name:        "uploadStickerFile",
+			testHandler: uploadStickerFile{},
+		},
+		{
+			name:        "addStickerToSet",
+			testHandler: addStickerToSet{},
 		},
 	}
 	for i := range testCases {

@@ -122,4 +122,14 @@ type Bot interface {
 	StopMessageLiveLocation(ctx context.Context, req apiModels.StopMessageLiveLocationRequest) error
 	// https://core.telegram.org/bots/api#getstickerset.
 	GetStickerSet(ctx context.Context, req apiModels.GetStickerSetRequest) (*models.StickerSet, error)
+	// https://core.telegram.org/bots/api#sendgame.
+	SendGame(ctx context.Context, req apiModels.SendGameRequest) (*models.Message, error)
+	// https://core.telegram.org/bots/api#setgamescore.
+	SetGameScore(ctx context.Context, req apiModels.SetGameScoreRequest) (*models.Message, error)
+	// https://core.telegram.org/bots/api#getgamehighscores.
+	GetGameHighScores(ctx context.Context, req apiModels.GetGameHighScoresRequest) ([]models.GameHighScore, error)
+	// https://core.telegram.org/bots/api#uploadstickerfile.
+	UploadStickerFile(ctx context.Context, req apiModels.UploadStickerFileRequest) (*models.File, error)
+	// https://core.telegram.org/bots/api#addstickertoset.
+	AddStickerToSet(ctx context.Context, req apiModels.AddStickerToSetRequest) error
 }
