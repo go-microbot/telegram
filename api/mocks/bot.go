@@ -125,6 +125,20 @@ func (_m *Bot) DeleteMessage(ctx context.Context, req models.DeleteMessageReques
 	return r0
 }
 
+// DeleteStickerFromSet provides a mock function with given fields: ctx, req
+func (_m *Bot) DeleteStickerFromSet(ctx context.Context, req models.DeleteStickerFromSetRequest) error {
+	ret := _m.Called(ctx, req)
+
+	var r0 error
+	if rf, ok := ret.Get(0).(func(context.Context, models.DeleteStickerFromSetRequest) error); ok {
+		r0 = rf(ctx, req)
+	} else {
+		r0 = ret.Error(0)
+	}
+
+	return r0
+}
+
 // DeleteWebhook provides a mock function with given fields: ctx
 func (_m *Bot) DeleteWebhook(ctx context.Context) error {
 	ret := _m.Called(ctx)
@@ -145,6 +159,20 @@ func (_m *Bot) EditMessageLiveLocation(ctx context.Context, req models.EditMessa
 
 	var r0 error
 	if rf, ok := ret.Get(0).(func(context.Context, models.EditMessageLiveLocationRequest) error); ok {
+		r0 = rf(ctx, req)
+	} else {
+		r0 = ret.Error(0)
+	}
+
+	return r0
+}
+
+// EditMessageText provides a mock function with given fields: ctx, req
+func (_m *Bot) EditMessageText(ctx context.Context, req models.EditMessageTextRequest) error {
+	ret := _m.Called(ctx, req)
+
+	var r0 error
+	if rf, ok := ret.Get(0).(func(context.Context, models.EditMessageTextRequest) error); ok {
 		r0 = rf(ctx, req)
 	} else {
 		r0 = ret.Error(0)
@@ -845,6 +873,29 @@ func (_m *Bot) SendPoll(ctx context.Context, req models.SendPollRequest) (*teleg
 	return r0, r1
 }
 
+// SendSticker provides a mock function with given fields: ctx, req
+func (_m *Bot) SendSticker(ctx context.Context, req models.SendStickerRequest) (*telegrammodels.Message, error) {
+	ret := _m.Called(ctx, req)
+
+	var r0 *telegrammodels.Message
+	if rf, ok := ret.Get(0).(func(context.Context, models.SendStickerRequest) *telegrammodels.Message); ok {
+		r0 = rf(ctx, req)
+	} else {
+		if ret.Get(0) != nil {
+			r0 = ret.Get(0).(*telegrammodels.Message)
+		}
+	}
+
+	var r1 error
+	if rf, ok := ret.Get(1).(func(context.Context, models.SendStickerRequest) error); ok {
+		r1 = rf(ctx, req)
+	} else {
+		r1 = ret.Error(1)
+	}
+
+	return r0, r1
+}
+
 // SendVenue provides a mock function with given fields: ctx, req
 func (_m *Bot) SendVenue(ctx context.Context, req models.SendVenueRequest) (*telegrammodels.Message, error) {
 	ret := _m.Called(ctx, req)
@@ -1050,6 +1101,34 @@ func (_m *Bot) SetMyCommands(ctx context.Context, req models.SetMyCommandsReques
 
 	var r0 error
 	if rf, ok := ret.Get(0).(func(context.Context, models.SetMyCommandsRequest) error); ok {
+		r0 = rf(ctx, req)
+	} else {
+		r0 = ret.Error(0)
+	}
+
+	return r0
+}
+
+// SetStickerPositionInSet provides a mock function with given fields: ctx, req
+func (_m *Bot) SetStickerPositionInSet(ctx context.Context, req models.SetStickerPositionInSetRequest) error {
+	ret := _m.Called(ctx, req)
+
+	var r0 error
+	if rf, ok := ret.Get(0).(func(context.Context, models.SetStickerPositionInSetRequest) error); ok {
+		r0 = rf(ctx, req)
+	} else {
+		r0 = ret.Error(0)
+	}
+
+	return r0
+}
+
+// SetStickerSetThumb provides a mock function with given fields: ctx, req
+func (_m *Bot) SetStickerSetThumb(ctx context.Context, req models.SetStickerSetThumbRequest) error {
+	ret := _m.Called(ctx, req)
+
+	var r0 error
+	if rf, ok := ret.Get(0).(func(context.Context, models.SetStickerSetThumbRequest) error); ok {
 		r0 = rf(ctx, req)
 	} else {
 		r0 = ret.Error(0)

@@ -241,14 +241,9 @@ The bot is **isn't finished yet**. The main goal is to implement all available m
 Implementation     | Test coverage  | Method                          | Docs                                                               |
 -----------------  | -------------  | ------------------------------- | -----------------------------------------------------------------  |
 :x:                | :x:            | answerCallbackQuery             | https://core.telegram.org/bots/api#answerCallbackQuery             |
-:x:                | :x:            | editMessageText                 | https://core.telegram.org/bots/api#editMessageText                 |
 :x:                | :x:            | editMessageCaption              | https://core.telegram.org/bots/api#editMessageCaption              |
 :x:                | :x:            | editMessageMedia                | https://core.telegram.org/bots/api#editMessageMedia                |
 :x:                | :x:            | editMessageReplyMarkup          | https://core.telegram.org/bots/api#editMessageReplyMarkup          |
-:x:                | :x:            | sendSticker                     | https://core.telegram.org/bots/api#sendSticker                     |
-:x:                | :x:            | setStickerPositionInSet         | https://core.telegram.org/bots/api#setStickerPositionInSet         |
-:x:                | :x:            | deleteStickerFromSet            | https://core.telegram.org/bots/api#deleteStickerFromSet            |
-:x:                | :x:            | setStickerSetThumb              | https://core.telegram.org/bots/api#setStickerSetThumb              |
 :x:                | :x:            | answerInlineQuery               | https://core.telegram.org/bots/api#answerInlineQuery               |
 :x:                | :x:            | sendInvoice                     | https://core.telegram.org/bots/api#sendInvoice                     |
 :x:                | :x:            | answerShippingQuery             | https://core.telegram.org/bots/api#answerShippingQuery             |
