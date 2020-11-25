@@ -20,6 +20,7 @@ const (
 	chatIDCtxKey                  = "chat_id"
 	existingPhotoIDCtxKey         = "existing_photo_id"
 	existingPhotoUIDCtxKey        = "existing_photo_unique_id"
+	existingPhotoMessageIDCtxKey  = "existing_photo_message_id"
 	photoToUploadURLCtxKey        = "photo_to_upload_url"
 	videoToUploadURLCtxKey        = "video_to_upload_url"
 	documentToUploadURLCtxKey     = "document_to_upload_url"
@@ -290,6 +291,26 @@ func TestTelegramAPI_Integration(t *testing.T) {
 		{
 			name:        "sendPoll",
 			testHandler: sendPoll{},
+		},
+		{
+			name:        "editMessageCaption",
+			testHandler: editMessageCaption{},
+		},
+		{
+			name:        "editMessageMedia",
+			testHandler: editMessageMedia{},
+		},
+		{
+			name:        "editMessageReplyMarkup",
+			testHandler: editMessageReplyMarkup{},
+		},
+		{
+			name:        "answerCallbackQuery",
+			testHandler: answerCallbackQuery{},
+		},
+		{
+			name:        "answerInlineQuery",
+			testHandler: answerInlineQuery{},
 		},
 		{
 			name:        "stopPoll",

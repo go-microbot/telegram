@@ -9,18 +9,18 @@ import (
 	"github.com/stretchr/testify/require"
 )
 
-type editMessageText struct{}
+type editMessageCaption struct{}
 
-func (h editMessageText) Test(ctx context.Context, t *testing.T) context.Context {
+func (h editMessageCaption) Test(ctx context.Context, t *testing.T) context.Context {
 	chatID := ctx.Value(chatIDCtxKey)
 	require.NotNil(t, chatID)
-	messageID := ctx.Value(sentMessageIDCtxKey)
+	messageID := ctx.Value(existingPhotoMessageIDCtxKey)
 	require.NotNil(t, messageID)
 
-	err := localAPI.EditMessageText(ctx, apiModels.EditMessageTextRequest{
+	err := localAPI.EditMessageCaption(ctx, apiModels.EditMessageCaptionRequest{
 		ChatID:    query.NewParamAny(chatID.(int64)),
 		MessageID: query.NewParamInt(int(messageID.(int32))),
-		Text:      "New test message text",
+		Caption:   "New test caption",
 	})
 	require.NoError(t, err)
 

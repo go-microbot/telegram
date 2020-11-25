@@ -142,4 +142,14 @@ type Bot interface {
 	DeleteStickerFromSet(ctx context.Context, req apiModels.DeleteStickerFromSetRequest) error
 	// https://core.telegram.org/bots/api#editmessagetext.
 	EditMessageText(ctx context.Context, req apiModels.EditMessageTextRequest) error
+	// https://core.telegram.org/bots/api#editmessagecaption.
+	EditMessageCaption(ctx context.Context, req apiModels.EditMessageCaptionRequest) error
+	// https://core.telegram.org/bots/api#editmessagemedia.
+	EditMessageMedia(ctx context.Context, req apiModels.EditMessageMediaRequest) error
+	// https://core.telegram.org/bots/api#editmessagereplymarkup.
+	EditMessageReplyMarkup(ctx context.Context, req apiModels.EditMessageReplyMarkupRequest) error
+	// https://core.telegram.org/bots/api#answercallbackquery.
+	AnswerCallbackQuery(ctx context.Context, req apiModels.AnswerCallbackQueryRequest) error
+	// https://core.telegram.org/bots/api#answerinlinequery.
+	AnswerInlineQuery(ctx context.Context, req apiModels.AnswerInlineQueryRequest) error
 }
