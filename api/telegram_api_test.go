@@ -378,7 +378,7 @@ func TestTelegramAPI_Integration(t *testing.T) {
 			// We may allow short bursts that go over this limit,
 			// but eventually you'll begin receiving 429 errors.
 			// https://core.telegram.org/bots/faq#my-bot-is-hitting-limits-how-do-i-avoid-this.
-			// time.Sleep(4 * time.Second)
+			time.Sleep(4 * time.Second)
 		})
 	}
 }
