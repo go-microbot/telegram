@@ -35,6 +35,10 @@ const (
 	stickerSetNameCtxKey          = "sticker_set_name"
 	pollQuestionCtxKey            = "poll_question"
 	pollMessageIDCtxKey           = "poll_message_id"
+	gameShortNameCtxKey           = "game_short_name"
+	gameScoreCtxKey               = "game_score"
+	gameMessageIDCtxKey           = "game_message_id"
+	uploadedStickerFileIDCtxKey   = "uploaded_sticker_file_id"
 )
 
 var (
@@ -81,7 +85,6 @@ func TestTelegramAPI_Integration(t *testing.T) {
 	testCases := []struct {
 		name        string
 		testHandler Testable
-		sleep       int
 	}{
 		{
 			name:        "close",
@@ -110,7 +113,6 @@ func TestTelegramAPI_Integration(t *testing.T) {
 		{
 			name:        "deleteWebhook",
 			testHandler: deleteWebhook{},
-			sleep:       1,
 		},
 		// should be always after webhook delete case.
 		{
@@ -305,12 +307,37 @@ func TestTelegramAPI_Integration(t *testing.T) {
 			name:        "promoteChatMember",
 			testHandler: promoteChatMember{},
 		},
+		{
+			name:        "sendGame",
+			testHandler: sendGame{},
+		},
+		{
+			name:        "setGameScore",
+			testHandler: setGameScore{},
+		},
+		{
+			name:        "getGameHighScores",
+			testHandler: getGameHighScores{},
+		},
+		{
+			name:        "uploadStickerFile",
+			testHandler: uploadStickerFile{},
+		},
+		{
+			name:        "addStickerToSet",
+			testHandler: addStickerToSet{},
+		},
 	}
 	for i := range testCases {
 		tc := &testCases[i]
 		t.Run(tc.name, func(t *testing.T) {
 			ctx = tc.testHandler.Test(ctx, t)
-			time.Sleep(time.Second * time.Duration(tc.sleep))
+			// When sending messages inside a particular chat,
+			// avoid sending more than one message per second.
+			// We may allow short bursts that go over this limit,
+			// but eventually you'll begin receiving 429 errors.
+			// https://core.telegram.org/bots/faq#my-bot-is-hitting-limits-how-do-i-avoid-this.
+			time.Sleep(4 * time.Second)
 		})
 	}
 }

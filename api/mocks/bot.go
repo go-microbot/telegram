@@ -18,6 +18,20 @@ type Bot struct {
 	mock.Mock
 }
 
+// AddStickerToSet provides a mock function with given fields: ctx, req
+func (_m *Bot) AddStickerToSet(ctx context.Context, req models.AddStickerToSetRequest) error {
+	ret := _m.Called(ctx, req)
+
+	var r0 error
+	if rf, ok := ret.Get(0).(func(context.Context, models.AddStickerToSetRequest) error); ok {
+		r0 = rf(ctx, req)
+	} else {
+		r0 = ret.Error(0)
+	}
+
+	return r0
+}
+
 // Close provides a mock function with given fields: ctx
 func (_m *Bot) Close(ctx context.Context) error {
 	ret := _m.Called(ctx)
@@ -288,6 +302,29 @@ func (_m *Bot) GetFile(ctx context.Context, req models.FileID) (*telegrammodels.
 
 	var r1 error
 	if rf, ok := ret.Get(1).(func(context.Context, models.FileID) error); ok {
+		r1 = rf(ctx, req)
+	} else {
+		r1 = ret.Error(1)
+	}
+
+	return r0, r1
+}
+
+// GetGameHighScores provides a mock function with given fields: ctx, req
+func (_m *Bot) GetGameHighScores(ctx context.Context, req models.GetGameHighScoresRequest) ([]telegrammodels.GameHighScore, error) {
+	ret := _m.Called(ctx, req)
+
+	var r0 []telegrammodels.GameHighScore
+	if rf, ok := ret.Get(0).(func(context.Context, models.GetGameHighScoresRequest) []telegrammodels.GameHighScore); ok {
+		r0 = rf(ctx, req)
+	} else {
+		if ret.Get(0) != nil {
+			r0 = ret.Get(0).([]telegrammodels.GameHighScore)
+		}
+	}
+
+	var r1 error
+	if rf, ok := ret.Get(1).(func(context.Context, models.GetGameHighScoresRequest) error); ok {
 		r1 = rf(ctx, req)
 	} else {
 		r1 = ret.Error(1)
@@ -670,6 +707,29 @@ func (_m *Bot) SendDocument(ctx context.Context, req models.SendDocumentRequest)
 	return r0, r1
 }
 
+// SendGame provides a mock function with given fields: ctx, req
+func (_m *Bot) SendGame(ctx context.Context, req models.SendGameRequest) (*telegrammodels.Message, error) {
+	ret := _m.Called(ctx, req)
+
+	var r0 *telegrammodels.Message
+	if rf, ok := ret.Get(0).(func(context.Context, models.SendGameRequest) *telegrammodels.Message); ok {
+		r0 = rf(ctx, req)
+	} else {
+		if ret.Get(0) != nil {
+			r0 = ret.Get(0).(*telegrammodels.Message)
+		}
+	}
+
+	var r1 error
+	if rf, ok := ret.Get(1).(func(context.Context, models.SendGameRequest) error); ok {
+		r1 = rf(ctx, req)
+	} else {
+		r1 = ret.Error(1)
+	}
+
+	return r0, r1
+}
+
 // SendLocation provides a mock function with given fields: ctx, req
 func (_m *Bot) SendLocation(ctx context.Context, req models.SendLocationRequest) (*telegrammodels.Message, error) {
 	ret := _m.Called(ctx, req)
@@ -961,6 +1021,29 @@ func (_m *Bot) SetChatTitle(ctx context.Context, req models.SetChatTitleRequest)
 	return r0
 }
 
+// SetGameScore provides a mock function with given fields: ctx, req
+func (_m *Bot) SetGameScore(ctx context.Context, req models.SetGameScoreRequest) (*telegrammodels.Message, error) {
+	ret := _m.Called(ctx, req)
+
+	var r0 *telegrammodels.Message
+	if rf, ok := ret.Get(0).(func(context.Context, models.SetGameScoreRequest) *telegrammodels.Message); ok {
+		r0 = rf(ctx, req)
+	} else {
+		if ret.Get(0) != nil {
+			r0 = ret.Get(0).(*telegrammodels.Message)
+		}
+	}
+
+	var r1 error
+	if rf, ok := ret.Get(1).(func(context.Context, models.SetGameScoreRequest) error); ok {
+		r1 = rf(ctx, req)
+	} else {
+		r1 = ret.Error(1)
+	}
+
+	return r0, r1
+}
+
 // SetMyCommands provides a mock function with given fields: ctx, req
 func (_m *Bot) SetMyCommands(ctx context.Context, req models.SetMyCommandsRequest) error {
 	ret := _m.Called(ctx, req)
@@ -1066,4 +1149,27 @@ func (_m *Bot) UnpinChatMessage(ctx context.Context, req models.UnpinChatMessage
 	}
 
 	return r0
+}
+
+// UploadStickerFile provides a mock function with given fields: ctx, req
+func (_m *Bot) UploadStickerFile(ctx context.Context, req models.UploadStickerFileRequest) (*telegrammodels.File, error) {
+	ret := _m.Called(ctx, req)
+
+	var r0 *telegrammodels.File
+	if rf, ok := ret.Get(0).(func(context.Context, models.UploadStickerFileRequest) *telegrammodels.File); ok {
+		r0 = rf(ctx, req)
+	} else {
+		if ret.Get(0) != nil {
+			r0 = ret.Get(0).(*telegrammodels.File)
+		}
+	}
+
+	var r1 error
+	if rf, ok := ret.Get(1).(func(context.Context, models.UploadStickerFileRequest) error); ok {
+		r1 = rf(ctx, req)
+	} else {
+		r1 = ret.Error(1)
+	}
+
+	return r0, r1
 }
