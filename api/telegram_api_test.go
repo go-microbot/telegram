@@ -124,6 +124,10 @@ func TestTelegramAPI_Integration(t *testing.T) {
 			testHandler: sendMessage{},
 		},
 		{
+			name:        "editMessageText",
+			testHandler: editMessageText{},
+		},
+		{
 			name:        "editMessageLiveLocation",
 			testHandler: editMessageLiveLocation{},
 		},
@@ -252,6 +256,10 @@ func TestTelegramAPI_Integration(t *testing.T) {
 			testHandler: createNewStickerSet{},
 		},
 		{
+			name:        "setStickerSetThumb",
+			testHandler: setStickerSetThumb{},
+		},
+		{
 			name:        "setChatStickerSet",
 			testHandler: setChatStickerSet{},
 		},
@@ -262,10 +270,6 @@ func TestTelegramAPI_Integration(t *testing.T) {
 		{
 			name:        "sendVideoNote",
 			testHandler: sendVideoNote{},
-		},
-		{
-			name:        "deleteChatStickerSet",
-			testHandler: deleteChatStickerSet{},
 		},
 		{
 			name:        "sendMediaGroup",
@@ -326,6 +330,22 @@ func TestTelegramAPI_Integration(t *testing.T) {
 		{
 			name:        "addStickerToSet",
 			testHandler: addStickerToSet{},
+		},
+		{
+			name:        "setStickerPositionInSet",
+			testHandler: setStickerPositionInSet{},
+		},
+		{
+			name:        "sendSticker",
+			testHandler: sendSticker{},
+		},
+		{
+			name:        "deleteStickerFromSet",
+			testHandler: deleteStickerFromSet{},
+		},
+		{
+			name:        "deleteChatStickerSet",
+			testHandler: deleteChatStickerSet{},
 		},
 	}
 	for i := range testCases {

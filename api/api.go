@@ -132,4 +132,14 @@ type Bot interface {
 	UploadStickerFile(ctx context.Context, req apiModels.UploadStickerFileRequest) (*models.File, error)
 	// https://core.telegram.org/bots/api#addstickertoset.
 	AddStickerToSet(ctx context.Context, req apiModels.AddStickerToSetRequest) error
+	// https://core.telegram.org/bots/api#sendsticker.
+	SendSticker(ctx context.Context, req apiModels.SendStickerRequest) (*models.Message, error)
+	// https://core.telegram.org/bots/api#setstickerpositioninset.
+	SetStickerPositionInSet(ctx context.Context, req apiModels.SetStickerPositionInSetRequest) error
+	// https://core.telegram.org/bots/api#setstickersetthumb.
+	SetStickerSetThumb(ctx context.Context, req apiModels.SetStickerSetThumbRequest) error
+	// https://core.telegram.org/bots/api#deletestickerfromset.
+	DeleteStickerFromSet(ctx context.Context, req apiModels.DeleteStickerFromSetRequest) error
+	// https://core.telegram.org/bots/api#editmessagetext.
+	EditMessageText(ctx context.Context, req apiModels.EditMessageTextRequest) error
 }
