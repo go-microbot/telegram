@@ -240,11 +240,6 @@ The bot is **isn't finished yet**. The main goal is to implement all available m
 
 Implementation     | Test coverage  | Method                          | Docs                                                               |
 -----------------  | -------------  | ------------------------------- | -----------------------------------------------------------------  |
-:x:                | :x:            | answerCallbackQuery             | https://core.telegram.org/bots/api#answerCallbackQuery             |
-:x:                | :x:            | editMessageCaption              | https://core.telegram.org/bots/api#editMessageCaption              |
-:x:                | :x:            | editMessageMedia                | https://core.telegram.org/bots/api#editMessageMedia                |
-:x:                | :x:            | editMessageReplyMarkup          | https://core.telegram.org/bots/api#editMessageReplyMarkup          |
-:x:                | :x:            | answerInlineQuery               | https://core.telegram.org/bots/api#answerInlineQuery               |
 :x:                | :x:            | sendInvoice                     | https://core.telegram.org/bots/api#sendInvoice                     |
 :x:                | :x:            | answerShippingQuery             | https://core.telegram.org/bots/api#answerShippingQuery             |
 :x:                | :x:            | answerPreCheckoutQuery          | https://core.telegram.org/bots/api#answerPreCheckoutQuery          |

@@ -69,6 +69,7 @@ func (h sendPhoto) Test(ctx context.Context, t *testing.T) context.Context {
 
 	ctx = context.WithValue(ctx, TestDataKey(existingPhotoIDCtxKey), existingFileID)
 	ctx = context.WithValue(ctx, TestDataKey(existingPhotoUIDCtxKey), existingFileUID)
+	ctx = context.WithValue(ctx, TestDataKey(existingPhotoMessageIDCtxKey), msg.ID)
 
 	return ctx
 }

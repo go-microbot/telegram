@@ -32,6 +32,34 @@ func (_m *Bot) AddStickerToSet(ctx context.Context, req models.AddStickerToSetRe
 	return r0
 }
 
+// AnswerCallbackQuery provides a mock function with given fields: ctx, req
+func (_m *Bot) AnswerCallbackQuery(ctx context.Context, req models.AnswerCallbackQueryRequest) error {
+	ret := _m.Called(ctx, req)
+
+	var r0 error
+	if rf, ok := ret.Get(0).(func(context.Context, models.AnswerCallbackQueryRequest) error); ok {
+		r0 = rf(ctx, req)
+	} else {
+		r0 = ret.Error(0)
+	}
+
+	return r0
+}
+
+// AnswerInlineQuery provides a mock function with given fields: ctx, req
+func (_m *Bot) AnswerInlineQuery(ctx context.Context, req models.AnswerInlineQueryRequest) error {
+	ret := _m.Called(ctx, req)
+
+	var r0 error
+	if rf, ok := ret.Get(0).(func(context.Context, models.AnswerInlineQueryRequest) error); ok {
+		r0 = rf(ctx, req)
+	} else {
+		r0 = ret.Error(0)
+	}
+
+	return r0
+}
+
 // Close provides a mock function with given fields: ctx
 func (_m *Bot) Close(ctx context.Context) error {
 	ret := _m.Called(ctx)
@@ -153,12 +181,54 @@ func (_m *Bot) DeleteWebhook(ctx context.Context) error {
 	return r0
 }
 
+// EditMessageCaption provides a mock function with given fields: ctx, req
+func (_m *Bot) EditMessageCaption(ctx context.Context, req models.EditMessageCaptionRequest) error {
+	ret := _m.Called(ctx, req)
+
+	var r0 error
+	if rf, ok := ret.Get(0).(func(context.Context, models.EditMessageCaptionRequest) error); ok {
+		r0 = rf(ctx, req)
+	} else {
+		r0 = ret.Error(0)
+	}
+
+	return r0
+}
+
 // EditMessageLiveLocation provides a mock function with given fields: ctx, req
 func (_m *Bot) EditMessageLiveLocation(ctx context.Context, req models.EditMessageLiveLocationRequest) error {
 	ret := _m.Called(ctx, req)
 
 	var r0 error
 	if rf, ok := ret.Get(0).(func(context.Context, models.EditMessageLiveLocationRequest) error); ok {
+		r0 = rf(ctx, req)
+	} else {
+		r0 = ret.Error(0)
+	}
+
+	return r0
+}
+
+// EditMessageMedia provides a mock function with given fields: ctx, req
+func (_m *Bot) EditMessageMedia(ctx context.Context, req models.EditMessageMediaRequest) error {
+	ret := _m.Called(ctx, req)
+
+	var r0 error
+	if rf, ok := ret.Get(0).(func(context.Context, models.EditMessageMediaRequest) error); ok {
+		r0 = rf(ctx, req)
+	} else {
+		r0 = ret.Error(0)
+	}
+
+	return r0
+}
+
+// EditMessageReplyMarkup provides a mock function with given fields: ctx, req
+func (_m *Bot) EditMessageReplyMarkup(ctx context.Context, req models.EditMessageReplyMarkupRequest) error {
+	ret := _m.Called(ctx, req)
+
+	var r0 error
+	if rf, ok := ret.Get(0).(func(context.Context, models.EditMessageReplyMarkupRequest) error); ok {
 		r0 = rf(ctx, req)
 	} else {
 		r0 = ret.Error(0)
