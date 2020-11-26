@@ -12,7 +12,7 @@ gen-mocks:
 
 ## run tests
 test:
-	go test -p 1 -covermode=count -coverprofile=coverage.out -coverpkg=./api/.,./bot/...,./query/...,./form/... ./api/. ./bot/... ./query/... ./form/...
+	go test -p 1 -timeout 15m -covermode=count -coverprofile=coverage.out -coverpkg=./api/.,./bot/...,./query/...,./form/... ./api/. ./bot/... ./query/... ./form/...
 
 ## start docker containers
 start_images:

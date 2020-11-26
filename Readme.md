@@ -240,7 +240,5 @@ The bot is **isn't finished yet**. The main goal is to implement all available m
 
 Implementation     | Test coverage  | Method                          | Docs                                                               |
 -----------------  | -------------  | ------------------------------- | -----------------------------------------------------------------  |
-:x:                | :x:            | sendInvoice                     | https://core.telegram.org/bots/api#sendInvoice                     |
 :x:                | :x:            | answerShippingQuery             | https://core.telegram.org/bots/api#answerShippingQuery             |
 :x:                | :x:            | answerPreCheckoutQuery          | https://core.telegram.org/bots/api#answerPreCheckoutQuery          |
-:x:                | :x:            | setPassportDataErrors           | https://core.telegram.org/bots/api#setPassportDataErrors           |

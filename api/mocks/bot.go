@@ -828,6 +828,29 @@ func (_m *Bot) SendGame(ctx context.Context, req models.SendGameRequest) (*teleg
 	return r0, r1
 }
 
+// SendInvoice provides a mock function with given fields: ctx, req
+func (_m *Bot) SendInvoice(ctx context.Context, req models.SendInvoiceRequest) (*telegrammodels.Message, error) {
+	ret := _m.Called(ctx, req)
+
+	var r0 *telegrammodels.Message
+	if rf, ok := ret.Get(0).(func(context.Context, models.SendInvoiceRequest) *telegrammodels.Message); ok {
+		r0 = rf(ctx, req)
+	} else {
+		if ret.Get(0) != nil {
+			r0 = ret.Get(0).(*telegrammodels.Message)
+		}
+	}
+
+	var r1 error
+	if rf, ok := ret.Get(1).(func(context.Context, models.SendInvoiceRequest) error); ok {
+		r1 = rf(ctx, req)
+	} else {
+		r1 = ret.Error(1)
+	}
+
+	return r0, r1
+}
+
 // SendLocation provides a mock function with given fields: ctx, req
 func (_m *Bot) SendLocation(ctx context.Context, req models.SendLocationRequest) (*telegrammodels.Message, error) {
 	ret := _m.Called(ctx, req)
@@ -1171,6 +1194,20 @@ func (_m *Bot) SetMyCommands(ctx context.Context, req models.SetMyCommandsReques
 
 	var r0 error
 	if rf, ok := ret.Get(0).(func(context.Context, models.SetMyCommandsRequest) error); ok {
+		r0 = rf(ctx, req)
+	} else {
+		r0 = ret.Error(0)
+	}
+
+	return r0
+}
+
+// SetPassportDataErrors provides a mock function with given fields: ctx, req
+func (_m *Bot) SetPassportDataErrors(ctx context.Context, req models.SetPassportDataErrorsRequest) error {
+	ret := _m.Called(ctx, req)
+
+	var r0 error
+	if rf, ok := ret.Get(0).(func(context.Context, models.SetPassportDataErrorsRequest) error); ok {
 		r0 = rf(ctx, req)
 	} else {
 		r0 = ret.Error(0)

@@ -152,4 +152,8 @@ type Bot interface {
 	AnswerCallbackQuery(ctx context.Context, req apiModels.AnswerCallbackQueryRequest) error
 	// https://core.telegram.org/bots/api#answerinlinequery.
 	AnswerInlineQuery(ctx context.Context, req apiModels.AnswerInlineQueryRequest) error
+	// https://core.telegram.org/bots/api#sendinvoice.
+	SendInvoice(ctx context.Context, req apiModels.SendInvoiceRequest) (*models.Message, error)
+	// https://core.telegram.org/bots/api#setpassportdataerrors.
+	SetPassportDataErrors(ctx context.Context, req apiModels.SetPassportDataErrorsRequest) error
 }
