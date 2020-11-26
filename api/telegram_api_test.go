@@ -50,7 +50,7 @@ type Testable interface {
 	Test(ctx context.Context, t *testing.T) context.Context
 }
 
-// TestDataKey
+// TestDataKey represents test context data key.
 type TestDataKey interface{}
 
 func TestMain(m *testing.M) {
@@ -368,6 +368,14 @@ func TestTelegramAPI_Integration(t *testing.T) {
 			name:        "deleteChatStickerSet",
 			testHandler: deleteChatStickerSet{},
 		},
+		{
+			name:        "sendInvoice",
+			testHandler: sendInvoice{},
+		},
+		{
+			name:        "setPassportDataErrors",
+			testHandler: setPassportDataErrors{},
+		},
 	}
 	for i := range testCases {
 		tc := &testCases[i]
@@ -378,7 +386,7 @@ func TestTelegramAPI_Integration(t *testing.T) {
 			// We may allow short bursts that go over this limit,
 			// but eventually you'll begin receiving 429 errors.
 			// https://core.telegram.org/bots/faq#my-bot-is-hitting-limits-how-do-i-avoid-this.
-			time.Sleep(4 * time.Second)
+			// time.Sleep(4 * time.Second)
 		})
 	}
 }
