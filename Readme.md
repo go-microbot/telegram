@@ -25,7 +25,6 @@
   - [Start Docker Containers](#start-docker-containers)
   - [Local testing](#run-tests-locally)
   - [Lint](#run-linter)
-- [TODO](#todo)
 
 ## Getting started
 
@@ -233,12 +232,3 @@ Or use [Makefile](./Makefile)'s `lint` command:
 ```bash
 make lint
 ```
-
-## TODO
-The bot is **isn't finished yet**. The main goal is to implement all available methods from [Telegram documentation](https://core.telegram.org/bots/api#available-methods).
-
-
-Implementation     | Test coverage  | Method                          | Docs                                                               |
------------------  | -------------  | ------------------------------- | -----------------------------------------------------------------  |
-:x:                | :x:            | answerShippingQuery             | https://core.telegram.org/bots/api#answerShippingQuery             |
-:x:                | :x:            | answerPreCheckoutQuery          | https://core.telegram.org/bots/api#answerPreCheckoutQuery          |

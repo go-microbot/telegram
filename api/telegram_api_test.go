@@ -376,6 +376,14 @@ func TestTelegramAPI_Integration(t *testing.T) {
 			name:        "setPassportDataErrors",
 			testHandler: setPassportDataErrors{},
 		},
+		{
+			name:        "answerShippingQuery",
+			testHandler: answerShippingQuery{},
+		},
+		{
+			name:        "answerPreCheckoutQuery",
+			testHandler: answerPreCheckoutQuery{},
+		},
 	}
 	for i := range testCases {
 		tc := &testCases[i]
