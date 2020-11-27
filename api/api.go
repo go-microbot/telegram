@@ -156,4 +156,8 @@ type Bot interface {
 	SendInvoice(ctx context.Context, req apiModels.SendInvoiceRequest) (*models.Message, error)
 	// https://core.telegram.org/bots/api#setpassportdataerrors.
 	SetPassportDataErrors(ctx context.Context, req apiModels.SetPassportDataErrorsRequest) error
+	// https://core.telegram.org/bots/api#answershippingquery.
+	AnswerShippingQuery(ctx context.Context, req apiModels.AnswerShippingQueryRequest) error
+	// https://core.telegram.org/bots/api#answerprecheckoutquery.
+	AnswerPreCheckoutQuery(ctx context.Context, req apiModels.AnswerPreCheckoutQueryRequest) error
 }
