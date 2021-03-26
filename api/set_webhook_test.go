@@ -2,7 +2,6 @@ package api
 
 import (
 	"context"
-	"io/ioutil"
 	"os"
 	"path"
 	"testing"
@@ -21,15 +20,11 @@ func (h setWebhook) Test(ctx context.Context, t *testing.T) context.Context {
 	if err != nil {
 		require.NoError(t, err)
 	}
-	webhookCert, err := ioutil.ReadFile(path.Join(wd, "./test_data/telegram_test.key"))
-	if err != nil {
-		require.NoError(t, err)
-	}
 
 	// set webhook.
 	url := "localhost:1012"
 	err = localAPI.SetWebhook(ctx, apiModels.SetWebhookRequest{
-		Certificate: form.NewPartText(string(webhookCert)),
+		Certificate: form.NewPartFile(path.Join(wd, "./test_data/telegram_test.key")),
 		URL:         query.NewParamString(url),
 	})
 	require.NoError(t, err)
