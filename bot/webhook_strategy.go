@@ -19,6 +19,8 @@ type UpdatesStrategyWebhook struct {
 // WebhookConfig represents webhook configuration.
 type WebhookConfig struct {
 	ServeURL string
+	KeyFile  string
+	CertFile string
 }
 
 type webHookHandler struct {
@@ -37,34 +39,44 @@ func NewUpdatesStrategyWebhook(cfg WebhookConfig) UpdatesStrategyWebhook {
 }
 
 // Updates returns updates channel.
-func (poll UpdatesStrategyWebhook) Updates() chan models.Update {
-	return poll.updatesChan
+func (w UpdatesStrategyWebhook) Updates() chan models.Update {
+	return w.updatesChan
 }
 
 // Errors returns errors channel.
-func (poll UpdatesStrategyWebhook) Errors() chan error {
-	return poll.errorsChan
+func (w UpdatesStrategyWebhook) Errors() chan error {
+	return w.errorsChan
 }
 
 // Listen starts webhook listening.
-func (poll UpdatesStrategyWebhook) Listen() {
-	go poll.listen()
+func (w UpdatesStrategyWebhook) Listen() {
+	go w.listen()
 
-	<-poll.doneChan
+	<-w.doneChan
 }
 
 // Stop stops webhook listening.
-func (poll UpdatesStrategyWebhook) Stop() {
-	poll.doneChan <- struct{}{}
-	close(poll.errorsChan)
-	close(poll.updatesChan)
+func (w UpdatesStrategyWebhook) Stop() {
+	w.doneChan <- struct{}{}
+	close(w.errorsChan)
+	close(w.updatesChan)
 }
 
-func (poll UpdatesStrategyWebhook) listen() {
-	if err := http.ListenAndServe(poll.cfg.ServeURL, &webHookHandler{
-		updates: poll.updatesChan,
-		errs:    poll.errorsChan,
-	}); err != nil {
+func (w UpdatesStrategyWebhook) listen() {
+	handler := webHookHandler{
+		updates: w.updatesChan,
+		errs:    w.errorsChan,
+	}
+
+	var err error
+	switch {
+	case w.cfg.CertFile != "" && w.cfg.KeyFile != "":
+		err = http.ListenAndServeTLS(w.cfg.ServeURL, w.cfg.CertFile, w.cfg.KeyFile, &handler)
+	default:
+		err = http.ListenAndServe(w.cfg.ServeURL, &handler)
+	}
+
+	if err != nil {
 		panic(err)
 	}
 }
