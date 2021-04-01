@@ -16,7 +16,7 @@ test:
 
 ## start docker containers
 start_images:
-	docker run --publish 8081:8081 -it --rm -d --name telegram-bot-api huntechio/telegram-bot-api:master-7cf91e4 --api-id=${TEST_API_ID} --api-hash=${TEST_API_HASH}
+	docker run --publish 8081:8081 -it --rm -d --name telegram-bot-api huntechio/telegram-bot-api:v0.0.1 --api-id=${TEST_API_ID} --api-hash=${TEST_API_HASH}
 
 ## stop docker containers
 stop_images:

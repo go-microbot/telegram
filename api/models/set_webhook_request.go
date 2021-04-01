@@ -12,7 +12,7 @@ type SetWebhookRequest struct {
 	// Optional. Upload your public key certificate so
 	// that the root certificate in use can be checked.
 	// See our self-signed (https://core.telegram.org/bots/self-signed) guide for details.
-	Certificate form.PartText `form:"certificate,omitempty"`
+	Certificate form.PartFile `form:"certificate,omitempty"`
 	// Optional. The fixed IP address which will be used to send webhook requests
 	// instead of the IP address resolved through DNS.
 	IPAddress query.ParamString `query:"ip_address,omitempty"`
