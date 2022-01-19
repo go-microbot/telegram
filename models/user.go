@@ -4,7 +4,7 @@ package models
 // https://core.telegram.org/bots/api#user.
 type User struct {
 	// Unique identifier for this user or bot.
-	ID int32 `json:"id"`
+	ID int64 `json:"id"`
 	// True, if this user is a bot.
 	IsBot bool `json:"is_bot"`
 	// User's or bot's first name.

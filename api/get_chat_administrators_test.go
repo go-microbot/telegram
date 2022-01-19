@@ -24,7 +24,7 @@ func (h getChatAdministrators) Test(ctx context.Context, t *testing.T) context.C
 	require.NotEmpty(t, admins)
 
 	var found bool
-	var adminID int32
+	var adminID int64
 	for i := range admins {
 		if admins[i].User.ID == botUserID {
 			found = true
