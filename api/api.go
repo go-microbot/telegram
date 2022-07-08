@@ -2,6 +2,7 @@ package api
 
 import (
 	"context"
+	"io"
 	"net/http"
 
 	apiModels "github.com/go-microbot/telegram/api/models"
@@ -160,4 +161,6 @@ type Bot interface {
 	AnswerShippingQuery(ctx context.Context, req apiModels.AnswerShippingQueryRequest) error
 	// https://core.telegram.org/bots/api#answerprecheckoutquery.
 	AnswerPreCheckoutQuery(ctx context.Context, req apiModels.AnswerPreCheckoutQueryRequest) error
+	// https://api.telegram.org/file/bot<token>/<file_path>.
+	GetFileData(ctx context.Context, fileID string, dst io.Writer) error
 }
